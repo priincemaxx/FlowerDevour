@@ -1,5 +1,8 @@
 package io.github.some_example_name;
 
+//Template for enemies, their stats
+
+
 public class Enemy
 {
     private int health;
