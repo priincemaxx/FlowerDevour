@@ -1,5 +1,8 @@
 package io.github.some_example_name;
 
+//The purpose of this class is to create a template for
+//describing actions taken in combat by either the player or the enemy.
+
 public class Action
 {
     int dmg;
