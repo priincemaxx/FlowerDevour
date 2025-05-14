@@ -7,4 +7,15 @@ public class Item
 {
     private int id;
     //private texture texture;
+
+
+    public int getId()
+    {
+        return id;
+    }
+
+    public void setId(int id)
+    {
+        this.id = id;
+    }
 }
