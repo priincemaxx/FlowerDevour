@@ -6,8 +6,29 @@ package io.github.some_example_name;
 
 public class Tool extends Item
 {
+    private BasicAction move;
+
+    public Tool(int id, String name, BasicAction move)
+    {
+        super(id, name);
+        this.move = move;
+    }
+
+    public BasicAction getMove()
+    {
+        return move;
+    }
+
+    public void setMove(BasicAction move)
+    {
+        this.move = move;
+    }
+
     public void callAction(Entity user, Entity target)
     {
-        ;
+        move.setUser(user);
+        move.setTarget(target);
+
+        move.execute();
     }
 }

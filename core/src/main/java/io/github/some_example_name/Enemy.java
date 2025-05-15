@@ -5,13 +5,29 @@ package io.github.some_example_name;
 
 public class Enemy extends Entity
 {
-    public Enemy(int health)
+    private BasicAction move;
+
+    public Enemy(int health, int maxHealth, String name, BasicAction move)
     {
-        super(health);
+        super(health, maxHealth, name);
+        setMove(move);
     }
 
-    public void callAction(Entity user, Entity target)
+    public BasicAction getMove()
     {
-        ;
+        return move;
+    }
+
+    public void setMove(BasicAction move)
+    {
+        this.move = move;
+    }
+
+    public void doMove(Entity user, Entity target)
+    {
+        move.setUser(user);
+        move.setTarget(target);
+
+        move.execute();
     }
 }

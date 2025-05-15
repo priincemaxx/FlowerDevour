@@ -6,6 +6,35 @@ package io.github.some_example_name;
 public class CombatRoom
 {
     private Enemy enemy;
+    private Tool reward;
 
-    //public doTheCombat;
+    public CombatRoom(Enemy enemy, Tool reward)
+    {
+        setEnemy(enemy);
+        setReward(reward);
+    }
+    public CombatRoom(Enemy enemy)
+    {
+        setEnemy(enemy);
+        setReward(null);
+    }
+
+    public Enemy getEnemy()
+    {
+        return enemy;
+    }
+    public Tool getReward()
+    {
+        return reward;
+    }
+
+    public void setEnemy(Enemy enemy)
+    {
+        this.enemy = enemy;
+    }
+
+    public void setReward(Tool reward)
+    {
+        this.reward = reward;
+    }
 }
