@@ -15,6 +15,11 @@ public class Item
         setId(id);
         setName(name);
     }
+    public Item (Item item)
+    {
+        this.id = item.getId();
+        this.name = item.getName();
+    }
 
     public int getId()
     {

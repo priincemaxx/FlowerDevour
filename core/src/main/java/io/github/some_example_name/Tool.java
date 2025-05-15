@@ -6,12 +6,19 @@ package io.github.some_example_name;
 
 public class Tool extends Item
 {
+    public static final Tool NULL_TOOL = new Tool(0, "Null Tool", null);
+
     private BasicAction move;
 
     public Tool(int id, String name, BasicAction move)
     {
         super(id, name);
         this.move = move;
+    }
+    public Tool(Tool tool)
+    {
+        super(tool);
+        this.move = tool.move;
     }
 
     public BasicAction getMove()
