@@ -5,6 +5,7 @@ package io.github.some_example_name;
 //The purpose of this class is to create a template for
 //describing actions taken in combat by either the player or the enemy.
 
+
 public class BasicAction
 {
     protected Entity user, target;
@@ -60,6 +61,9 @@ public class BasicAction
         this.targetChange = targetChange;
     }
 
+    /**Executes itself on user and target.
+     * @throws ActionException When user or target is unset.
+     */
     public void execute() throws ActionException
     {
         if (user == null || target == null)

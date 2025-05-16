@@ -29,6 +29,10 @@ public class Tool extends Item
         this.move = move;
     }
 
+    /**Executes action.
+     * @param user Entity doing action.
+     * @param target Entity targeted by action.
+     */
     public void callAction(Entity user, Entity target)
     {
         move.setUser(user);

@@ -38,19 +38,35 @@ public class Player extends Entity
     }
 
 
-
+    /**
+     * Equips tool to first empty equip slot.
+     * @param inventoryIndex Index of tool to equip.
+     * @return Place in equip index.
+     */
     public int equipTool(int inventoryIndex)
     {
         return inventory.moveOneInto(inventoryIndex, equippedTools);
     }
+    /**Equips tool to selected slot.
+     * @param equipSlotIndex Selected slot.
+     * @param inventoryIndex Index of tool to equip.
+     */
     public void equipTool(int equipSlotIndex, int inventoryIndex)
     {
         inventory.moveOneInto(inventoryIndex, equipSlotIndex, equippedTools);
     }
+    /**Unequips tool to first empty inventory slot.
+     * @param equipSlotIndex Index of tool to unequip.
+     * @return Place in inventory index.
+     */
     public int unequipTool(int equipSlotIndex)
     {
         return equippedTools.moveOneInto(equipSlotIndex, inventory);
     }
+    /**Unequips tool to selected inventory slot.
+     * @param inventoryIndex Selected slot.
+     * @param equipSlotIndex Index of tool to unequip.
+     */
     public void unequipTool(int inventoryIndex, int equipSlotIndex)
     {
         equippedTools.moveOneInto(equipSlotIndex, inventoryIndex, inventory);

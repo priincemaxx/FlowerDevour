@@ -53,6 +53,11 @@ public class Entity
         this.name = name;
     }
 
+    /**
+     * Executes selected action on target.
+     *
+     * @param target Entity targeted by action.
+     */
     public void doMove(Entity target)
     {
 
