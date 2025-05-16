@@ -52,4 +52,9 @@ public class Entity
     {
         this.name = name;
     }
+
+    public void doMove(Entity target)
+    {
+
+    }
 }

@@ -11,6 +11,7 @@ public class Enemy extends Entity
     {
         super(health, maxHealth, name);
         setMove(move);
+        move.setUser(this);
     }
 
     public BasicAction getMove()
@@ -23,9 +24,8 @@ public class Enemy extends Entity
         this.move = move;
     }
 
-    public void doMove(Entity user, Entity target)
+    public void doMove(Entity target)
     {
-        move.setUser(user);
         move.setTarget(target);
 
         move.execute();
