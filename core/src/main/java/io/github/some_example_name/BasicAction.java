@@ -60,12 +60,11 @@ public class BasicAction
         this.targetChange = targetChange;
     }
 
-    public void execute()
+    public void execute() throws ActionException
     {
         if (user == null || target == null)
         {
-            System.out.println("You have no (or not enough) targets!");
-            return;
+            throw new ActionException("Invalid target or targets!");
         }
 
         int userHp = user.getHealth();
