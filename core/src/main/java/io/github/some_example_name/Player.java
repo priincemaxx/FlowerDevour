@@ -71,8 +71,12 @@ public class Player extends Entity
     {
         equippedTools.moveOneInto(equipSlotIndex, inventoryIndex, inventory);
     }
+    public int rewardTool(Tool reward) //TODO: add try-catch block for when the player has a full inventory
+    {
+        return inventory.moveInside(reward);
+    }
 
-    public void doMove(Entity target) throws PlayerException
+    public void doMoveOn(Entity target) throws PlayerException
     {
         Tool actingTool = equippedTools.getTool(selectedTool);
 
