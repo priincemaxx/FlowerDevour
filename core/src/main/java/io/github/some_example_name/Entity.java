@@ -58,7 +58,7 @@ public class Entity
      *
      * @param target Entity targeted by action.
      */
-    public void doMove(Entity target)
+    public void doMoveOn(Entity target)
     {
 
     }
