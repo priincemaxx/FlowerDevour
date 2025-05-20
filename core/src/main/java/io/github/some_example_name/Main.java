@@ -20,8 +20,9 @@ public class Main extends ApplicationAdapter
 {
     private Stage stage;
     private Skin skin;
-    Player player = new Player(20, 20, "The Player", new Tool(1, "Shovel", new BasicAction(1, -5)));
-    Enemy punyLeaf = new Enemy(15, 15, "Puny Leaf", new BasicAction(0, -5));
+    Player player = new Player(20, 20, "The Player",
+        new Tool(1, "Shovel", new BasicAction(1, -5, "Healing attack")));
+    Enemy punyLeaf = new Enemy(15, 15, "Puny Leaf", new BasicAction(0, -5, "Attack"));
 
     @Override
     public void create()
@@ -29,26 +30,10 @@ public class Main extends ApplicationAdapter
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
 
-        Table root = new Table();
-        root.setFillParent(true);
-        stage.addActor(root);
+        stage.addActor(player.provideMoveButtons());
 
-        skin = new Skin(Gdx.files.internal("skin.json"));
-
-        TextButton actButton = new TextButton("Act", skin);
-        root.add(actButton);
-
-        actButton.addListener(new ChangeListener()
-        {
-            @Override
-            public void changed(ChangeEvent event, Actor actor)
-            {
-                System.out.println("Player health: " + player.getHealth());
-                System.out.println("Puny Leaf health: " + punyLeaf.getHealth());
-                player.doMoveOn(punyLeaf);
-                punyLeaf.doMoveOn(player);
-            }
-        });
+        player.setTarget(punyLeaf);
+        punyLeaf.setTarget(player);
     }
 
     @Override
@@ -63,6 +48,8 @@ public class Main extends ApplicationAdapter
         ScreenUtils.clear(Color.WHITE);
         stage.act();
         stage.draw();
+        System.out.println("Player health: " + player.getHealth());
+        System.out.println("Puny Leaf health: " + punyLeaf.getHealth());
     }
 
     @Override
