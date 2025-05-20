@@ -1,5 +1,13 @@
 package io.github.some_example_name;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+
 public class Player extends Entity
 {
     public static final int EQUIP_SLOTS = 4;
@@ -35,6 +43,10 @@ public class Player extends Entity
         }
 
         this.selectedTool = selectedTool;
+    }
+    public void setPlayerTarget(Entity target)
+    {
+        super.setTarget(target);
     }
 
 
@@ -76,7 +88,7 @@ public class Player extends Entity
         return inventory.moveInside(reward);
     }
 
-    public void doMoveOn(Entity target) throws PlayerException
+    public void doMove() throws PlayerException
     {
         Tool actingTool = equippedTools.getTool(selectedTool);
 
@@ -85,6 +97,51 @@ public class Player extends Entity
             throw new PlayerException("Trying to act on nothing!");
         }
 
-        actingTool.callAction(this, target);
+        actingTool.callAction(this, super.getTarget());
+    }
+
+
+    /** Provides buttons that do the associated action.
+     * @return Table with buttons to be added to a stage.
+     */
+    public Table provideMoveButtons()
+    {
+        final int width = 200;
+        final int height = 40;
+        Table moveButtons = new Table();
+        Skin skin = new Skin(Gdx.files.internal("skin.json"));
+        moveButtons.setFillParent(true); //temporary
+
+        for (int currentSlot = 0; currentSlot < EQUIP_SLOTS; currentSlot++)
+        {
+            if (currentSlot > 0 && currentSlot % 2 == 0)
+            {
+                moveButtons.row();
+            }
+            if (equippedTools.getTool(currentSlot) == null)
+            {
+                Button blankButton = new Button(skin);
+                blankButton.setDisabled(true);
+                moveButtons.add(blankButton).size(width, height);
+                continue;
+            }
+
+            String moveName = equippedTools.getTool(currentSlot).getMove().getName();
+            TextButton moveButton = new TextButton(moveName, skin);
+            moveButtons.add(moveButton).size(width, height);
+            final int tmpCurrentSlot = currentSlot;
+            moveButton.addListener(new ChangeListener()
+            {
+                @Override
+                public void changed(ChangeEvent event, Actor actor)
+                {
+                    setSelectedTool(tmpCurrentSlot);
+                    doMove();
+                    //System.out.println("I work!");
+                }
+            });
+        }
+
+        return moveButtons;
     }
 }

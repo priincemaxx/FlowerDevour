@@ -1,9 +1,16 @@
 package io.github.some_example_name;
 
 import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 
 /**
@@ -11,29 +18,43 @@ import com.badlogic.gdx.utils.ScreenUtils;
  */
 public class Main extends ApplicationAdapter
 {
-    private SpriteBatch batch;
-    private Texture image;
+    private Stage stage;
+    private Skin skin;
+    Player player = new Player(20, 20, "The Player",
+        new Tool(1, "Shovel", new BasicAction(1, -5, "Healing attack")));
+    Enemy punyLeaf = new Enemy(15, 15, "Puny Leaf", new BasicAction(0, -5, "Attack"));
 
     @Override
     public void create()
     {
-        batch = new SpriteBatch();
-        image = new Texture("libgdx.png");
+        stage = new Stage(new ScreenViewport());
+        Gdx.input.setInputProcessor(stage);
+
+        stage.addActor(player.provideMoveButtons());
+
+        player.setTarget(punyLeaf);
+        punyLeaf.setTarget(player);
+    }
+
+    @Override
+    public void resize(int width, int height)
+    {
+        stage.getViewport().update(width, height);
     }
 
     @Override
     public void render()
     {
-        ScreenUtils.clear(0.15f, 0.15f, 0.2f, 1f);
-        batch.begin();
-        batch.draw(image, 140, 210);
-        batch.end();
+        ScreenUtils.clear(Color.WHITE);
+        stage.act();
+        stage.draw();
+        System.out.println("Player health: " + player.getHealth());
+        System.out.println("Puny Leaf health: " + punyLeaf.getHealth());
     }
 
     @Override
     public void dispose()
     {
-        batch.dispose();
-        image.dispose();
+        stage.dispose();
     }
 }
