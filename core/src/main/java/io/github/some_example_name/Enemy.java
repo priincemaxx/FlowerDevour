@@ -24,9 +24,9 @@ public class Enemy extends Entity
         this.move = move;
     }
 
-    public void doMoveOn(Entity target)
+    public void doMove()
     {
-        move.setTarget(target);
+        move.setTarget(super.getTarget());
 
         move.execute();
     }

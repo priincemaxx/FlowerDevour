@@ -7,6 +7,7 @@ public class Entity
     private int health;
     private int maxHealth;
     private String name;
+    private Entity target;
     //private texture...
 
     public Entity(int health, int maxHealth, String name)
@@ -27,6 +28,10 @@ public class Entity
     public String getName()
     {
         return name;
+    }
+    public Entity getTarget()
+    {
+        return target;
     }
 
     public void setHealth(int health)
@@ -52,13 +57,20 @@ public class Entity
     {
         this.name = name;
     }
+    public void setTarget(Entity target) throws ActionException
+    {
+        if (target == null)
+        {
+            throw new ActionException("Attempting to target nothing!");
+        }
+
+        this.target = target;
+    }
 
     /**
      * Executes selected action on target.
-     *
-     * @param target Entity targeted by action.
      */
-    public void doMoveOn(Entity target)
+    public void doMove()
     {
 
     }
