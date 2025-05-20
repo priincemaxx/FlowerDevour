@@ -8,20 +8,23 @@ package io.github.some_example_name;
 
 public class BasicAction
 {
-    protected Entity user, target;
-    protected int userChange, targetChange;
+    private Entity user, target;
+    private int userChange, targetChange;
+    private String name;
 
-    public BasicAction(Entity user, Entity target, int userChange, int targetChange)
+    public BasicAction(Entity user, Entity target, int userChange, int targetChange, String name)
     {
         setUser(user);
         setTarget(target);
         setUserChange(userChange);
         setTargetChange(targetChange);
+        setName(name);
     }
-    public BasicAction(int userChange, int targetChange)
+    public BasicAction(int userChange, int targetChange, String name)
     {
         setUserChange(userChange);
         setTargetChange(targetChange);
+        setName(name);
 
         setUser(null);
         setTarget(null);
@@ -43,6 +46,10 @@ public class BasicAction
     {
         return targetChange;
     }
+    public String getName()
+    {
+        return name;
+    }
 
     public void setUser(Entity user)
     {
@@ -59,6 +66,15 @@ public class BasicAction
     public void setTargetChange(int targetChange)
     {
         this.targetChange = targetChange;
+    }
+    public void setName(String name) throws ActionException
+    {
+        if (name == null || name.isEmpty())
+        {
+            throw new ActionException("Invalid action name!");
+        }
+
+        this.name = name;
     }
 
     /**Executes itself on user and target.
