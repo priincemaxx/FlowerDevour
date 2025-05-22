@@ -106,8 +106,9 @@ public class Player extends Entity
      */
     public Table provideMoveButtons()
     {
-        final int width = 200;
-        final int height = 40;
+        final int width = 400;
+        final int height = 80;
+        final int fontScale = 2;
         Table moveButtons = new Table();
         Skin skin = new Skin(Gdx.files.internal("skin.json"));
         moveButtons.setFillParent(true); //temporary
@@ -140,6 +141,7 @@ public class Player extends Entity
                     //System.out.println("I work!");
                 }
             });
+            moveButton.getLabel().setFontScale(fontScale);
         }
 
         return moveButtons;

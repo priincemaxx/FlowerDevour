@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 
@@ -19,6 +20,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 public class Main extends ApplicationAdapter
 {
     private Stage stage;
+    private Stage stage2;
     private Skin skin;
     Player player = new Player(20, 20, "The Player",
         new Tool(1, "Shovel", new BasicAction(1, -5, "Healing attack")));
@@ -27,8 +29,17 @@ public class Main extends ApplicationAdapter
     @Override
     public void create()
     {
-        stage = new Stage(new ScreenViewport());
+        stage = new Stage(new FitViewport(1920, 1080));
         Gdx.input.setInputProcessor(stage);
+        stage2 = new Stage(new FitViewport(1920, 1080));
+
+        Table table = new Table();
+        TextButton button = new TextButton("BEEG TEST", new Skin(Gdx.files.internal("skin.json")));
+        table.addActor(button);
+        stage2.addActor(table);
+
+        int tmp = player.rewardTool(new Tool (2, "test", new BasicAction(0, -1, "test")));
+        player.equipTool(tmp);
 
         stage.addActor(player.provideMoveButtons());
 
@@ -40,6 +51,7 @@ public class Main extends ApplicationAdapter
     public void resize(int width, int height)
     {
         stage.getViewport().update(width, height);
+        stage2.getViewport().update(width, height);
     }
 
     @Override
@@ -48,6 +60,8 @@ public class Main extends ApplicationAdapter
         ScreenUtils.clear(Color.WHITE);
         stage.act();
         stage.draw();
+        stage2.act();
+        stage2.draw();
         System.out.println("Player health: " + player.getHealth());
         System.out.println("Puny Leaf health: " + punyLeaf.getHealth());
     }
@@ -56,5 +70,6 @@ public class Main extends ApplicationAdapter
     public void dispose()
     {
         stage.dispose();
+        stage2.dispose();
     }
 }
