@@ -3,6 +3,7 @@ package io.github.some_example_name;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -27,6 +28,8 @@ public class Main extends ApplicationAdapter
     private SpriteBatch batch;
     private Texture playerTexture;
     private Texture enemyTexture;
+    ///this camera renders a 2D view, no perspective
+    private OrthographicCamera camera;
 
     Player player;
     Enemy punyLeaf;
@@ -34,6 +37,17 @@ public class Main extends ApplicationAdapter
     @Override
     public void create()
     {
+
+        float width = Gdx.graphics.getWidth();
+        float height = Gdx.graphics.getHeight();
+
+        camera = new OrthographicCamera();
+        ///sets camera's viewport size, defines the games world coordinate system
+        ///if set to "true" everything is upside down💀
+        /// using width and height variables instead of hardcoding the 1000x500, same for FitViewport
+        camera.setToOrtho(false, width, height);
+        camera.update();
+
         playerTexture = new Texture(Gdx.files.internal("Gardener/FemaleType1/Idle/Idle1.png"));
         enemyTexture = new Texture(Gdx.files.internal("Enemy/Dandelion/Idle/Idle1.png"));
 
@@ -43,7 +57,9 @@ public class Main extends ApplicationAdapter
 
         batch = new SpriteBatch();
 
-        stage = new Stage(new FitViewport(1000, 500));
+        ///using FitViewport constructor that requires a camera
+        ///now both game rendering and UI share the same coordinate system and camera
+        stage = new Stage(new FitViewport(width, height, camera));
         Gdx.input.setInputProcessor(stage);
 
         int tmp = player.rewardTool(new Tool (2, "test", new BasicAction(0, -1, "test")));
@@ -84,10 +100,16 @@ public class Main extends ApplicationAdapter
     {
         ScreenUtils.clear(Color.WHITE);
 
+        camera.update();
+
+        batch.setProjectionMatrix(camera.combined);
+
         batch.begin();
 
-        batch.draw(player.getTexture(), 0, 200);
-        batch.draw(punyLeaf.getTexture(), 300, 200);
+        ///(x position, y position, increase width, increase height of sprite)
+        ///basically the two last variables scale up the sprite
+        batch.draw(player.getTexture(), 0, 200, 256, 256);
+        batch.draw(punyLeaf.getTexture(), 300, 200, 256, 256);
 
         batch.end();
 
