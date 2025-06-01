@@ -3,9 +3,16 @@ package io.github.some_example_name;
 //ROUGH ESTIMATE, ONLY FOR ARCHITECTURAL PURPOSES
 //Template for enemies, their stats
 
-public class Enemy extends Entity
+import java.io.Serializable;
+
+public class Enemy extends Entity implements Serializable
 {
     private BasicAction move;
+
+    public Enemy()
+    {
+
+    }
 
     public Enemy(int health, int maxHealth, String name, BasicAction move)
     {
@@ -29,5 +36,12 @@ public class Enemy extends Entity
         move.setTarget(super.getTarget());
 
         move.execute();
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Enemy:" + super.toString()
+                + " " +move.toString();
     }
 }

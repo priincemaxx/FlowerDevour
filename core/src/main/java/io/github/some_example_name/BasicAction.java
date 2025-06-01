@@ -1,16 +1,21 @@
 package io.github.some_example_name;
 
 //TODO: figure out a data-driven way to pass BasicAction child classes to enemies and items
-//ROUGH ESTIMATE, ONLY FOR ARCHITECTURAL PURPOSES
 //The purpose of this class is to create a template for
 //describing actions taken in combat by either the player or the enemy.
 
+import java.io.Serializable;
 
-public class BasicAction
+public class BasicAction implements Serializable
 {
     private Entity user, target;
     private int userChange, targetChange;
     private String name;
+
+    public BasicAction()
+    {
+
+    }
 
     public BasicAction(Entity user, Entity target, int userChange, int targetChange, String name)
     {
@@ -95,8 +100,17 @@ public class BasicAction
 
         user.setHealth(userHp);
         target.setHealth(targetHp);
+    }
 
-        Map map = new Map();
-        map.traverse();
+    @Override
+    public String toString()
+    {
+        return "BasicAction{" +
+            "user=" + user.getName() +
+            ", target=" + target.getName() +
+            ", userChange=" + userChange +
+            ", targetChange=" + targetChange +
+            ", name='" + name + '\'' +
+            '}';
     }
 }

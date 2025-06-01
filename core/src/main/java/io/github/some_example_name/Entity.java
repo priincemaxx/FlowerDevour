@@ -2,13 +2,19 @@ package io.github.some_example_name;
 
 //TODO: add texture and associated method for drawing.
 
-public class Entity
+import java.io.Serializable;
+
+public class Entity implements Serializable
 {
     private int health;
     private int maxHealth;
     private String name;
     private Entity target;
     //private texture...
+
+    public Entity()
+    {
+    }
 
     public Entity(int health, int maxHealth, String name)
     {
@@ -73,5 +79,16 @@ public class Entity
     public void doMove()
     {
 
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Entity{" +
+            "health=" + health +
+            ", maxHealth=" + maxHealth +
+            ", name='" + name + '\'' +
+            ", target=" + target.getName() +
+            '}';
     }
 }
