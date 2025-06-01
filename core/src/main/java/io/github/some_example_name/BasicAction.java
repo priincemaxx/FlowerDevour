@@ -95,5 +95,8 @@ public class BasicAction
 
         user.setHealth(userHp);
         target.setHealth(targetHp);
+
+        Map map = new Map();
+        map.traverse();
     }
 }
