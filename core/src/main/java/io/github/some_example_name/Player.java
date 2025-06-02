@@ -106,12 +106,14 @@ public class Player extends Entity
      */
     public Table provideMoveButtons()
     {
-        final int width = 200;
-        final int height = 40;
+        //final int width = 200;
+        //final int height = 40;
         Table moveButtons = new Table();
         Skin skin = new Skin(Gdx.files.internal("skin.json"));
-        moveButtons.setFillParent(true); //temporary
-
+        moveButtons.setFillParent(true);
+        moveButtons.bottom().pad(10);
+        moveButtons.defaults().growX();
+        //moveButtons.setDebug(true);
         for (int currentSlot = 0; currentSlot < EQUIP_SLOTS; currentSlot++)
         {
             if (currentSlot > 0 && currentSlot % 2 == 0)
@@ -122,13 +124,13 @@ public class Player extends Entity
             {
                 Button blankButton = new Button(skin);
                 blankButton.setDisabled(true);
-                moveButtons.add(blankButton).size(width, height);
+                moveButtons.add(blankButton);
                 continue;
             }
 
             String moveName = equippedTools.getTool(currentSlot).getMove().getName();
             TextButton moveButton = new TextButton(moveName, skin);
-            moveButtons.add(moveButton).size(width, height);
+            moveButtons.add(moveButton);
             final int tmpCurrentSlot = currentSlot;
             moveButton.addListener(new ChangeListener()
             {
@@ -143,5 +145,18 @@ public class Player extends Entity
         }
 
         return moveButtons;
+    }
+
+    public Table provideProgressBars()
+    {
+        Table progressBars = new Table();
+        Skin skin = new Skin(Gdx.files.internal("starsoldierui/star-soldier-ui.json"));
+        progressBars.setFillParent(true);
+//        progressBars.top().pad(10);
+//        progressBars.defaults().growX();
+        //progressBars.setDebug(true);
+
+
+        return progressBars;
     }
 }
