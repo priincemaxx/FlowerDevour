@@ -1,11 +1,13 @@
 package io.github.some_example_name;
 
+import com.badlogic.gdx.utils.Json;
+
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import java.util.Scanner;
 
 public class GameMaster
 {
@@ -15,16 +17,27 @@ public class GameMaster
 
     public void initializeEnemies()
     {
-        Gson gson = new Gson();
+        String enemiesJson = "";
+        Json json = new Json();
 
-        try (Reader reader = new FileReader("JSONs/enemies.json"))
+        try
         {
-            enemies = gson.fromJson(reader, new TypeToken<ArrayList<Enemy>>(){}.getType());
-        } catch (IOException e) {
-            e.printStackTrace();
+            File enemies = new File("JSONs/enemies.json");
+            Scanner Reader = new Scanner(enemies);
+            while (Reader.hasNextLine())
+            {
+                enemiesJson = (enemiesJson + Reader.nextLine());
+            }
+            Reader.close();
+
+            enemies = json.fromJson(ArrayList<>.class, enemies);
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
         }
     }
-
+/*
     public void initializeTools()
     {
         Gson gson = new Gson();
@@ -49,6 +62,8 @@ public class GameMaster
         }
     }
 
+ */
+
     public ArrayList<Enemy> getEnemies()
     {
         return enemies;
@@ -63,4 +78,5 @@ public class GameMaster
     {
         return passives;
     }
+
 }
