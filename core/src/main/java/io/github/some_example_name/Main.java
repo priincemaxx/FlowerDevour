@@ -47,7 +47,7 @@ public class Main extends ApplicationAdapter
         //background, viewport and window should all be the same size
         int worldWidth = 8;
         int worldHeight = 6;
-        backgroundTexture = new Texture("Backgrounds/background.png");
+        backgroundTexture = new Texture("Backgrounds/combatbg_temp_red.png");
         playerTexture = new Texture("Gardener/FemaleType1/Idle/Idle1.png");
         enemyTexture = new Texture("Enemy/Dandelion/Idle/Idle1.png");
         spriteBatch = new SpriteBatch();

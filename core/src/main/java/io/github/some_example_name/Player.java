@@ -109,7 +109,7 @@ public class Player extends Entity
         //final int width = 200;
         //final int height = 40;
         Table moveButtons = new Table();
-        Skin skin = new Skin(Gdx.files.internal("skin.json"));
+        Skin skin = new Skin(Gdx.files.internal("buttonSkin_temp/skin.json"));
         moveButtons.setFillParent(true);
         moveButtons.bottom().pad(10);
         moveButtons.defaults().growX();
@@ -150,8 +150,8 @@ public class Player extends Entity
     public Table provideProgressBars()
     {
         Table progressBars = new Table();
-        Skin skin = new Skin(Gdx.files.internal("starsoldierui/star-soldier-ui.json"));
-        progressBars.setFillParent(true);
+        //Skin skin = new Skin(Gdx.files.internal("starsoldierui/star-soldier-ui.json"));
+        //progressBars.setFillParent(true);
 //        progressBars.top().pad(10);
 //        progressBars.defaults().growX();
         //progressBars.setDebug(true);
