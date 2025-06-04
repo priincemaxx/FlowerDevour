@@ -17,5 +17,7 @@ public class Fertilizer extends PassiveItem
         double modifier = 0.25 * passives;
 
         modifier += owner.getDamageModifier();
+
+        owner.setDamageModifier(modifier);
     }
 }

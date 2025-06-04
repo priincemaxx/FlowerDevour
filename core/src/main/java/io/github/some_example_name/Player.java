@@ -42,7 +42,7 @@ public class Player extends Entity
         equippedTools.moveInside(new Tool(starterTool));
     }
 
-    public void setDamageModifier(int damageModifier)
+    public void setDamageModifier(double damageModifier)
     {
         this.damageModifier = damageModifier;
     }
