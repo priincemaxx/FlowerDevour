@@ -57,7 +57,7 @@ public class CombatRoom extends Room
     public void drawRoom(FillViewport backgroundViewport, SpriteBatch spriteBatch,
                          Texture backgroundTexture, FillViewport entityViewport,
                          Texture playerTexture, Texture enemyTexture) {
-        ScreenUtils.clear(Color.BLACK);
+        ScreenUtils.clear(Color.WHITE);
         backgroundViewport.apply();
         spriteBatch.setProjectionMatrix(backgroundViewport.getCamera().combined);
         spriteBatch.begin();
@@ -75,8 +75,5 @@ public class CombatRoom extends Room
         spriteBatch.end();
     }
 
-    public void initializebg() {
 
-
-    }
 }
