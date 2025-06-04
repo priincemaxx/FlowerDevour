@@ -39,7 +39,7 @@ public class Tool extends Item implements Serializable
      * @param user Entity doing action.
      * @param target Entity targeted by action.
      */
-    public void callAction(Entity user, Entity target)
+    public void execute(Entity user, Entity target)
     {
         move.setUser(user);
         move.setTarget(target);
