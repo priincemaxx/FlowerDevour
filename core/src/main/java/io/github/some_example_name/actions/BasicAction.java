@@ -104,6 +104,11 @@ public class BasicAction implements Serializable
         target.setHealth(targetHp);
     }
 
+    public void update()
+    {
+
+    }
+
     @Override
     public String toString()
     {

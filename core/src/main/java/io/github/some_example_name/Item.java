@@ -19,7 +19,7 @@ public class Item implements Serializable
     {
         setName(name);
     }
-    public Item (Item item)
+    public Item(Item item)
     {
         this.name = item.getName();
     }
@@ -35,6 +35,11 @@ public class Item implements Serializable
     }
 
     public void execute(Entity user, Entity target)
+    {
+
+    }
+
+    public void update()
     {
 
     }
