@@ -19,6 +19,11 @@ public class Player extends Entity
     private int selectedTool = 0;
 
 
+    public Player(int health, int maxHealth, String name, Tool starterTool)
+    {
+        super(health, maxHealth, name);
+        equippedTools.moveInside(new Tool(starterTool));
+    }
 
     public Player(int health, int maxHealth, String name, Texture texture, ToolContainer starterTools)
     {
