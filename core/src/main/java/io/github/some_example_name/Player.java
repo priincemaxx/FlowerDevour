@@ -22,6 +22,8 @@ public class Player extends Entity
     private PassiveContainer passives = new PassiveContainer(MAX_PASSIVES);
     private int selectedTool = 0;
 
+    private double damageModifier = 1;
+
 
     public Player(int health, int maxHealth, String name, Tool starterTool)
     {
@@ -40,6 +42,10 @@ public class Player extends Entity
         equippedTools.moveInside(new Tool(starterTool));
     }
 
+    public void setDamageModifier(int damageModifier)
+    {
+        this.damageModifier = damageModifier;
+    }
     public void setEquippedTools(ToolContainer equippedTools)
     {
         this.equippedTools = new ToolContainer(equippedTools);
@@ -58,6 +64,10 @@ public class Player extends Entity
         super.setTarget(target);
     }
 
+    public double getDamageModifier()
+    {
+        return damageModifier;
+    }
 
     /**
      * Equips tool to first empty equip slot.
@@ -101,14 +111,33 @@ public class Player extends Entity
         return passives.moveInside(reward);
     }
 
+    public int getEquippedCount()
+    {
+        return equippedTools.filledSlots();
+    }
+    public int getUnequippedCount()
+    {
+        return inventory.filledSlots();
+    }
+    public int getPassivesCount()
+    {
+        return passives.filledSlots();
+    }
+
     public void doMove() throws PlayerException
     {
-        Tool actingTool = equippedTools.getTool(selectedTool);
-
-        if (actingTool == null)
+        if (equippedTools.getTool(selectedTool) == null)
         {
             throw new PlayerException("Trying to act on nothing!");
         }
+
+        Tool actingTool = new Tool(equippedTools.getTool(selectedTool));
+
+        int targetChange = actingTool.getMove().getTargetChange();
+
+        targetChange *= damageModifier;
+
+        actingTool.getMove().setTargetChange(targetChange);
 
         actingTool.execute(this, super.getTarget());
     }
