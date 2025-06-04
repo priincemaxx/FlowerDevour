@@ -34,6 +34,11 @@ public class Item implements Serializable
         this.name = name;
     }
 
+    public void execute(Entity user, Entity target)
+    {
+
+    }
+
     @Override
     public String toString()
     {

@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import io.github.some_example_name.passives.PassiveContainer;
+import io.github.some_example_name.passives.PassiveItem;
 import io.github.some_example_name.tools.Tool;
 import io.github.some_example_name.tools.ToolContainer;
 import io.github.some_example_name.tools.ToolContainerException;
@@ -17,6 +19,7 @@ public class Player extends Entity
 
     private ToolContainer equippedTools = new ToolContainer(EQUIP_SLOTS);
     private ToolContainer inventory = new ToolContainer(INVENTORY_SLOTS);
+    private PassiveContainer passives = new PassiveContainer(MAX_PASSIVES);
     private int selectedTool = 0;
 
 
@@ -93,6 +96,10 @@ public class Player extends Entity
     {
         return inventory.moveInside(reward);
     }
+    public int rewardPassive(PassiveItem reward)
+    {
+        return passives.moveInside(reward);
+    }
 
     public void doMove() throws PlayerException
     {
@@ -103,7 +110,7 @@ public class Player extends Entity
             throw new PlayerException("Trying to act on nothing!");
         }
 
-        actingTool.callAction(this, super.getTarget());
+        actingTool.execute(this, super.getTarget());
     }
 
 
