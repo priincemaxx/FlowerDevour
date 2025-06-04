@@ -1,13 +1,25 @@
 package io.github.some_example_name;
 
-//ROUGH ESTIMATE, ONLY FOR ARCHITECTURAL PURPOSES
 //Template for enemies, their stats
 
+import java.io.Serializable;
 import com.badlogic.gdx.graphics.Texture;
 
-public class Enemy extends Entity
+public class Enemy extends Entity implements Serializable
 {
     private BasicAction move;
+
+    public Enemy()
+    {
+
+    }
+
+    public Enemy(int health, int maxHealth, String name, BasicAction move)
+    {
+        super(health, maxHealth, name);
+        setMove(move);
+        move.setUser(this);
+    }
 
     public Enemy(int health, int maxHealth, String name, Texture texture, BasicAction move)
     {
@@ -31,5 +43,14 @@ public class Enemy extends Entity
         move.setTarget(super.getTarget());
 
         move.execute();
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Enemy{" +
+            "move=" + move +
+            super.toString() +
+            '}';
     }
 }

@@ -4,13 +4,15 @@ package io.github.some_example_name;
 //Template for a weapon style item.
 //Player will start off with some basic ones.
 
-public class Tool extends Item
+import java.io.Serializable;
+
+public class Tool extends Item implements Serializable
 {
     private BasicAction move;
 
-    public Tool(int id, String name, BasicAction move)
+    public Tool(String name, BasicAction move)
     {
-        super(id, name);
+        super(name);
         this.move = move;
     }
     public Tool(Tool tool)
@@ -39,5 +41,13 @@ public class Tool extends Item
         move.setTarget(target);
 
         move.execute();
+    }
+
+    @Override
+    public String toString()
+    {
+        return super.toString() +
+            "move=" + move +
+            '}';
     }
 }
