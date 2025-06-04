@@ -106,11 +106,9 @@ public class BasicAction implements Serializable
     public String toString()
     {
         return "BasicAction{" +
-            "user=" + user.getName() +
-            ", target=" + target.getName() +
-            ", userChange=" + userChange +
+            "name='" + name + '\'' +
             ", targetChange=" + targetChange +
-            ", name='" + name + '\'' +
+            ", userChange=" + userChange +
             '}';
     }
 }

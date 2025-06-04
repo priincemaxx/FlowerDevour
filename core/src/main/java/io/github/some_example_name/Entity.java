@@ -88,7 +88,6 @@ public class Entity implements Serializable
             "health=" + health +
             ", maxHealth=" + maxHealth +
             ", name='" + name + '\'' +
-            ", target=" + target.getName() +
             '}';
     }
 }

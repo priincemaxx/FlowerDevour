@@ -1,68 +1,71 @@
 package io.github.some_example_name;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Json;
-
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
+import com.badlogic.gdx.utils.JsonReader;
+import com.badlogic.gdx.utils.JsonValue;
 import java.util.ArrayList;
-import java.util.Scanner;
 
+
+/**
+ * Responsible for files and the actual game.
+ *
+ * Game objects initialized from JSONs.
+ *
+ * For JSON writing, don't forget to declare the class of the object
+ * when writing them. Refer to the enemies.json file for reference.
+ */
 public class GameMaster
 {
     private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
     private ArrayList<Tool> tools = new ArrayList<Tool>();
     private ArrayList<PassiveItem> passives = new ArrayList<PassiveItem>();
 
+
+
     public void initializeEnemies()
     {
-        String enemiesJson = "";
         Json json = new Json();
+        JsonValue jsonReader = new JsonReader().parse(Gdx.files.internal("JSONs/enemies.json"));
 
-        try
+        for (JsonValue enemyJson : jsonReader.iterator())
         {
-            File enemies = new File("JSONs/enemies.json");
-            Scanner Reader = new Scanner(enemies);
-            while (Reader.hasNextLine())
-            {
-                enemiesJson = (enemiesJson + Reader.nextLine());
-            }
-            Reader.close();
+            String text = enemyJson.toString();
+            Enemy newEnemy = json.fromJson(Enemy.class, text);
 
-            enemies = json.fromJson(ArrayList<>.class, enemies);
-        }
-        catch (Exception e)
-        {
-            System.out.println(e);
+            enemies.add(newEnemy);
         }
     }
-/*
+
     public void initializeTools()
     {
-        Gson gson = new Gson();
+        Json json = new Json();
+        JsonValue jsonReader = new JsonReader().parse(Gdx.files.internal("JSONs/tools.json"));
 
-        try (Reader reader = new FileReader("JSONs/tools.json"))
+        for (JsonValue toolJson : jsonReader.iterator())
         {
-            tools = gson.fromJson(reader, new TypeToken<ArrayList<Tool>>(){}.getType());
-        } catch (IOException e) {
-            e.printStackTrace();
+            String text = toolJson.toString();
+            Tool newTool = json.fromJson(Tool.class, text);
+
+            tools.add(newTool);
         }
     }
 
     public void initializePassives()
     {
-        Gson gson = new Gson();
+        Json json = new Json();
+        JsonValue jsonReader = new JsonReader().parse(Gdx.files.internal("JSONs/passives.json"));
 
-        try (Reader reader = new FileReader("JSONs/passives.json"))
+        for (JsonValue passiveJson : jsonReader.iterator())
         {
-            passives = gson.fromJson(reader, new TypeToken<ArrayList<PassiveItem>>(){}.getType());
-        } catch (IOException e) {
-            e.printStackTrace();
+            String text = passiveJson.toString();
+            PassiveItem newPassive = json.fromJson(PassiveItem.class, text);
+
+            passives.add(newPassive);
         }
     }
 
- */
+
 
     public ArrayList<Enemy> getEnemies()
     {

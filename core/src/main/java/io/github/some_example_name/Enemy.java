@@ -41,7 +41,9 @@ public class Enemy extends Entity implements Serializable
     @Override
     public String toString()
     {
-        return "Enemy:" + super.toString()
-                + " " +move.toString();
+        return "Enemy{" +
+            "move=" + move +
+            super.toString() +
+            '}';
     }
 }
