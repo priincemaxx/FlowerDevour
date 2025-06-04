@@ -159,7 +159,7 @@ public class Player extends Entity
         Table progressBars = new Table();
         Skin skin = new Skin(Gdx.files.internal("testskin/default-ui1.json"));
         progressBars.setFillParent(true);
-        //progressBars.top().pad(10);
+        progressBars.top().padTop(70);
         progressBars.defaults().growX().pad(10);
         progressBars.setDebug(true);
 //progressBars.setDebug(true);

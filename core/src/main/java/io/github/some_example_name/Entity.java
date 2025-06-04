@@ -13,9 +13,10 @@ public class Entity implements Serializable
     private Entity target;
     private Texture texture; //should later replace with TextureRegion class
 
+
     public Entity()
     {
-    
+
     }
 
     public Entity(int health, int maxHealth, String name)
@@ -24,7 +25,7 @@ public class Entity implements Serializable
         setHealth(health);
         setName(name);
     }
-    
+
     public Entity(int health, int maxHealth, String name, Texture texture)
     {
         setMaxHealth(maxHealth);
