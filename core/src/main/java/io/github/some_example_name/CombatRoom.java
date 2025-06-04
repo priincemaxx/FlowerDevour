@@ -3,6 +3,9 @@ package io.github.some_example_name;
 //ROUGH ESTIMATE, ONLY FOR ARCHITECTURAL PURPOSES
 //Template for an enemy encounter in the map
 
+import io.github.some_example_name.enemies.Enemy;
+import io.github.some_example_name.tools.Tool;
+
 public class CombatRoom extends Room
 {
     private Enemy enemy;

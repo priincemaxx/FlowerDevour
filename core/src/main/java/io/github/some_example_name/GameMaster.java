@@ -4,6 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
+import io.github.some_example_name.enemies.Enemy;
+import io.github.some_example_name.passives.PassiveItem;
+import io.github.some_example_name.tools.Tool;
+
 import java.util.ArrayList;
 
 

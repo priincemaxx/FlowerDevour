@@ -1,23 +1,23 @@
 [
   {
-    "class": "io.github.some_example_name.Enemy",
+    "class": "io.github.some_example_name.enemies.Enemy",
     "health": 20,
     "maxHealth": 20,
     "name": "Test Guy 1",
     "move": {
-      "class": "io.github.some_example_name.BasicAction",
+      "class": "io.github.some_example_name.actions.BasicAction",
       "name": "Test action 1",
       "userChange": 5,
       "targetChange": -5
     }
   },
   {
-    "class": "io.github.some_example_name.Enemy",
+    "class": "io.github.some_example_name.enemies.Enemy",
     "health": 20,
     "maxHealth": 20,
     "name": "Test Guy 2",
     "move": {
-      "class": "io.github.some_example_name.BasicAction",
+      "class": "io.github.some_example_name.actions.BasicAction",
       "name": "Test action 2",
       "userChange": 5,
       "targetChange": -5

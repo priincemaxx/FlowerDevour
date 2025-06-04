@@ -1,9 +1,11 @@
-package io.github.some_example_name;
+package io.github.some_example_name.enemies;
 
 //Template for enemies, their stats
 
 import java.io.Serializable;
 import com.badlogic.gdx.graphics.Texture;
+import io.github.some_example_name.Entity;
+import io.github.some_example_name.actions.BasicAction;
 
 public class Enemy extends Entity implements Serializable
 {

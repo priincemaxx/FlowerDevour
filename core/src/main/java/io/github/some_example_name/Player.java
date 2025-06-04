@@ -5,8 +5,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-
-import java.io.Serializable;
+import io.github.some_example_name.tools.Tool;
+import io.github.some_example_name.tools.ToolContainer;
+import io.github.some_example_name.tools.ToolContainerException;
 
 public class Player extends Entity
 {

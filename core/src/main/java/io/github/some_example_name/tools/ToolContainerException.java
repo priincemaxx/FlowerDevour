@@ -1,4 +1,4 @@
-package io.github.some_example_name;
+package io.github.some_example_name.tools;
 
 public class ToolContainerException extends RuntimeException
 {

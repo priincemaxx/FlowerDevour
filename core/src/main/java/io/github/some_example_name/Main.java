@@ -10,6 +10,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import io.github.some_example_name.actions.BasicAction;
+import io.github.some_example_name.enemies.Enemy;
+import io.github.some_example_name.tools.Tool;
 
 //player lacks try catch blocks
 //graphics
