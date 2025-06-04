@@ -1,9 +1,12 @@
 package io.github.some_example_name;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+
+import java.io.Serializable;
 
 public class Player extends Entity
 {
@@ -17,14 +20,14 @@ public class Player extends Entity
 
 
 
-    public Player(int health, int maxHealth, String name, ToolContainer starterTools)
+    public Player(int health, int maxHealth, String name, Texture texture, ToolContainer starterTools)
     {
-        super(health, maxHealth, name);
+        super(health, maxHealth, name, texture);
         setEquippedTools(starterTools);
     }
-    public Player(int health, int maxHealth, String name, Tool starterTool)
+    public Player(int health, int maxHealth, String name, Texture texture, Tool starterTool)
     {
-        super(health, maxHealth, name);
+        super(health, maxHealth, name, texture);
         equippedTools.moveInside(new Tool(starterTool));
     }
 
@@ -140,7 +143,9 @@ public class Player extends Entity
                     //System.out.println("I work!");
                 }
             });
+            moveButton.getLabel().setFontScale(fontScale);
         }
+        moveButtons.defaults().reset();
 
         return moveButtons;
     }

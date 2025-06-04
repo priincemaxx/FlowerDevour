@@ -4,12 +4,25 @@ package io.github.some_example_name;
 //Template for an item the player can find
 //that passively helps the player.
 
-public class PassiveItem extends Item
+import java.io.Serializable;
+
+public class PassiveItem extends Item implements Serializable
 {
     //private passive passive;
 
-    public PassiveItem(int id, String name)
+    public PassiveItem()
     {
-        super(id, name);
+
+    }
+
+    public PassiveItem(String name)
+    {
+        super(name);
+    }
+
+    @Override
+    public String toString()
+    {
+        return super.toString();
     }
 }
