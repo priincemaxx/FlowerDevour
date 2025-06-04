@@ -1,3 +1,80 @@
 [
+  {
+    "class" : "io.github.some_example_name.tools.Tool",
+    "name" : "Rusty Scythe",
+    "move" :
+    {
+      "class" : "io.github.some_example_name.actions.BasicAction",
+      "name" : "Lesser Slash",
+      "userChange" : 0,
+      "targetChange" : -5
+    }
+  },
+  {
+    "class" : "io.github.some_example_name.tools.Tool",
+    "name" : "Scythe",
+    "move" :
+    {
+      "class" : "io.github.some_example_name.actions.BasicAction",
+      "name" : "Slash",
+      "userChange" : 0,
+      "targetChange" : -10
+    }
+  },
+  {
+    "class" : "io.github.some_example_name.tools.Tool",
+    "name" : "Shiny Scythe",
+    "move" :
+    {
+      "class" : "io.github.some_example_name.actions.BasicAction",
+      "name" : "Greater Slash",
+      "userChange" : 0,
+      "targetChange" : -20
+    }
+  },
+  {
+    "class" : "io.github.some_example_name.tools.Tool",
+    "name" : "Rusty Scissors",
+    "move" :
+    {
+      "class" : "io.github.some_example_name.actions.BasicAction",
+      "name" : "Tainted Cut",
+      "userChange" : -1,
+      "targetChange" : -7
+    }
+  },
+  {
+    "class" : "io.github.some_example_name.tools.Tool",
+    "name" : "New Scissors",
+    "move" :
+    {
+      "class" : "io.github.some_example_name.actions.BasicAction",
+      "name" : "Healing Cut",
+      "userChange" : 3,
+      "targetChange" : -10
+    }
+  },
+  {
+    "class" : "io.github.some_example_name.tools.Tool",
+    "name" : "Blessed Scissors",
+    "move" :
+    {
+      "class" : "io.github.some_example_name.actions.BasicAction",
+      "name" : "Mending Cut",
+      "userChange" : 10,
+      "targetChange" : -15
+    }
+  },
+  {
+    "class" : "io.github.some_example_name.tools.Tool",
+    "name" : "Ritual Rake",
+    "move" :
+    {
+      "class" : "io.github.some_example_name.actions.BasicAction",
+      "name" : "Banish",
+      "userChange" : -10,
+      "targetChange" : -50
+    }
+  }
 
 ]
