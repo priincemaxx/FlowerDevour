@@ -10,19 +10,36 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
+//player lacks try catch blocks
+//graphics
+//passive items
+//map/rooms/drawing rooms
+
+//buttons and progress bars (health bars) on tables
+//sprites in stage?
+
+//scenes: combat, loot, pause menu, main menu, map
 
 /**
  * {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms.
  */
 public class Main extends ApplicationAdapter
 {
+    //textures
+    Texture backgroundTexture;
+    Texture playerTexture;
+    Texture enemyTexture;
+    SpriteBatch spriteBatch;
+    //viewports
+    FillViewport entityViewport;
+    FillViewport backgroundViewport;
+    ScreenViewport stageViewport;
+
     private Stage stage;
     private Skin skin;
     private SpriteBatch batch;
@@ -37,7 +54,31 @@ public class Main extends ApplicationAdapter
     @Override
     public void create()
     {
+        //params set by startup window size
+        //background, viewport and window should all be the same size
+        //changing them will require changing size/X/Y values of basically everything visually
+        int worldWidth = 8;
+        int worldHeight = 6;
+        backgroundTexture = new Texture("Backgrounds/combatbg_temp_red.png");
+        playerTexture = new Texture("Gardener/FemaleType1/Idle/Idle1.png");
+        enemyTexture = new Texture("Enemy/Dandelion/Idle/Idle1.png");
+        spriteBatch = new SpriteBatch();
+        
+        player = new Player(20, 20, "The Player", playerTexture,
+            new Tool(1, "Shovel", new BasicAction(1, -5, "Healing attack")));
+        punyLeaf = new Enemy(15, 15, "Puny Leaf", enemyTexture, new BasicAction(0, -5, "Attack"));
+        //TODO: sprite grouping
 
+        backgroundViewport = new FillViewport(worldWidth, worldHeight);
+        stageViewport = new ScreenViewport();
+        entityViewport = new FillViewport(worldWidth, worldHeight);
+
+        stage = new Stage(stageViewport);
+        Gdx.input.setInputProcessor(stage);
+
+        stage.addActor(player.provideMoveButtons());
+        stage.addActor(player.provideProgressBars());
+        /*
         float width = Gdx.graphics.getWidth();
         float height = Gdx.graphics.getHeight();
 
@@ -65,16 +106,6 @@ public class Main extends ApplicationAdapter
         int tmp = player.rewardTool(new Tool (2, "test", new BasicAction(0, -1, "test")));
         player.equipTool(tmp);
 
-        //Table testTable = new Table();
-
-        //Table playerButtons = player.provideMoveButtons();
-
-        //testTable.add(playerButtons);
-        //testTable.add(new Button(new Skin(Gdx.files.internal("skin.json"))));
-        //playerButtons.add(new Button(new Skin(Gdx.files.internal("skin.json"))));
-
-        //stage.addActor(testTable);
-        //FIXME: clean up goddamn viewport garbage
         Table root = new Table();
         root.add(new Button(new Skin(Gdx.files.internal("skin.json")))).fill();
 
@@ -84,6 +115,7 @@ public class Main extends ApplicationAdapter
         newTable.add(new Button(new Skin(Gdx.files.internal("skin.json"))));
 
         stage.addActor(root);
+        */
 
         player.setTarget(punyLeaf);
         punyLeaf.setTarget(player);
@@ -92,31 +124,53 @@ public class Main extends ApplicationAdapter
     @Override
     public void resize(int width, int height)
     {
+        stageViewport.update(width, height, true);
+        backgroundViewport.update(width, height, true);
+        entityViewport.update(width, height, true);
+
         stage.getViewport().update(width, height);
     }
 
     @Override
     public void render() //FIXME: VIEWPORTS!!!!!!!
     {
-        ScreenUtils.clear(Color.WHITE);
+        input();
+        logic();
+        drawCombatRoom();
 
-        camera.update();
-
-        batch.setProjectionMatrix(camera.combined);
-
-        batch.begin();
-
-        ///(x position, y position, increase width, increase height of sprite)
-        ///basically the two last variables scale up the sprite
-        batch.draw(player.getTexture(), 0, 200, 256, 256);
-        batch.draw(punyLeaf.getTexture(), 300, 200, 256, 256);
-
-        batch.end();
-
+//        ScreenUtils.clear(Color.WHITE);
         stage.act();
         stage.draw();
         System.out.println("Player health: " + player.getHealth());
         System.out.println("Puny Leaf health: " + punyLeaf.getHealth());
+    }
+
+    private void input() {
+
+    }
+
+    private void logic() {
+
+    }
+
+    private void drawCombatRoom() {
+        ScreenUtils.clear(Color.BLACK);
+        backgroundViewport.apply();
+        spriteBatch.setProjectionMatrix(backgroundViewport.getCamera().combined);
+        spriteBatch.begin();
+            float worldWidth = backgroundViewport.getWorldWidth();
+            float worldHeight = backgroundViewport.getWorldHeight();
+            spriteBatch.draw(backgroundTexture, 0, 0, worldWidth, worldHeight);
+            System.out.println("AAAAAAAAAAAAAAAAA");
+        spriteBatch.end();
+
+        entityViewport.apply();
+        spriteBatch.setProjectionMatrix(entityViewport.getCamera().combined);
+        spriteBatch.begin();
+            spriteBatch.draw(playerTexture, 1.1f, 2.1f, 3f, 3.4f);
+            spriteBatch.draw(enemyTexture, 4.1f, 2.1f, 3f, 3.4f);
+        spriteBatch.end();
+
     }
 
     @Override

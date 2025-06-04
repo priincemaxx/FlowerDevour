@@ -3,10 +3,7 @@ package io.github.some_example_name;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
 import java.io.Serializable;
@@ -109,14 +106,15 @@ public class Player extends Entity
      */
     public Table provideMoveButtons()
     {
-        final int width = 400;
-        final int height = 80;
-        final int fontScale = 2;
+        //final int width = 200;
+        //final int height = 40;
         Table moveButtons = new Table();
-        Skin skin = new Skin(Gdx.files.internal("skin.json"));
-        moveButtons.setFillParent(true); //temporary
-        moveButtons.defaults().size(width, height);
-
+        //Skin skin1 = new Skin(Gdx.files.internal("buttonSkin_temp/skin.json"));
+        Skin skin = new Skin(Gdx.files.internal("button/TextButton.json"));
+        moveButtons.setFillParent(true);
+        moveButtons.bottom().pad(15);
+        moveButtons.defaults().growX().padLeft(10).padRight(10).height(50);
+        //moveButtons.setDebug(true);
         for (int currentSlot = 0; currentSlot < EQUIP_SLOTS; currentSlot++)
         {
             if (currentSlot > 0 && currentSlot % 2 == 0)
@@ -125,15 +123,15 @@ public class Player extends Entity
             }
             if (equippedTools.getTool(currentSlot) == null)
             {
-                Button blankButton = new Button(skin);
+                TextButton blankButton = new TextButton(" ", skin);
                 blankButton.setDisabled(true);
-                moveButtons.add(blankButton);
+                moveButtons.add(blankButton).uniform();
                 continue;
             }
 
             String moveName = equippedTools.getTool(currentSlot).getMove().getName();
             TextButton moveButton = new TextButton(moveName, skin);
-            moveButtons.add(moveButton);
+            moveButtons.add(moveButton).uniform();
             final int tmpCurrentSlot = currentSlot;
             moveButton.addListener(new ChangeListener()
             {
@@ -150,5 +148,21 @@ public class Player extends Entity
         moveButtons.defaults().reset();
 
         return moveButtons;
+    }
+
+    //ughhhhhh
+    public Table provideProgressBars()
+    {
+        Table progressBars = new Table();
+        Skin skin = new Skin(Gdx.files.internal("testskin/default-ui1.json"));
+        progressBars.setFillParent(true);
+        //progressBars.top().pad(10);
+        progressBars.defaults().growX().pad(10);
+        progressBars.setDebug(true);
+//progressBars.setDebug(true);
+        ProgressBar healthBar = new ProgressBar(0, 20, 5, false, skin);
+        progressBars.add(healthBar);
+
+        return progressBars;
     }
 }
