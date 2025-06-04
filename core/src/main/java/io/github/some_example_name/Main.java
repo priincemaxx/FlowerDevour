@@ -26,10 +26,12 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
  */
 public class Main extends ApplicationAdapter
 {
+    //textures
     Texture backgroundTexture;
     Texture playerTexture;
     Texture enemyTexture;
     SpriteBatch spriteBatch;
+    //viewports
     FillViewport entityViewport;
     FillViewport backgroundViewport;
     ScreenViewport stageViewport;
@@ -45,6 +47,7 @@ public class Main extends ApplicationAdapter
     {
         //params set by startup window size
         //background, viewport and window should all be the same size
+        //changing them will require changing size/X/Y values of basically everything visually
         int worldWidth = 8;
         int worldHeight = 6;
         backgroundTexture = new Texture("Backgrounds/combatbg_temp_red.png");
@@ -52,16 +55,16 @@ public class Main extends ApplicationAdapter
         enemyTexture = new Texture("Enemy/Dandelion/Idle/Idle1.png");
         spriteBatch = new SpriteBatch();
         //TODO: sprite grouping
-        //viewport = new FitViewport(12, 8);
+
         backgroundViewport = new FillViewport(worldWidth, worldHeight);
         stageViewport = new ScreenViewport();
         entityViewport = new FillViewport(worldWidth, worldHeight);
 
-        //stage = new Stage(new ScreenViewport());
         stage = new Stage(stageViewport);
         Gdx.input.setInputProcessor(stage);
 
         stage.addActor(player.provideMoveButtons());
+        stage.addActor(player.provideProgressBars());
 
         player.setTarget(punyLeaf);
         punyLeaf.setTarget(player);
@@ -82,7 +85,7 @@ public class Main extends ApplicationAdapter
     {
         input();
         logic();
-        draw();
+        drawCombatRoom();
 
 //        ScreenUtils.clear(Color.WHITE);
         stage.act();
@@ -99,7 +102,7 @@ public class Main extends ApplicationAdapter
 
     }
 
-    private void draw() {
+    private void drawCombatRoom() {
         ScreenUtils.clear(Color.BLACK);
         backgroundViewport.apply();
         spriteBatch.setProjectionMatrix(backgroundViewport.getCamera().combined);
@@ -107,15 +110,14 @@ public class Main extends ApplicationAdapter
             float worldWidth = backgroundViewport.getWorldWidth();
             float worldHeight = backgroundViewport.getWorldHeight();
             spriteBatch.draw(backgroundTexture, 0, 0, worldWidth, worldHeight);
-
             System.out.println("AAAAAAAAAAAAAAAAA");
         spriteBatch.end();
 
         entityViewport.apply();
         spriteBatch.setProjectionMatrix(entityViewport.getCamera().combined);
         spriteBatch.begin();
-            spriteBatch.draw(playerTexture, 1.8f, 1.4f, 2, 3);
-            spriteBatch.draw(enemyTexture, 4.7f, 1.4f, 2, 3);
+            spriteBatch.draw(playerTexture, 1.1f, 2.1f, 3f, 3.4f);
+            spriteBatch.draw(enemyTexture, 4.1f, 2.1f, 3f, 3.4f);
         spriteBatch.end();
 
     }
