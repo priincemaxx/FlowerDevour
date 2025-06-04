@@ -1,5 +1,7 @@
-package io.github.some_example_name;
+package io.github.some_example_name.screens;
 
+import io.github.some_example_name.Main;
+import io.github.some_example_name.Player;
 import io.github.some_example_name.enemies.*;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.Gdx;
@@ -26,15 +28,7 @@ public class LootScreen implements Screen {
             game.font.draw(game.batch, "press space to switch!",  4, 3);
         game.batch.end();
         System.out.println("WHAT IS WRONG WITH YOU");
-        Gdx.input.setInputProcessor(new InputAdapter() {
-            @Override
-            public boolean keyDown(int keyCode) {
-                if (keyCode == Input.Keys.SPACE) {
-                    game.setScreen(new CombatScreen(game, player, enemy));
-                }
-                return true;
-            }
-        });
+
     }
 
     @Override
@@ -44,16 +38,15 @@ public class LootScreen implements Screen {
 
     //called when this screen becomes current screen
     public void show() {
-        //switches screens upon spacebar input
-//        Gdx.input.setInputProcessor(new InputAdapter() {
-//            @Override
-//            public boolean keyDown(int keyCode) {
-//                if (keyCode == Input.Keys.SPACE) {
-//                    game.setScreen(new CombatScreen(game, player, enemy));
-//                }
-//                return true;
-//            }
-//        });
+        Gdx.input.setInputProcessor(new InputAdapter() {
+            @Override
+            public boolean keyDown(int keyCode) {
+                if (keyCode == Input.Keys.SPACE) {
+                    game.setScreen(new CombatScreen(game, player, enemy));
+                }
+                return true;
+            }
+        });
     }
 
     //hides screen+input when another screen is called
