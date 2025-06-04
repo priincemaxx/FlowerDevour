@@ -14,6 +14,7 @@ public class Entity implements Serializable
     private Entity target;
     private Texture texture; //should later replace with TextureRegion class
 
+
     public Entity()
     {
 

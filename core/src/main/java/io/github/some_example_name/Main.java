@@ -2,12 +2,10 @@ package io.github.some_example_name;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import io.github.some_example_name.actions.BasicAction;
@@ -29,6 +27,7 @@ import io.github.some_example_name.tools.Tool;
  */
 public class Main extends ApplicationAdapter
 {
+    CombatRoom combatRoom = new CombatRoom();
     //textures
     Texture backgroundTexture;
     Texture playerTexture;
@@ -53,11 +52,16 @@ public class Main extends ApplicationAdapter
         //changing them will require changing size/X/Y values of basically everything visually
         int worldWidth = 8;
         int worldHeight = 6;
-        backgroundTexture = new Texture("Backgrounds/combatbg_temp_red.png");
+
+
+        //combatRoom.setBackground("Backgrounds/combatbg_temp_red.png");
+        combatRoom.setBackgroundPath("Backgrounds/combatbg_temp_red.png");
+        backgroundTexture = new Texture(combatRoom.getBackgroundPath());
         playerTexture = new Texture("Gardener/FemaleType1/Idle/Idle1.png");
         enemyTexture = new Texture("Enemy/Dandelion/Idle/Idle1.png");
+
         spriteBatch = new SpriteBatch();
-        //TODO: sprite grouping
+        //TODO: sprite grouping?
 
         backgroundViewport = new FillViewport(worldWidth, worldHeight);
         stageViewport = new ScreenViewport();
@@ -88,9 +92,8 @@ public class Main extends ApplicationAdapter
     {
         input();
         logic();
-        drawCombatRoom();
+        combatRoom.drawRoom(backgroundViewport, spriteBatch, backgroundTexture, entityViewport, playerTexture, enemyTexture);
 
-//        ScreenUtils.clear(Color.WHITE);
         stage.act();
         stage.draw();
         System.out.println("Player health: " + player.getHealth());
@@ -105,25 +108,6 @@ public class Main extends ApplicationAdapter
 
     }
 
-    private void drawCombatRoom() {
-        ScreenUtils.clear(Color.BLACK);
-        backgroundViewport.apply();
-        spriteBatch.setProjectionMatrix(backgroundViewport.getCamera().combined);
-        spriteBatch.begin();
-        float worldWidth = backgroundViewport.getWorldWidth();
-        float worldHeight = backgroundViewport.getWorldHeight();
-        spriteBatch.draw(backgroundTexture, 0, 0, worldWidth, worldHeight);
-        System.out.println("AAAAAAAAAAAAAAAAA");
-        spriteBatch.end();
-
-        entityViewport.apply();
-        spriteBatch.setProjectionMatrix(entityViewport.getCamera().combined);
-        spriteBatch.begin();
-        spriteBatch.draw(playerTexture, 1.1f, 2.1f, 3f, 3.4f);
-        spriteBatch.draw(enemyTexture, 4.1f, 2.1f, 3f, 3.4f);
-        spriteBatch.end();
-
-    }
 
     @Override
     public void dispose()
