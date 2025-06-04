@@ -1,6 +1,6 @@
 package io.github.some_example_name.passives;
 
-import io.github.some_example_name.Entity;
+import io.github.some_example_name.Player;
 
 
 /**
@@ -10,7 +10,7 @@ import io.github.some_example_name.Entity;
  */
 public class AmbrosiaFruit extends PassiveItem
 {
-    public void onGet(Entity owner)
+    public void onGet(Player owner)
     {
         int currentMax = owner.getMaxHealth();
 

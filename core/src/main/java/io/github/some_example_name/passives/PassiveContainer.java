@@ -66,4 +66,18 @@ public class PassiveContainer
         container[containerIndex] = null;
         return leavingPassive;
     }
+
+    public int filledSlots()
+    {
+        int filledSlots = 0;
+        for (PassiveItem passive : container)
+        {
+            if (passive != null)
+            {
+                filledSlots++;
+            }
+        }
+
+        return filledSlots;
+    }
 }
