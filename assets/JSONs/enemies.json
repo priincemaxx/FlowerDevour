@@ -1,26 +1,50 @@
 [
   {
     "class": "io.github.some_example_name.enemies.Enemy",
-    "health": 20,
-    "maxHealth": 20,
-    "name": "Test Guy 1",
+    "health": 10,
+    "maxHealth": 10,
+    "name": "Puny Leaf",
     "move": {
       "class": "io.github.some_example_name.actions.BasicAction",
-      "name": "Test action 1",
-      "userChange": 5,
-      "targetChange": -5
+      "name": "Leaf Shower",
+      "userChange": 0,
+      "targetChange": -2
     }
   },
   {
     "class": "io.github.some_example_name.enemies.Enemy",
     "health": 20,
     "maxHealth": 20,
-    "name": "Test Guy 2",
+    "name": "Dandelion Trooper",
     "move": {
       "class": "io.github.some_example_name.actions.BasicAction",
-      "name": "Test action 2",
+      "name": "Seed Attack",
+      "userChange": 0,
+      "targetChange": -7
+    }
+  },
+  {
+    "class": "io.github.some_example_name.enemies.Enemy",
+    "health": 20,
+    "maxHealth": 40,
+    "name": "Dormant Poppy",
+    "move": {
+      "class": "io.github.some_example_name.actions.BasicAction",
+      "name": "Drain",
       "userChange": 5,
       "targetChange": -5
+    }
+  },
+  {
+    "class": "io.github.some_example_name.enemies.Enemy",
+    "health": 30,
+    "maxHealth": 30,
+    "name": "Thorny Rose",
+    "move": {
+      "class": "io.github.some_example_name.actions.BasicAction",
+      "name": "Thorn Spray",
+      "userChange": -15,
+      "targetChange": -20
     }
   }
 ]
