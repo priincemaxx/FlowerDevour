@@ -75,6 +75,17 @@
       "userChange" : -10,
       "targetChange" : -50
     }
+  },
+  {
+    "class" : "io.github.some_example.name.tools.DeadlyTool",
+    "name" : "Bountiful Rake",
+    "move" :
+    {
+      "class" : "io.github.some_example_name.actions.BasicAction",
+      "name" : "Double Harvest",
+      "userChange" : 0,
+      "targetChange" : -10
+    }
   }
 
 ]

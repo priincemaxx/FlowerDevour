@@ -14,6 +14,11 @@ public class Tool extends Item implements Serializable
 {
     private BasicAction move;
 
+    public Tool()
+    {
+
+    }
+
     public Tool(String name, BasicAction move)
     {
         super(name);
