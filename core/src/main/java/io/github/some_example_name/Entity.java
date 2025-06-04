@@ -3,6 +3,7 @@ package io.github.some_example_name;
 //TODO: add texture and associated method for drawing.
 
 import java.io.Serializable;
+import com.badlogic.gdx.graphics.Texture;
 
 public class Entity implements Serializable
 {
@@ -10,10 +11,11 @@ public class Entity implements Serializable
     private int maxHealth;
     private String name;
     private Entity target;
-    //private texture...
+    private Texture texture; //should later replace with TextureRegion class
 
     public Entity()
     {
+    
     }
 
     public Entity(int health, int maxHealth, String name)
@@ -21,6 +23,14 @@ public class Entity implements Serializable
         setMaxHealth(maxHealth);
         setHealth(health);
         setName(name);
+    }
+    
+    public Entity(int health, int maxHealth, String name, Texture texture)
+    {
+        setMaxHealth(maxHealth);
+        setHealth(health);
+        setName(name);
+        setTexture(texture);
     }
 
     public int getHealth()
@@ -38,6 +48,10 @@ public class Entity implements Serializable
     public Entity getTarget()
     {
         return target;
+    }
+    public Texture getTexture()
+    {
+        return texture;
     }
 
     public void setHealth(int health)
@@ -71,6 +85,10 @@ public class Entity implements Serializable
         }
 
         this.target = target;
+    }
+    public void setTexture(Texture texture)
+    {
+        this.texture = texture;
     }
 
     /**
