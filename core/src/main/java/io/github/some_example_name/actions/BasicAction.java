@@ -1,8 +1,10 @@
-package io.github.some_example_name;
+package io.github.some_example_name.actions;
 
 //TODO: figure out a data-driven way to pass BasicAction child classes to enemies and items
 //The purpose of this class is to create a template for
 //describing actions taken in combat by either the player or the enemy.
+
+import io.github.some_example_name.Entity;
 
 import java.io.Serializable;
 

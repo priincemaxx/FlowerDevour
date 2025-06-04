@@ -1,15 +1,14 @@
-package io.github.some_example_name;
+package io.github.some_example_name.passives;
 
-//ROUGH ESTIMATE, ONLY FOR ARCHITECTURAL PURPOSES
 //Template for an item the player can find
 //that passively helps the player.
+
+import io.github.some_example_name.Item;
 
 import java.io.Serializable;
 
 public class PassiveItem extends Item implements Serializable
 {
-    //private passive passive;
-
     public PassiveItem()
     {
 
@@ -18,6 +17,11 @@ public class PassiveItem extends Item implements Serializable
     public PassiveItem(String name)
     {
         super(name);
+    }
+
+    public void execute()
+    {
+
     }
 
     @Override
