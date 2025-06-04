@@ -148,9 +148,7 @@ public class Player extends Entity
                     //System.out.println("I work!");
                 }
             });
-            moveButton.getLabel().setFontScale(fontScale);
         }
-        moveButtons.defaults().reset();
 
         return moveButtons;
     }
