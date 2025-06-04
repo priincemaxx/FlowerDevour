@@ -7,11 +7,12 @@ public class Map
     public final static int MIN_ROW_ROOMS = 2;
     public final static int ROWS = 6;
     private Room rooms[][] = new Room[ROWS][MAX_ROW_ROOMS];
+    private Room currentRoom;
 
     public Map()
     {
-        rooms[0][MIN_ROW_ROOMS] = new Room(); //starting room
-        rooms[ROWS - 1][MIN_ROW_ROOMS] = new Room(); //boss room
+        rooms[0][0] = new Room(); //starting room
+        rooms[ROWS - 1][0] = new Room(); //boss room
 
         for (int i = 1; i < ROWS - 1; i++)
         {
@@ -21,13 +22,17 @@ public class Map
         {
             addRoomPaths(i);
         }
+
+        currentRoom = rooms[0][0];
     }
+
+
 
     private void addRowRooms(int row)
     {
         Random random = new Random();
 
-        int roomNumber = random.nextInt(MIN_ROW_ROOMS, MAX_ROW_ROOMS);
+        int roomNumber = random.nextInt(MIN_ROW_ROOMS, MAX_ROW_ROOMS + 1);
 
         for (int i = 0; i < roomNumber; i++)
         {
@@ -54,8 +59,6 @@ public class Map
                 continue;
             }
 
-            //Room tmpPaths[] = rooms[row][i].getPaths();
-
             for (int j = 0; j < MAX_ROW_ROOMS; j++)
             {
                 if (rooms[row - 1][j] == null)
@@ -67,6 +70,28 @@ public class Map
         }
     }
 
+
+    /**
+     * @param index Index of path the player wishes to travel to.
+     * @return The Room that the player has traveled to.
+     * @throws MapException Throws when there isn't a path with the given index.
+     */
+    public Room advance(int index) throws MapException
+    {
+        Room[] possiblePaths = currentRoom.getPaths();
+
+        if (possiblePaths[index] == null)
+        {
+            throw new MapException("Invalid advance");
+        }
+
+        currentRoom = possiblePaths[index];
+        return currentRoom;
+    }
+
+    /**
+     * For printing to terminal.
+     */
     public void traverse()
     {
         for (int i = 0; i < ROWS; i++)

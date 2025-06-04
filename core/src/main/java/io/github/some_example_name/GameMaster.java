@@ -69,8 +69,6 @@ public class GameMaster
         }
     }
 
-
-
     public ArrayList<Enemy> getEnemies()
     {
         return enemies;
