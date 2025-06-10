@@ -10,6 +10,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import io.github.some_example_name.actions.BasicAction;
 import io.github.some_example_name.enemies.Enemy;
 import io.github.some_example_name.screens.LootScreen;
+import io.github.some_example_name.screens.MainMenuScreen;
 import io.github.some_example_name.tools.Tool;
 
 //player lacks try catch blocks
@@ -62,7 +63,7 @@ public class Main extends Game
         //creates CombatScreen and passes FDGame
         //should be main menu -> start button -> map interface
         //game screen (parent of loot/combat screens)?
-        this.setScreen(new LootScreen(this, player, punyLeaf));
+        this.setScreen(new MainMenuScreen(this, player, punyLeaf));
     }
 
     public void render() {
