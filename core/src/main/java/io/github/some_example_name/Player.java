@@ -122,10 +122,7 @@ public class Player extends Entity
      */
     public Table provideMoveButtons()
     {
-        //final int width = 200;
-        //final int height = 40;
         Table moveButtons = new Table();
-        //Skin skin1 = new Skin(Gdx.files.internal("buttonSkin_temp/skin.json"));
         Skin skin = new Skin(Gdx.files.internal("button/TextButton.json"));
         moveButtons.setFillParent(true);
         moveButtons.bottom().pad(15);
@@ -164,10 +161,14 @@ public class Player extends Entity
         return moveButtons;
     }
 
-    //ughhhhhh
+    /**
+     * Provides dynamic health bar
+     * @param batch - spritebatch of screen
+     */
     public void provideHealthBar(SpriteBatch batch) {
         batch.draw(new Texture("barborder_temp1.png"), 1.25f, 4.55f, 2.5f, 0.2f);
-        //math
-        batch.draw(new Texture("healthBar.png"), 1.3f, 4.6f, 2.4f, 0.1f);
+        float maxWidth = 2.4f;
+        float width = (float) getHealth() /getMaxHealth() * maxWidth;
+        batch.draw(new Texture("healthBar.png"), 1.3f, 4.6f, width, 0.1f);
     }
 }

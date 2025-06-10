@@ -48,10 +48,15 @@ public class Enemy extends Entity implements Serializable
         move.execute();
     }
 
+    /**
+     * Provides dynamic health bar
+     * @param batch - spritebatch of screen
+     */
     public void provideHealthBar(SpriteBatch batch) {
         batch.draw(new Texture("barborder_temp1.png"), 4.25f, 4.55f, 2.5f, 0.2f);
-        //math
-        batch.draw(new Texture("healthBar.png"), 4.3f, 4.6f, 2.4f, 0.1f);
+        float maxWidth = 2.4f;
+        float width = (float) getHealth() /getMaxHealth() * maxWidth;
+        batch.draw(new Texture("healthBar.png"), 4.3f, 4.6f, width, 0.1f);
     }
 
     @Override

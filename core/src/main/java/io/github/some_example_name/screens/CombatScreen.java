@@ -87,7 +87,6 @@ public class CombatScreen implements Screen {
     @Override
     public void render(float delta) {
         ScreenUtils.clear(Color.WHITE);
-        //combatRoom.drawRoom(backgroundViewport, spriteBatch, backgroundTexture, entityViewport, playerTexture, enemyTexture);
         drawRoom();
 
         stage.act();
@@ -119,7 +118,6 @@ public class CombatScreen implements Screen {
         game.batch.setProjectionMatrix(game.viewport.getCamera().combined);
         game.batch.begin();
         game.batch.draw(backgroundTexture, 0, 0, game.worldWidth, game.worldHeight);
-        System.out.println("AAAAAAAAAAAAAAAAA");
         game.batch.end();
 
         game.viewport.apply();
