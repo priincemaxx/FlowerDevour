@@ -1,7 +1,10 @@
 package io.github.some_example_name;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -162,18 +165,9 @@ public class Player extends Entity
     }
 
     //ughhhhhh
-    public Table provideProgressBars()
-    {
-        Table progressBars = new Table();
-        Skin skin = new Skin(Gdx.files.internal("testskin/default-ui1.json"));
-        progressBars.setFillParent(true);
-        progressBars.top().padTop(70);
-        progressBars.defaults().growX().pad(10);
-        progressBars.setDebug(true);
-//progressBars.setDebug(true);
-        ProgressBar healthBar = new ProgressBar(0, 20, 5, false, skin);
-        progressBars.add(healthBar);
-
-        return progressBars;
+    public void provideHealthBar(SpriteBatch batch) {
+        batch.draw(new Texture("barborder_temp1.png"), 1.25f, 4.55f, 2.5f, 0.2f);
+        //math
+        batch.draw(new Texture("healthBar.png"), 1.3f, 4.6f, 2.4f, 0.1f);
     }
 }

@@ -56,6 +56,7 @@ public class CombatScreen implements Screen {
 //        Gdx.input.setInputProcessor(stage);
 
         stage.addActor(player.provideMoveButtons());
+        //stage.addActor(player.provideHealthBar());
         //stage.addActor(player.provideProgressBars());
 
         player.setTarget(enemy);
@@ -126,6 +127,9 @@ public class CombatScreen implements Screen {
         game.batch.begin();
         game.batch.draw(playerTexture, 1.1f, 2.1f, 3f, 3.4f);
         game.batch.draw(enemyTexture, 4.1f, 2.1f, 3f, 3.4f);
+        player.provideHealthBar(game.batch);
+        enemy.provideHealthBar(game.batch);
+
         game.batch.end();
     }
 }
