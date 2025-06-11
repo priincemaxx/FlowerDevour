@@ -30,7 +30,6 @@ public class CombatScreen implements Screen {
 
     Skin skin;
 
-    //public CombatScreen(Main game, Player player, Enemy punyLeaf) {
     public CombatScreen(Main game, Player player, Enemy enemy) {
         this.game = game;
         this.player = player;
