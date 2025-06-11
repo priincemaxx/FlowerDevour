@@ -17,14 +17,14 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class MainMenuScreen implements Screen {
-    Main game;
-    Player player;
-    Enemy enemy;
-    Stage stage;
-    Skin skin;
+    public Main game;
+    public Player player;
+    public Enemy enemy;
+    private Stage stage;
+    private final Skin skin;
 
-    Texture background;
-    SpriteBatch batch;
+    private final Texture background;
+    private SpriteBatch batch;
 
     public MainMenuScreen(Main game, Player player, Enemy enemy) {
         this.game = game;

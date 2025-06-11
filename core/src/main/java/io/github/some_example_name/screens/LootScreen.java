@@ -9,9 +9,9 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class LootScreen implements Screen {
-    Main game;
-    Player player;
-    Enemy enemy;
+    public Main game;
+    public Player player;
+    public Enemy enemy;
 
     public LootScreen(Main game, Player player, Enemy enemy) {
         this.game = game;
@@ -25,10 +25,8 @@ public class LootScreen implements Screen {
         game.viewport.apply();
         game.batch.setProjectionMatrix(game.viewport.getCamera().combined);
         game.batch.begin();
-            game.font.draw(game.batch, "press space to switch!",  4, 3);
-        game.batch.end();
-        System.out.println("WHAT IS WRONG WITH YOU");
 
+        game.batch.end();
     }
 
     @Override
@@ -38,21 +36,21 @@ public class LootScreen implements Screen {
 
     //called when this screen becomes current screen
     public void show() {
-        Gdx.input.setInputProcessor(new InputAdapter() {
-            @Override
-            public boolean keyDown(int keyCode) {
-                if (keyCode == Input.Keys.SPACE) {
-                    game.setScreen(new CombatScreen(game, player, enemy));
-                }
-                return true;
-            }
-        });
+//        Gdx.input.setInputProcessor(new InputAdapter() {
+//            @Override
+//            public boolean keyDown(int keyCode) {
+//                if (keyCode == Input.Keys.SPACE) {
+//                    game.setScreen(new CombatScreen(game, player, enemy));
+//                }
+//                return true;
+//            }
+//        });
     }
 
     //hides screen+input when another screen is called
     @Override
     public void hide(){
-        Gdx.input.setInputProcessor(null);
+        //Gdx.input.setInputProcessor(null);
     }
 
     @Override

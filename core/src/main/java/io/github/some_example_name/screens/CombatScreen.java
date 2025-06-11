@@ -14,10 +14,10 @@ import io.github.some_example_name.enemies.Enemy;
 import io.github.some_example_name.screens.MainMenuScreen;
 
 public class CombatScreen implements Screen {
-    private final Main game;
-    private final Player player;
-    private final Enemy enemy;
-    private final Stage stage;
+    public Main game;
+    public Player player;
+    public Enemy enemy;
+    private Stage stage;
     private final Texture backgroundTexture;
     //private final Texture playerTexture;
     private final Texture enemyTexture;
@@ -41,8 +41,8 @@ public class CombatScreen implements Screen {
         player.setTarget(enemy);
         enemy.setTarget(player);
 
-        Skin skin = new Skin(Gdx.files.internal("button/Buttons.json"));
-        Button pauseButton = new Button(skin, "pause");
+        //Skin skin = new Skin(Gdx.files.internal("button/Buttons.json"));
+        Button pauseButton = new Button(new Skin(Gdx.files.internal("button/Buttons.json")), "pause");
 
         Table table = new Table();
         table.top().left().setFillParent(true);
@@ -82,12 +82,13 @@ public class CombatScreen implements Screen {
         game.viewport.apply();
         game.batch.setProjectionMatrix(game.viewport.getCamera().combined);
         game.batch.begin();
-        game.batch.draw(backgroundTexture, 0, 0, game.worldWidth, game.worldHeight);
+        game.batch.draw(backgroundTexture, 0, 0, game.getWorldWidth(), game.getWorldHeight());
         player.draw(game.batch, 1.1f, 2.1f, 3f, 3.4f);
         //game.batch.draw(playerTexture, 1.1f, 2.1f, 3f, 3.4f);
         game.batch.draw(enemyTexture, 4.1f, 2.1f, 3f, 3.4f);
         player.provideHealthBar(game.batch);
         enemy.provideHealthBar(game.batch);
+
         game.batch.end();
     }
 

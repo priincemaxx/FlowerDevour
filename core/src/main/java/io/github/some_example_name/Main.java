@@ -17,11 +17,13 @@ import io.github.some_example_name.tools.Tool;
 public class Main extends Game
 {
     public SpriteBatch batch;
-    public BitmapFont font;
+    //public BitmapFont font;
     public FillViewport viewport;
-    //make setters getters
-    public int worldWidth = 8;
-    public int worldHeight = 6;
+
+    public static final int worldWidth = 8;
+    public static final int worldHeight = 6;
+    public int getWorldWidth() { return worldWidth; }
+    public int getWorldHeight() { return worldHeight;}
 
     Player player = new Player(20, 20, "The Player",
         new Tool("Shovel", new BasicAction(1, -5, "Healing attack")));
@@ -31,12 +33,10 @@ public class Main extends Game
     @Override
     public void create() {
         batch = new SpriteBatch();
-        font = new BitmapFont();
+        //font = new BitmapFont();
         viewport = new FillViewport(worldWidth, worldHeight);
-        font.setUseIntegerPositions(false);
-        font.getData().setScale(viewport.getWorldHeight() / Gdx.graphics.getHeight());
-        //allows us to switch between screens
-        //should be main menu -> start button -> map interface
+        //font.setUseIntegerPositions(false);
+        //font.getData().setScale(viewport.getWorldHeight() / Gdx.graphics.getHeight());
         this.setScreen(new MainMenuScreen(this, player, punyLeaf));
     }
 
@@ -47,7 +47,7 @@ public class Main extends Game
     @Override
     public void dispose() {
         batch.dispose();
-        font.dispose();
+        //font.dispose();
     }
 
 }
