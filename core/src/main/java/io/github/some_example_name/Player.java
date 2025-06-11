@@ -1,10 +1,10 @@
 package io.github.some_example_name;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -170,5 +170,34 @@ public class Player extends Entity
         float maxWidth = 2.4f;
         float width = (float) getHealth() /getMaxHealth() * maxWidth;
         batch.draw(new Texture("healthBar.png"), 1.3f, 4.6f, width, 0.1f);
+    }
+
+
+
+    /// animation testing
+
+    private Animations animations;
+    private float stateTime = 0f;
+    private Animation<TextureRegion> currentAnimation;
+
+    public void setAnimations(Animations animations) {
+        this.animations = animations;
+        this.currentAnimation = animations.getAnimation(); // default animation
+    }
+
+    public void setCurrentAnimation(Animation<TextureRegion> animation) {
+        this.currentAnimation = animation;
+        this.stateTime = 0f; /// reset animation time when switching
+    }
+
+    public void update(float delta) {
+        stateTime += delta;
+    }
+
+    public void draw(SpriteBatch batch, float x, float y, float width, float height) {
+        if (currentAnimation != null) {
+            TextureRegion frame = currentAnimation.getKeyFrame(stateTime, true);
+            batch.draw(frame, x, y, width, height);
+        }
     }
 }
