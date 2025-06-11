@@ -1,6 +1,9 @@
 package io.github.some_example_name.screens;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.ScreenUtils;
 import io.github.some_example_name.Main;
 import io.github.some_example_name.Player;
@@ -25,6 +28,9 @@ public class CombatScreen implements Screen {
     //private FillViewport entityViewport;
     final ScreenViewport stageViewport;
 
+    Skin skin;
+
+    //public CombatScreen(Main game, Player player, Enemy punyLeaf) {
     public CombatScreen(Main game, Player player, Enemy enemy) {
         this.game = game;
         this.player = player;
@@ -45,6 +51,23 @@ public class CombatScreen implements Screen {
         stage.addActor(player.provideMoveButtons());
         player.setTarget(enemy);
         enemy.setTarget(player);
+
+        Skin skin = new Skin(Gdx.files.internal("button/Buttons.json"));
+        Button pauseButton = new Button(skin, "pause");
+
+        Table table = new Table();
+        table.top().left();
+        table.setFillParent(true);
+        table.add(pauseButton).size(40, 40).pad(10);
+
+        pauseButton.addListener(e -> {
+            if (pauseButton.isPressed()) {
+                game.setScreen(new MainMenuScreen(game, player, enemy));
+            }
+            return false;
+        });
+
+        stage.addActor(table);
     }
 
     @Override
