@@ -43,6 +43,10 @@
 		"font": "dogica1",
 		"fontColor": "white",
 		"up": "buttonUp",
+		"down": "buttonDown",
+		"over": "buttonUpOver",
+		"focused": "buttonDownOver",
+		"disabled": "buttonDisabled",
 		"pressedOffsetY": -1
 	}
 }

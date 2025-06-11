@@ -123,7 +123,7 @@ public class Player extends Entity
     public Table provideMoveButtons()
     {
         Table moveButtons = new Table();
-        Skin skin = new Skin(Gdx.files.internal("button/TextButton.json"));
+        Skin skin = new Skin(Gdx.files.internal("button/Buttons.json"));
         moveButtons.setFillParent(true);
         moveButtons.bottom().pad(15);
         moveButtons.defaults().growX().padLeft(10).padRight(10).height(50);
