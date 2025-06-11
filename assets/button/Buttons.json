@@ -1,0 +1,49 @@
+{
+"com.badlogic.gdx.graphics.g2d.BitmapFont": {
+	"dogica1": {
+		"file": "dogica(1).fnt",
+		"scaledSize": -1,
+		"markupEnabled": false,
+		"flip": false
+	}
+},
+"com.badlogic.gdx.graphics.Color": {
+	"white": {
+		"r": 1,
+		"g": 1,
+		"b": 1,
+		"a": 1
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle": {
+	"default": {
+		"up": "buttonUp",
+		"down": "buttonDown",
+		"over": "buttonUpOver",
+		"focused": "buttonDownOver",
+		"disabled": "buttonDisabled"
+	},
+	"pause": {
+		"up": "pauseUp",
+		"down": "pauseDown",
+		"over": "pauseUpOver",
+		"focused": "pauseDownOver",
+		"disabled": "pauseDisabled"
+	},
+	"inventory": {
+		"up": "inventoryUp",
+		"down": "inventoryDown",
+		"over": "inventoryUpOver",
+		"focused": "inventoryDownOver",
+		"disabled": "inventoryDisabled"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle": {
+	"default": {
+		"font": "dogica1",
+		"fontColor": "white",
+		"up": "buttonUp",
+		"pressedOffsetY": -1
+	}
+}
+}
