@@ -25,7 +25,7 @@ public class Main extends Game
 
     Player player = new Player(20, 20, "The Player",
         new Tool("Shovel", new BasicAction(1, -5, "Healing attack")));
-    Enemy punyLeaf = new Enemy(15, 15, "Puny Leaf", new BasicAction(1, -5, "Attack"));
+    Enemy punyLeaf = new Enemy(15, 15, "Puny Leaf", new BasicAction(-1, -5, "Attack"));
 
 
     @Override

@@ -2,63 +2,47 @@ package io.github.some_example_name.screens;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.ScreenUtils;
-import io.github.some_example_name.CombatRoom;
 import io.github.some_example_name.Main;
 import io.github.some_example_name.Player;
 import io.github.some_example_name.enemies.*;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 public class CombatScreen implements Screen {
     public Main game;
-    CombatRoom combatRoom = new CombatRoom();
+    //CombatRoom combatRoom = new CombatRoom();
 
     Player player;
     Enemy enemy;
-    private Stage stage;
+    Stage stage;
     //textures
-    Texture backgroundTexture;
-    Texture playerTexture;
-    Texture enemyTexture;
-    //SpriteBatch spriteBatch;
+    final Texture backgroundTexture;
+    final Texture playerTexture;
+    final Texture enemyTexture;
     //viewports
-    FillViewport entityViewport;
-    //FillViewport backgroundViewport;
-    ScreenViewport stageViewport;
+    //private FillViewport entityViewport;
+    final ScreenViewport stageViewport;
 
-    public CombatScreen(Main game, Player player, Enemy punyLeaf) {
+    public CombatScreen(Main game, Player player, Enemy enemy) {
         this.game = game;
         this.player = player;
-        this.enemy = punyLeaf;
+        this.enemy = enemy;
 
         //params set by startup window size
         //background, viewport and window should all be the same size
         //changing them will require changing size/X/Y values of basically everything visually
 
-
-        //combatRoom.setBackground("Backgrounds/combatbg_temp_red.png");
-        //combatRoom.setBackgroundPath("Backgrounds/combatbg_temp_red.png");
         backgroundTexture = new Texture("Backgrounds/combatbg_temp_red.png");
         playerTexture = new Texture("Gardener/FemaleType1/Idle/Idle1.png");
         enemyTexture = new Texture("Enemy/Dandelion/Idle/Idle1.png");
 
-        //spriteBatch = new SpriteBatch();
-        //TODO: sprite grouping?
-
-         //viewport = new FillViewport(worldWidth, worldHeight);
         stageViewport = new ScreenViewport();
-        entityViewport = new FillViewport(game.worldWidth, game.worldHeight);
+        //entityViewport = new FillViewport(game.worldWidth, game.worldHeight);
 
         stage = new Stage(stageViewport);
-//        Gdx.input.setInputProcessor(stage);
-
         stage.addActor(player.provideMoveButtons());
-        //stage.addActor(player.provideHealthBar());
-        //stage.addActor(player.provideProgressBars());
-
         player.setTarget(enemy);
         enemy.setTarget(player);
     }
@@ -112,7 +96,7 @@ public class CombatScreen implements Screen {
     public void dispose() {
     }
 
-    public void drawRoom() {
+    private void drawRoom() {
         ScreenUtils.clear(Color.WHITE);
         game.viewport.apply();
         game.batch.setProjectionMatrix(game.viewport.getCamera().combined);
