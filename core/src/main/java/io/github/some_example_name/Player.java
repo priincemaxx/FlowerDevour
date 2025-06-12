@@ -1,6 +1,8 @@
 package io.github.some_example_name;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -8,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.ScreenUtils;
 import io.github.some_example_name.passives.PassiveContainer;
 import io.github.some_example_name.passives.PassiveItem;
 import io.github.some_example_name.tools.Tool;
@@ -206,13 +209,18 @@ public class Player extends Entity
      * @param batch - spritebatch of screen
      */
     public void provideHealthBar(SpriteBatch batch) {
-        batch.draw(new Texture("barborder_temp1.png"), 1.25f, 4.65f, 2.5f, 0.2f);
+        batch.draw(new Texture("other/barborder_temp1.png"), 1.25f, 4.65f, 2.5f, 0.2f);
         float maxWidth = 2.4f;
         float width = (float) getHealth() /getMaxHealth() * maxWidth;
-        batch.draw(new Texture("healthBar.png"), 1.3f, 4.7f, width, 0.1f);
+        batch.draw(new Texture("other/healthBar.png"), 1.3f, 4.7f, width, 0.1f);
     }
 
-
+    public boolean isDead() {
+        if(getHealth() == 0) {
+            return true;
+        }
+        return false;
+    }
 
     /// animation testing
 

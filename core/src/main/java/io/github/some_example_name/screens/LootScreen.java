@@ -27,7 +27,7 @@ public class LootScreen implements Screen {
         this.enemy = enemy;
 
         backgroundTexture = new Texture("Backgrounds/lootbg_temp.png");
-        chestTexture = new Texture("Chest.png");
+        chestTexture = new Texture("other/Chest.png");
 
         player.setupAnimations();
 

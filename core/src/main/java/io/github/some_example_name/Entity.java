@@ -101,6 +101,15 @@ public class Entity implements Serializable
 
     }
 
+    public void provideHealthBar() {
+
+    }
+
+    public boolean isDead()
+    {
+        return false;
+    }
+
     @Override
     public String toString()
     {

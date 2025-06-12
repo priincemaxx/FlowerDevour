@@ -3,8 +3,13 @@ package io.github.some_example_name.enemies;
 //Template for enemies, their stats
 
 import java.io.Serializable;
+
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import io.github.some_example_name.Entity;
 import io.github.some_example_name.actions.BasicAction;
 
@@ -53,10 +58,18 @@ public class Enemy extends Entity implements Serializable
      * @param batch - spritebatch of screen
      */
     public void provideHealthBar(SpriteBatch batch) {
-        batch.draw(new Texture("barborder_temp1.png"), 4.25f, 4.65f, 2.5f, 0.2f);
+        batch.draw(new Texture("other/barborder_temp1.png"), 4.25f, 4.65f, 2.5f, 0.2f);
         float maxWidth = 2.4f;
         float width = (float) getHealth() /getMaxHealth() * maxWidth;
-        batch.draw(new Texture("healthBar.png"), 4.3f, 4.7f, width, 0.1f);
+        batch.draw(new Texture("other/healthBar.png"), 4.3f, 4.7f, width, 0.1f);
+    }
+
+    //@Override
+    public boolean isDead() {
+        if(getHealth() == 0) {
+            return true;
+        }
+        return false;
     }
 
     @Override
