@@ -1,8 +1,6 @@
 package io.github.some_example_name;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import io.github.some_example_name.actions.BasicAction;
@@ -32,10 +30,7 @@ public class Main extends Game
     @Override
     public void create() {
         batch = new SpriteBatch();
-        //font = new BitmapFont();
         viewport = new FillViewport(worldWidth, worldHeight);
-        //font.setUseIntegerPositions(false);
-        //font.getData().setScale(viewport.getWorldHeight() / Gdx.graphics.getHeight());
         this.setScreen(new MainMenuScreen(this, player, punyLeaf));
     }
 
@@ -46,7 +41,6 @@ public class Main extends Game
     @Override
     public void dispose() {
         batch.dispose();
-        //font.dispose();
     }
 
 }

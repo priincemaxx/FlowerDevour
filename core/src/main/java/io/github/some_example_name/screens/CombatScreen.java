@@ -1,17 +1,12 @@
 package io.github.some_example_name.screens;
 
 import com.badlogic.gdx.*;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import io.github.some_example_name.Animations;
 import io.github.some_example_name.Main;
 import io.github.some_example_name.Player;
 import io.github.some_example_name.enemies.Enemy;
-import io.github.some_example_name.screens.MainMenuScreen;
 
 public class CombatScreen implements Screen {
     public Main game;
@@ -20,27 +15,23 @@ public class CombatScreen implements Screen {
     private Stage stage;
     private final Texture backgroundTexture;
     private final Texture enemyTexture;
-    private final ScreenViewport stageViewport;
-    private final PauseMenuScreen pauseButton;
 
     public CombatScreen(Main game, Player player, Enemy enemy) {
         this.game = game;
         this.player = player;
         this.enemy = enemy;
-        pauseButton = new PauseMenuScreen(game, player, enemy);
 
         backgroundTexture = new Texture("Backgrounds/combatbg_temp_red.png");
         enemyTexture = new Texture("Enemy/Dandelion/Idle/Idle1.png");
 
         player.setupAnimations();
 
-        stageViewport = new ScreenViewport();
-        stage = new Stage(stageViewport);
+        stage = new Stage(new ScreenViewport());
         stage.addActor(player.provideMoveButtons());
         player.setTarget(enemy);
         enemy.setTarget(player);
 
-        stage.addActor(pauseButton.getPauseButton());
+        stage.addActor(new PauseMenuScreen(game, player, enemy).getPauseButton());
     }
 
     @Override
@@ -86,6 +77,7 @@ public class CombatScreen implements Screen {
     }
 
     @Override public void hide() {
+        Gdx.input.setInputProcessor(null);
     }
 
     @Override public void dispose() {

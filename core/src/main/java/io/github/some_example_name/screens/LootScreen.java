@@ -7,12 +7,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import io.github.some_example_name.Animations;
 import io.github.some_example_name.Main;
 import io.github.some_example_name.Player;
 import io.github.some_example_name.enemies.Enemy;
-import io.github.some_example_name.screens.MainMenuScreen;
-import io.github.some_example_name.tools.Tool;
 import io.github.some_example_name.tools.ToolContainer;
 
 public class LootScreen implements Screen {
@@ -20,26 +17,22 @@ public class LootScreen implements Screen {
     public Player player;
     public Enemy enemy;
     private ToolContainer chest;
-    private Stage stage;
+    private final Stage stage;
     private final Texture backgroundTexture;
     private final Texture chestTexture;
-    private final ScreenViewport stageViewport;
-    private final PauseMenuScreen pauseButton;
 
     public LootScreen(Main game, Player player, Enemy enemy) {
         this.game = game;
         this.player = player;
         this.enemy = enemy;
-        pauseButton = new PauseMenuScreen(game, player, enemy);
 
         backgroundTexture = new Texture("Backgrounds/lootbg_temp.png");
         chestTexture = new Texture("Chest.png");
 
         player.setupAnimations();
 
-        stageViewport = new ScreenViewport();
-        stage = new Stage(stageViewport);
-        stage.addActor(pauseButton.getPauseButton());
+        stage = new Stage(new ScreenViewport());
+        stage.addActor(new PauseMenuScreen(game, player, enemy).getPauseButton());
         player.setupAnimations();
 
         TextButton openChestButton = new TextButton("Open!" ,new Skin(Gdx.files.internal("button/Buttons.json")));
@@ -98,6 +91,7 @@ public class LootScreen implements Screen {
     }
 
     @Override public void hide() {
+        Gdx.input.setInputProcessor(null);
     }
 
     @Override public void dispose() {

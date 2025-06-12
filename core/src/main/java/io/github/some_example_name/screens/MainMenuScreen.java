@@ -13,8 +13,6 @@ import io.github.some_example_name.Player;
 import io.github.some_example_name.enemies.*;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.utils.ScreenUtils;
 
 public class MainMenuScreen implements Screen {
     public Main game;
@@ -32,7 +30,6 @@ public class MainMenuScreen implements Screen {
         this.enemy = enemy;
 
         this.stage = new Stage(new ScreenViewport());
-        Gdx.input.setInputProcessor(stage);
 
         skin = new Skin(Gdx.files.internal("button/Buttons.json"));
 
@@ -83,30 +80,13 @@ public class MainMenuScreen implements Screen {
     }
 
 
-    //called when this screen becomes current screen
     public void show() {
-        /*
-        Gdx.input.setInputProcessor(new InputAdapter() {
-            @Override
-            public boolean keyDown(int keyCode) {
-                if (keyCode == Input.Keys.SPACE) {
-                    //should change to map? tutorial?
-                    game.setScreen(new CombatScreen(game, player, enemy));
-                }
-                return true;
-            }
-        });
-
-         */
+        Gdx.input.setInputProcessor(stage);
     }
 
-    //hides screen+input when another screen is called
     @Override
     public void hide(){
-        /*
         Gdx.input.setInputProcessor(null);
-
-         */
     }
 
     @Override
