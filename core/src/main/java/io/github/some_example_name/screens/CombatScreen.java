@@ -19,7 +19,6 @@ public class CombatScreen implements Screen {
     public Enemy enemy;
     private Stage stage;
     private final Texture backgroundTexture;
-    //private final Texture playerTexture;
     private final Texture enemyTexture;
     private final ScreenViewport stageViewport;
 
@@ -29,11 +28,9 @@ public class CombatScreen implements Screen {
         this.enemy = enemy;
 
         backgroundTexture = new Texture("Backgrounds/combatbg_temp_red.png");
-        //playerTexture = new Texture("Gardener/FemaleType1/Idle/Idle1.png");
-        Animations playerAnimations = new Animations("atlas/FemaleType1Atlas.atlas", "EmptyIdle", 0.8f);
-        player.setAnimations(playerAnimations);
-
         enemyTexture = new Texture("Enemy/Dandelion/Idle/Idle1.png");
+
+        player.setupAnimations();
 
         stageViewport = new ScreenViewport();
         stage = new Stage(stageViewport);
@@ -41,7 +38,6 @@ public class CombatScreen implements Screen {
         player.setTarget(enemy);
         enemy.setTarget(player);
 
-        //Skin skin = new Skin(Gdx.files.internal("button/Buttons.json"));
         Button pauseButton = new Button(new Skin(Gdx.files.internal("button/Buttons.json")), "pause");
 
         Table table = new Table();
