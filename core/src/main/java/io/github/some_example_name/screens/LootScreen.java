@@ -12,14 +12,21 @@ import io.github.some_example_name.Player;
 import io.github.some_example_name.enemies.Enemy;
 import io.github.some_example_name.tools.ToolContainer;
 
+import static java.lang.Thread.sleep;
+
 public class LootScreen implements Screen {
     public Main game;
     public Player player;
     public Enemy enemy;
     private ToolContainer chest;
     private final Stage stage;
+    private final Stage rewardStage;
     private final Texture backgroundTexture;
+    private final Texture backgroundTint;
     private final Texture chestTexture;
+    boolean chestOpen = false;
+
+    private final Texture temporary;
 
     public LootScreen(Main game, Player player, Enemy enemy) {
         this.game = game;
@@ -27,7 +34,11 @@ public class LootScreen implements Screen {
         this.enemy = enemy;
 
         backgroundTexture = new Texture("Backgrounds/lootbg_temp.png");
+        backgroundTint = new Texture("Backgrounds/backgroundTint.png");
         chestTexture = new Texture("other/Chest.png");
+        //something to act as the item frame
+        //TODO: item frame, reward item icon on it
+        temporary = new Texture("other/Defeat_temp.png");
 
         player.setupAnimations();
 
@@ -40,10 +51,11 @@ public class LootScreen implements Screen {
         chestTable.bottom().pad(10).setFillParent(true);
         chestTable.add(openChestButton).bottom().growX().height(60).padLeft(100).padRight(100).padBottom(20);
 
+        rewardStage = new Stage(new ScreenViewport());
+
         openChestButton.addListener(e -> {
             if (openChestButton.isPressed()) {
-                player.attackArmMovement();
-                //TODO: ANIMATION chest opens
+                chestOpen = true;
             }
             return false;
         });
@@ -65,6 +77,13 @@ public class LootScreen implements Screen {
 
         stage.act();
         stage.draw();
+
+        if(chestOpen) {
+            player.attackArmMovement();
+            //TODO: animation delay
+            //TODO: ANIMATION chest opens
+            drawRewardScreen();
+        }
     }
 
     private void drawRoom() {
@@ -78,6 +97,38 @@ public class LootScreen implements Screen {
         game.batch.draw(chestTexture, 4.1f, 2.2f, 3f, 3.4f);
 
         game.batch.end();
+    }
+
+    //TODO: add reward item, make space on screen for reward item + description
+    private void drawRewardScreen() {
+        Gdx.input.setInputProcessor(rewardStage);
+
+        game.viewport.apply();
+        game.batch.setProjectionMatrix(game.viewport.getCamera().combined);
+        game.batch.begin();
+        game.batch.draw(backgroundTint, 0, 0, game.getWorldWidth(), game.getWorldHeight());
+        //TODO: change to item frame + reward item
+        game.batch.draw(temporary, 1, 2.5f, 6, 2);
+        game.batch.end();
+
+        rewardStage.act();
+        rewardStage.draw();
+
+        Table table = new Table();
+        TextButton claimReward = new TextButton("Claim reward" ,new Skin(Gdx.files.internal("button/Buttons.json")));
+        table.setFillParent(true);
+        table.bottom().row();
+        table.add(claimReward).pad(100).growX().height(60);
+        rewardStage.addActor(table);
+
+        claimReward.addListener(e -> {
+            if (claimReward.isPressed()) {
+                //TODO: add reward item to inventory
+                //maybe another popup/animation for "claimed!" or smthn to delay return to map
+                game.setScreen(new MapScreen(game, player, enemy));
+            }
+            return false;
+        });
     }
 
     @Override public void resize(int width, int height) {

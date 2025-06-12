@@ -38,7 +38,7 @@ public class CombatScreen implements Screen {
         backgroundTexture = new Texture("Backgrounds/combatbg_temp_red.png");
         backgroundTint = new Texture("Backgrounds/backgroundTint.png");
         enemyTexture = new Texture("Enemy/Dandelion/Idle/Idle1.png");
-        //victory = new Texture("other/"); //i couldnt get image
+        //victory = new Texture("other/Victory_temp.png"); //i couldnt get image
         defeat = new Texture("other/Defeat_temp.png");
 
         player.setupAnimations();
