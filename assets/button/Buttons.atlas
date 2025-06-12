@@ -1,0 +1,148 @@
+
+Buttons.png
+size: 512, 512
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+buttonDisabled
+  rotate: false
+  xy: 1, 391
+  size: 128, 32
+  split: 16, 21, 7, 7
+  pad: 21, 28, 12, 14
+  orig: 128, 32
+  offset: 0, 0
+  index: -1
+buttonDown
+  rotate: false
+  xy: 1, 357
+  size: 128, 32
+  split: 18, 21, 9, 7
+  pad: 23, 26, 14, 12
+  orig: 128, 32
+  offset: 0, 0
+  index: -1
+buttonDownOver
+  rotate: false
+  xy: 131, 391
+  size: 128, 32
+  split: 18, 21, 9, 7
+  pad: 23, 26, 14, 12
+  orig: 128, 32
+  offset: 0, 0
+  index: -1
+buttonUp
+  rotate: false
+  xy: 1, 323
+  size: 128, 32
+  split: 16, 21, 7, 7
+  pad: 21, 28, 12, 14
+  orig: 128, 32
+  offset: 0, 0
+  index: -1
+buttonUpOver
+  rotate: false
+  xy: 131, 357
+  size: 128, 32
+  split: 16, 21, 7, 7
+  pad: 21, 28, 12, 14
+  orig: 128, 32
+  offset: 0, 0
+  index: -1
+inventoryDisabled
+  rotate: false
+  xy: 1, 255
+  size: 32, 32
+  split: 3, 2, 3, 2
+  pad: 16, 15, 16, 15
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+inventoryDown
+  rotate: false
+  xy: 35, 289
+  size: 32, 32
+  split: 4, 2, 4, 2
+  pad: 16, 15, 16, 15
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+inventoryDownOver
+  rotate: false
+  xy: 165, 323
+  size: 32, 32
+  split: 4, 2, 4, 2
+  pad: 16, 15, 16, 15
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+inventoryUp
+  rotate: false
+  xy: 295, 357
+  size: 32, 32
+  split: 3, 2, 3, 2
+  pad: 16, 15, 16, 15
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+inventoryUpOver
+  rotate: false
+  xy: 329, 391
+  size: 32, 32
+  split: 3, 2, 3, 2
+  pad: 16, 15, 16, 15
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+pauseDisabled
+  rotate: false
+  xy: 261, 391
+  size: 32, 32
+  split: 3, 2, 3, 2
+  pad: 0, 0, 0, 0
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+pauseDown
+  rotate: false
+  xy: 1, 289
+  size: 32, 32
+  split: 4, 2, 4, 2
+  pad: 0, 0, 0, 0
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+pauseDownOver
+  rotate: false
+  xy: 131, 323
+  size: 32, 32
+  split: 4, 2, 4, 2
+  pad: 0, 0, 0, 0
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+pauseUp
+  rotate: false
+  xy: 261, 357
+  size: 32, 32
+  split: 3, 2, 3, 2
+  pad: 0, 0, 0, 0
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+pauseUpOver
+  rotate: false
+  xy: 295, 391
+  size: 32, 32
+  split: 3, 2, 3, 2
+  pad: 0, 0, 0, 0
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+dogica(1)
+  rotate: false
+  xy: 1, 425
+  size: 505, 79
+  orig: 505, 79
+  offset: 0, 0
+  index: -1

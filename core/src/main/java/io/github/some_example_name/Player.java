@@ -2,6 +2,9 @@ package io.github.some_example_name;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -148,11 +151,8 @@ public class Player extends Entity
      */
     public Table provideMoveButtons()
     {
-        //final int width = 200;
-        //final int height = 40;
         Table moveButtons = new Table();
-        //Skin skin1 = new Skin(Gdx.files.internal("buttonSkin_temp/skin.json"));
-        Skin skin = new Skin(Gdx.files.internal("button/TextButton.json"));
+        Skin skin = new Skin(Gdx.files.internal("button/Buttons.json"));
         moveButtons.setFillParent(true);
         moveButtons.bottom().pad(15);
         moveButtons.defaults().growX().padLeft(10).padRight(10).height(50);
@@ -190,19 +190,43 @@ public class Player extends Entity
         return moveButtons;
     }
 
-    //ughhhhhh
-    public Table provideProgressBars()
-    {
-        Table progressBars = new Table();
-        Skin skin = new Skin(Gdx.files.internal("testskin/default-ui1.json"));
-        progressBars.setFillParent(true);
-        progressBars.top().padTop(70);
-        progressBars.defaults().growX().pad(10);
-        progressBars.setDebug(true);
-//progressBars.setDebug(true);
-        ProgressBar healthBar = new ProgressBar(0, 20, 5, false, skin);
-        progressBars.add(healthBar);
+    /**
+     * Provides dynamic health bar
+     * @param batch - spritebatch of screen
+     */
+    public void provideHealthBar(SpriteBatch batch) {
+        batch.draw(new Texture("barborder_temp1.png"), 1.25f, 4.55f, 2.5f, 0.2f);
+        float maxWidth = 2.4f;
+        float width = (float) getHealth() /getMaxHealth() * maxWidth;
+        batch.draw(new Texture("healthBar.png"), 1.3f, 4.6f, width, 0.1f);
+    }
 
-        return progressBars;
+
+
+    /// animation testing
+
+    private Animations animations;
+    private float stateTime = 0f;
+    private Animation<TextureRegion> currentAnimation;
+
+    public void setAnimations(Animations animations) {
+        this.animations = animations;
+        this.currentAnimation = animations.getAnimation(); // default animation
+    }
+
+    public void setCurrentAnimation(Animation<TextureRegion> animation) {
+        this.currentAnimation = animation;
+        this.stateTime = 0f; /// reset animation time when switching
+    }
+
+    public void update(float delta) {
+        stateTime += delta;
+    }
+
+    public void draw(SpriteBatch batch, float x, float y, float width, float height) {
+        if (currentAnimation != null) {
+            TextureRegion frame = currentAnimation.getKeyFrame(stateTime, true);
+            batch.draw(frame, x, y, width, height);
+        }
     }
 }
