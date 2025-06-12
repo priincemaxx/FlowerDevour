@@ -137,6 +137,8 @@ public class Player extends Entity
             throw new PlayerException("Trying to act on nothing!");
         }
 
+
+
         /// does Polearm type weapon animation
         if (animations != null && animations.getAnimation("PolearmAttack") != null) {
             setCurrentAnimation(animations.getAnimation("PolearmAttack"));
