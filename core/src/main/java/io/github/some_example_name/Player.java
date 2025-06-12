@@ -14,6 +14,9 @@ import io.github.some_example_name.tools.Tool;
 import io.github.some_example_name.tools.ToolContainer;
 import io.github.some_example_name.tools.ToolContainerException;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Player extends Entity
 {
     public static final int EQUIP_SLOTS = 4;
@@ -142,6 +145,11 @@ public class Player extends Entity
 
         actingTool.getMove().setTargetChange(targetChange);
 
+        /// does Polearm type weapon animation
+        if (animations != null && animations.getAnimation("PolearmAttack") != null) {
+            setCurrentAnimation(animations.getAnimation("PolearmAttack"));
+        }
+
         actingTool.execute(this, super.getTarget());
     }
 
@@ -211,16 +219,37 @@ public class Player extends Entity
 
     public void setAnimations(Animations animations) {
         this.animations = animations;
-        this.currentAnimation = animations.getAnimation(); // default animation
+        this.currentAnimation = animations.getAnimation("EmptyIdle"); // default animation
+    }
+
+    public void setupAnimations() {
+        Map<String, Float> animData = new HashMap<>();
+        animData.put("EmptyIdle", 0.75f);
+        animData.put("PolearmIdle", 0.75f);
+        animData.put("PolearmAttack", 0.1f);
+        animData.put("EmptyDamage", 0.3f);
+        animData.put("PolearmDamage", 0.3f);
+
+        Animations playerAnimations = new Animations("atlas/FemaleType1Atlas.atlas", animData);
+        setAnimations(playerAnimations);
+        setCurrentAnimation(playerAnimations.getAnimation("EmptyIdle"));
     }
 
     public void setCurrentAnimation(Animation<TextureRegion> animation) {
         this.currentAnimation = animation;
-        this.stateTime = 0f; /// reset animation time when switching
+        this.stateTime = 0f;
     }
 
     public void update(float delta) {
         stateTime += delta;
+        if (currentAnimation != null && currentAnimation.isAnimationFinished(stateTime)) {
+            if (animations != null && currentAnimation != animations.getAnimation("EmptyIdle")) {
+                Animation<TextureRegion> idle = animations.getAnimation("EmptyIdle");
+                if (idle != null) {
+                    setCurrentAnimation(idle);
+                }
+            }
+        }
     }
 
     public void draw(SpriteBatch batch, float x, float y, float width, float height) {
