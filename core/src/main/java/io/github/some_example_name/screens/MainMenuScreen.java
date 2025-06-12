@@ -18,11 +18,11 @@ public class MainMenuScreen implements Screen {
     public Main game;
     public Player player;
     public Enemy enemy;
-    private Stage stage;
+    private final Stage stage;
     private final Skin skin;
 
     private final Texture background;
-    private SpriteBatch batch;
+    private final SpriteBatch batch;
 
     public MainMenuScreen(Main game, Player player, Enemy enemy) {
         this.game = game;

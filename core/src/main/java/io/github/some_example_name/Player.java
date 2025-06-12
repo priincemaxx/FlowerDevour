@@ -1,14 +1,11 @@
 package io.github.some_example_name;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.utils.ScreenUtils;
 import io.github.some_example_name.passives.PassiveContainer;
 import io.github.some_example_name.passives.PassiveItem;
 import io.github.some_example_name.tools.Tool;
@@ -185,7 +182,7 @@ public class Player extends Entity
                 {
                     setSelectedTool(tmpCurrentSlot);
                     doPolearmAttack();
-                    doMove();
+                    //doMove();
                     //System.out.println("I work!");
                 }
             });
@@ -231,8 +228,14 @@ public class Player extends Entity
         setCurrentAnimation(playerAnimations.getAnimation("GardenerPolearmIdle"));
     }
 
-    public void doPolearmAttack() {
+    public void doPolearmAttack() throws PlayerException {
         Tool actingTool = equippedTools.getTool(selectedTool);
+
+        if (actingTool == null)
+        {
+            throw new PlayerException("Trying to act on nothing!");
+        }
+
         performAnimation("GardenerPolearmAttack");
         actingTool.execute(this, super.getTarget());
     }

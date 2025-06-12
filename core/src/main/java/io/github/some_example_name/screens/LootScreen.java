@@ -12,7 +12,6 @@ import io.github.some_example_name.Player;
 import io.github.some_example_name.enemies.Enemy;
 import io.github.some_example_name.tools.ToolContainer;
 
-import static java.lang.Thread.sleep;
 
 public class LootScreen implements Screen {
     public Main game;
@@ -79,7 +78,7 @@ public class LootScreen implements Screen {
         stage.draw();
 
         if(chestOpen) {
-            player.attackArmMovement();
+            player.doArmMovement();
             //TODO: animation delay
             //TODO: ANIMATION chest opens
             drawRewardScreen();
