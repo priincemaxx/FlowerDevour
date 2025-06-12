@@ -4,6 +4,9 @@ package io.github.some_example_name;
 
 import java.io.Serializable;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import io.github.some_example_name.actions.ActionException;
 
 public class Entity implements Serializable
@@ -108,6 +111,52 @@ public class Entity implements Serializable
     public boolean isDead()
     {
         return false;
+    }
+
+    private Animations animations;
+    private Animation<TextureRegion> currentAnimation;
+    private float stateTime = 0f;
+
+    public void setAnimations(Animations animations) {
+        this.animations = animations;
+    }
+
+    public void setAnimations(Animations animations, String defaultAnimation) {
+        this.animations = animations;
+        this.currentAnimation = animations.getAnimation(defaultAnimation); // default animation
+    }
+
+    public void performAnimation(String animationName) {
+        if (animations != null && animations.getAnimation(animationName) != null) {
+            setCurrentAnimation(animations.getAnimation(animationName));
+        }
+
+    }
+
+    public void setCurrentAnimation(Animation<TextureRegion> animation) {
+        this.currentAnimation = animation;
+        this.stateTime = 0f;
+    }
+
+    public void update(float delta) {
+        stateTime += delta;
+        if (currentAnimation != null && currentAnimation.isAnimationFinished(stateTime)) {
+            Animation<TextureRegion> idle = animations.getAnimation(setIdle());
+            if (idle != null) {
+                setCurrentAnimation(idle);
+            }
+        }
+    }
+
+    public void draw(SpriteBatch batch, float x, float y, float width, float height) {
+        if (currentAnimation != null) {
+            TextureRegion frame = currentAnimation.getKeyFrame(stateTime, true);
+            batch.draw(frame, x, y, width, height);
+        }
+    }
+
+    public String setIdle() {
+        return "DefaultIdle";
     }
 
     @Override

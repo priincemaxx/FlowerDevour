@@ -1,16 +1,17 @@
 package io.github.some_example_name.screens;
 
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import io.github.some_example_name.CombatRoom;
+import io.github.some_example_name.Animations;
 import io.github.some_example_name.Main;
 import io.github.some_example_name.Player;
 import io.github.some_example_name.enemies.Enemy;
+import io.github.some_example_name.screens.MainMenuScreen;
 
 public class CombatScreen implements Screen {
     public Main game;
@@ -24,24 +25,20 @@ public class CombatScreen implements Screen {
     private final Texture backgroundTexture;
     //perhaps tint should be moved to game master
     private final Texture backgroundTint;
-    private final Texture enemyTexture;
+    //private final Texture enemyTexture;
     //private final Texture victory;
     private final Texture defeat;
 
     public CombatScreen(Main game, Player player, Enemy enemy) {
-        //this.combatRoom = combatRoom;
-        //this.enemy = combatRoom.enemy?;
         this.game = game;
         this.player = player;
         this.enemy = enemy;
 
         backgroundTexture = new Texture("Backgrounds/combatbg_temp_red.png");
-        backgroundTint = new Texture("Backgrounds/backgroundTint.png");
-        enemyTexture = new Texture("Enemy/Dandelion/Idle/Idle1.png");
-        //victory = new Texture("other/Victory_temp.png"); //i couldnt get image
-        defeat = new Texture("other/Defeat_temp.png");
+        //enemyTexture = new Texture("Enemy/Dandelion/Idle/Idle1.png");
 
         player.setupAnimations();
+        enemy.setupAnimations();
 
         gameEndStage = new Stage(new ScreenViewport());
 
@@ -50,7 +47,35 @@ public class CombatScreen implements Screen {
         player.setTarget(enemy);
         enemy.setTarget(player);
 
+        Button test = new Button(new Skin(Gdx.files.internal("button/Buttons.json")), "inventory");
+
+
         stage.addActor(new PauseMenuScreen(game, player, enemy).getPauseButton());
+        Button pauseButton = new Button(new Skin(Gdx.files.internal("button/Buttons.json")), "pause");
+        Button test = new Button(new Skin(Gdx.files.internal("button/Buttons.json")), "inventory");
+
+        Table table = new Table();
+        table.top().left().setFillParent(true);
+        table.add(pauseButton).size(40, 40).pad(10);
+        table.add(test).size(40, 40).pad(10);
+
+        pauseButton.addListener(e -> {
+            if (pauseButton.isPressed()) {
+                game.setScreen(new MainMenuScreen(game, player, enemy));
+            }
+            return false;
+        });
+
+        test.addListener(e -> {
+            if (test.isPressed()) {
+                enemy.doAttack();
+                //enemy.doDefaultIdle();
+                //enemy.takeDamage();
+            }
+            return false;
+        });
+
+        stage.addActor(table);
     }
 
     @Override
@@ -60,7 +85,10 @@ public class CombatScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        ScreenUtils.clear(Color.WHITE);
+
         player.update(delta);
+        enemy.update(delta);
         drawRoom();
 
         stage.act();
@@ -85,15 +113,19 @@ public class CombatScreen implements Screen {
         player.provideHealthBar(game.batch);
         enemy.provideHealthBar(game.batch);
 
+        //game.batch.draw(playerTexture, 1.1f, 2.1f, 3f, 3.4f);
+        //game.batch.draw(enemyTexture, 4.1f, 2.1f, 3f, 3.4f);
+
+
         if(player.isDead()) {
             //TODO: player death animation
-        } else player.draw(game.batch, 1.1f, 2.2f, 3f, 3.4f);
+        } else player.draw(game.batch, 1.1f, 2.1f, 3f, 3.4f);
         //game.batch.draw(playerTexture, 1.1f, 2.1f, 3f, 3.4f);
         if(enemy.isDead()) {
             //TODO: enemy death animation
             //for now it just vanishes
             //i dont know if enemy animation will delay victory screen
-        } else game.batch.draw(enemyTexture, 4.1f, 2.2f, 3f, 3.4f);
+        } else enemy.draw(game.batch, 4.1f, 2.1f, 3f, 3.4f);
 
 
 
@@ -111,63 +143,6 @@ public class CombatScreen implements Screen {
         //TODO: change to victory
         game.batch.draw(defeat, 1, 2.5f, 6, 2);
         game.batch.end();
-
-        gameEndStage.act();
-        gameEndStage.draw();
-
-        Table victoryButtons = new Table();
-        TextButton claimReward = new TextButton("Claim reward" ,new Skin(Gdx.files.internal("button/Buttons.json")));
-        victoryButtons.setFillParent(true);
-        victoryButtons.bottom().row();
-        victoryButtons.add(claimReward).pad(100).growX().height(60);
-        gameEndStage.addActor(victoryButtons);
-
-        claimReward.addListener(e -> {
-            if (claimReward.isPressed()) {
-                //TODO: should enemy be passed to map?
-                game.setScreen(new MapScreen(game, player, enemy));
-            }
-            return false;
-        });
-    }
-
-    private void drawDefeatScreen() {
-        Gdx.input.setInputProcessor(gameEndStage);
-
-        game.viewport.apply();
-        game.batch.setProjectionMatrix(game.viewport.getCamera().combined);
-        game.batch.begin();
-        game.batch.draw(backgroundTint, 0, 0, game.getWorldWidth(), game.getWorldHeight());
-        game.batch.draw(defeat, 1, 2.5f, 6, 2);
-        game.batch.end();
-
-        gameEndStage.act();
-        gameEndStage.draw();
-
-        Table defeatButtons = new Table();
-        TextButton mainMenu = new TextButton("Return to main menu" ,new Skin(Gdx.files.internal("button/Buttons.json")));
-        //dunno if we need that button
-        //TextButton playAgain = new TextButton("Play again?" ,new Skin(Gdx.files.internal("button/Buttons.json")));
-        defeatButtons.setFillParent(true);
-        defeatButtons.bottom().row();
-        defeatButtons.add(mainMenu).pad(100).growX().height(60);
-        //defeatButtons.add(playAgain).pad(100).growX().height(60).uniform();
-        gameEndStage.addActor(defeatButtons);
-
-        mainMenu.addListener(e -> {
-            if (mainMenu.isPressed()) {
-                //TODO: should enemy be passed to map?
-                game.setScreen(new MainMenuScreen(game, player, enemy));
-            }
-            return false;
-        });
-//        playAgain.addListener(e -> {
-//            if (playAgain.isPressed()) {
-//                //TODO: should enemy be passed to map?
-//                game.setScreen(new MapScreen(game, player, enemy));
-//            }
-//            return false;
-//        });
     }
 
     @Override public void resize(int width, int height) {
@@ -186,7 +161,8 @@ public class CombatScreen implements Screen {
 
     @Override public void dispose() {
         backgroundTexture.dispose();
-        enemyTexture.dispose();
+        //playerTexture.dispose();
+        //enemyTexture.dispose();
         stage.dispose();
         gameEndStage.dispose();
         backgroundTint.dispose();
