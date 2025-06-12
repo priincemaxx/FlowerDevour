@@ -19,7 +19,7 @@ public class CombatScreen implements Screen {
     public Enemy enemy;
     private Stage stage;
     private final Texture backgroundTexture;
-    private final Texture enemyTexture;
+    //private final Texture enemyTexture;
     private final ScreenViewport stageViewport;
 
     public CombatScreen(Main game, Player player, Enemy enemy) {
@@ -28,9 +28,10 @@ public class CombatScreen implements Screen {
         this.enemy = enemy;
 
         backgroundTexture = new Texture("Backgrounds/combatbg_temp_red.png");
-        enemyTexture = new Texture("Enemy/Dandelion/Idle/Idle1.png");
+        //enemyTexture = new Texture("Enemy/Dandelion/Idle/Idle1.png");
 
         player.setupAnimations();
+        enemy.setupAnimations();
 
         stageViewport = new ScreenViewport();
         stage = new Stage(stageViewport);
@@ -39,14 +40,25 @@ public class CombatScreen implements Screen {
         enemy.setTarget(player);
 
         Button pauseButton = new Button(new Skin(Gdx.files.internal("button/Buttons.json")), "pause");
+        Button test = new Button(new Skin(Gdx.files.internal("button/Buttons.json")), "inventory");
 
         Table table = new Table();
         table.top().left().setFillParent(true);
         table.add(pauseButton).size(40, 40).pad(10);
+        table.add(test).size(40, 40).pad(10);
 
         pauseButton.addListener(e -> {
             if (pauseButton.isPressed()) {
                 game.setScreen(new MainMenuScreen(game, player, enemy));
+            }
+            return false;
+        });
+
+        test.addListener(e -> {
+            if (test.isPressed()) {
+                enemy.doAttack();
+                //enemy.doDefaultIdle();
+                //enemy.takeDamage();
             }
             return false;
         });
@@ -64,6 +76,7 @@ public class CombatScreen implements Screen {
         ScreenUtils.clear(Color.WHITE);
 
         player.update(delta);
+        enemy.update(delta);
         drawRoom();
 
         stage.act();
@@ -80,8 +93,9 @@ public class CombatScreen implements Screen {
         game.batch.begin();
         game.batch.draw(backgroundTexture, 0, 0, game.getWorldWidth(), game.getWorldHeight());
         player.draw(game.batch, 1.1f, 2.1f, 3f, 3.4f);
+        enemy.draw(game.batch, 4.1f, 2.1f, 3f, 3.4f);
         //game.batch.draw(playerTexture, 1.1f, 2.1f, 3f, 3.4f);
-        game.batch.draw(enemyTexture, 4.1f, 2.1f, 3f, 3.4f);
+        //game.batch.draw(enemyTexture, 4.1f, 2.1f, 3f, 3.4f);
         player.provideHealthBar(game.batch);
         enemy.provideHealthBar(game.batch);
 
@@ -104,7 +118,7 @@ public class CombatScreen implements Screen {
     @Override public void dispose() {
         backgroundTexture.dispose();
         //playerTexture.dispose();
-        enemyTexture.dispose();
+        //enemyTexture.dispose();
         stage.dispose();
     }
 

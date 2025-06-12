@@ -2,9 +2,7 @@ package io.github.some_example_name;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -107,6 +105,7 @@ public class Player extends Entity
         return passives.moveInside(reward);
     }
 
+    /*
     public void doMove() throws PlayerException
     {
         Tool actingTool = equippedTools.getTool(selectedTool);
@@ -116,14 +115,13 @@ public class Player extends Entity
             throw new PlayerException("Trying to act on nothing!");
         }
 
-        /// does Polearm type weapon animation
-        if (animations != null && animations.getAnimation("PolearmAttack") != null) {
-            setCurrentAnimation(animations.getAnimation("PolearmAttack"));
+        if (animations != null && animations.getAnimation("GardenerPolearmAttack") != null) {
+            setCurrentAnimation(animations.getAnimation("GardenerPolearmAttack"));
         }
 
         actingTool.execute(this, super.getTarget());
     }
-
+     */
 
     /** Provides buttons that do the associated action.
      * @return Table with buttons to be added to a stage.
@@ -160,7 +158,8 @@ public class Player extends Entity
                 public void changed(ChangeEvent event, Actor actor)
                 {
                     setSelectedTool(tmpCurrentSlot);
-                    doMove();
+                    doPolearmAttack();
+                    //doMove();
                     //System.out.println("I work!");
                 }
             });
@@ -185,48 +184,51 @@ public class Player extends Entity
     /// animation testing
 
     private Animations animations;
-    private float stateTime = 0f;
-    private Animation<TextureRegion> currentAnimation;
-
-    public void setAnimations(Animations animations) {
-        this.animations = animations;
-        this.currentAnimation = animations.getAnimation("EmptyIdle"); // default animation
-    }
 
     public void setupAnimations() {
         Map<String, Float> animData = new HashMap<>();
-        animData.put("EmptyIdle", 0.75f);
-        animData.put("PolearmIdle", 0.75f);
-        animData.put("PolearmAttack", 0.1f);
-        animData.put("EmptyDamage", 0.3f);
-        animData.put("PolearmDamage", 0.3f);
+        animData.put("GardenerEmptyIdle", 0.75f);
+        animData.put("GardenerPolearmIdle", 0.75f);
+        animData.put("GardenerEmptyAttack", 0.08f);
+        animData.put("GardenerPolearmAttack", 0.08f);
+        animData.put("GardenerEmptyDamage", 0.1f);
+        animData.put("GardenerPolearmDamage", 0.1f);
+
 
         Animations playerAnimations = new Animations("atlas/FemaleType1Atlas.atlas", animData);
         setAnimations(playerAnimations);
-        setCurrentAnimation(playerAnimations.getAnimation("EmptyIdle"));
+        setCurrentAnimation(playerAnimations.getAnimation("GardenerPolearmIdle"));
     }
 
-    public void setCurrentAnimation(Animation<TextureRegion> animation) {
-        this.currentAnimation = animation;
-        this.stateTime = 0f;
+    public void doPolearmAttack() {
+        Tool actingTool = equippedTools.getTool(selectedTool);
+        performAnimation("GardenerPolearmAttack");
+        actingTool.execute(this, super.getTarget());
     }
 
-    public void update(float delta) {
-        stateTime += delta;
-        if (currentAnimation != null && currentAnimation.isAnimationFinished(stateTime)) {
-            if (animations != null && currentAnimation != animations.getAnimation("EmptyIdle")) {
-                Animation<TextureRegion> idle = animations.getAnimation("EmptyIdle");
-                if (idle != null) {
-                    setCurrentAnimation(idle);
-                }
-            }
-        }
+    public void doArmMovement() {
+        performAnimation("GardenerEmptyAttack");
     }
 
-    public void draw(SpriteBatch batch, float x, float y, float width, float height) {
-        if (currentAnimation != null) {
-            TextureRegion frame = currentAnimation.getKeyFrame(stateTime, true);
-            batch.draw(frame, x, y, width, height);
-        }
+    public void doEmptyIdle() {
+        performAnimation("GardenerEmptyIdle");
     }
+
+    public void doPolearmIdle() {
+        performAnimation("GardenerPolearmIdle");
+    }
+
+    public void takeEmptyDamage() {
+        performAnimation("GardenerEmptyDamage");
+    }
+
+    public void takePolearmDamage() {
+        performAnimation("GardenerPolearmDamage");
+    }
+
+    @Override
+    public String setIdle() {
+        return "GardenerPolearmIdle";
+    }
+
 }
