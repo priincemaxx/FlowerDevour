@@ -92,12 +92,14 @@ public class CombatScreen implements Screen {
         game.batch.setProjectionMatrix(game.viewport.getCamera().combined);
         game.batch.begin();
         game.batch.draw(backgroundTexture, 0, 0, game.getWorldWidth(), game.getWorldHeight());
+        player.provideHealthBar(game.batch);
+        enemy.provideHealthBar(game.batch);
+
         player.draw(game.batch, 1.1f, 2.1f, 3f, 3.4f);
         enemy.draw(game.batch, 4.1f, 2.1f, 3f, 3.4f);
         //game.batch.draw(playerTexture, 1.1f, 2.1f, 3f, 3.4f);
         //game.batch.draw(enemyTexture, 4.1f, 2.1f, 3f, 3.4f);
-        player.provideHealthBar(game.batch);
-        enemy.provideHealthBar(game.batch);
+
 
         game.batch.end();
     }
