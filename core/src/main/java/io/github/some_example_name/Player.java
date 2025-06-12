@@ -137,7 +137,11 @@ public class Player extends Entity
             throw new PlayerException("Trying to act on nothing!");
         }
 
+        int targetChange = actingTool.getMove().getTargetChange();
 
+        targetChange *= (int) damageModifier;
+
+        actingTool.getMove().setTargetChange(targetChange);
 
         /// does Polearm type weapon animation
         if (animations != null && animations.getAnimation("PolearmAttack") != null) {
