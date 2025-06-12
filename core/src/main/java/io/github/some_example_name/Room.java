@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 public class Room
 {
     private String backgroundPath;
-    //0 left path, MAX right path, else middles paths;
+    //0 left path, MAX right path, else middle paths;
     private Room paths[] = new Room[Map.MAX_ROW_ROOMS];
 
     public Room()

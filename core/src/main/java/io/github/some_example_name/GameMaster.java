@@ -9,6 +9,7 @@ import io.github.some_example_name.passives.PassiveItem;
 import io.github.some_example_name.tools.Tool;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 
 /**
@@ -21,14 +22,16 @@ import java.util.ArrayList;
  */
 public class GameMaster
 {
-    private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
-    private ArrayList<Tool> tools = new ArrayList<Tool>();
-    private ArrayList<PassiveItem> passives = new ArrayList<PassiveItem>();
+    static private ArrayList<Enemy> enemies = initializeEnemies();
+    static private ArrayList<Tool> tools = initializeTools();
+    static private ArrayList<PassiveItem> passives = initializePassives();
 
 
 
-    public void initializeEnemies()
+    static public ArrayList<Enemy> initializeEnemies()
     {
+        ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+
         Json json = new Json();
         JsonValue jsonReader = new JsonReader().parse(Gdx.files.internal("JSONs/enemies.json"));
 
@@ -39,10 +42,14 @@ public class GameMaster
 
             enemies.add(newEnemy);
         }
+
+        return enemies;
     }
 
-    public void initializeTools()
+    static public ArrayList<Tool> initializeTools()
     {
+        ArrayList<Tool> tools = new ArrayList<Tool>();
+
         Json json = new Json();
         JsonValue jsonReader = new JsonReader().parse(Gdx.files.internal("JSONs/tools.json"));
 
@@ -53,10 +60,14 @@ public class GameMaster
 
             tools.add(newTool);
         }
+
+        return tools;
     }
 
-    public void initializePassives()
+    static public ArrayList<PassiveItem> initializePassives()
     {
+        ArrayList<PassiveItem> passives = new ArrayList<PassiveItem>();
+
         Json json = new Json();
         JsonValue jsonReader = new JsonReader().parse(Gdx.files.internal("JSONs/passives.json"));
 
@@ -67,21 +78,49 @@ public class GameMaster
 
             passives.add(newPassive);
         }
+
+        return passives;
     }
 
-    public ArrayList<Enemy> getEnemies()
+    static public ArrayList<Enemy> getEnemies()
     {
         return enemies;
     }
 
-    public ArrayList<Tool> getTools()
+    static public ArrayList<Tool> getTools()
     {
         return tools;
     }
 
-    public ArrayList<PassiveItem> getPassives()
+    static public ArrayList<PassiveItem> getPassives()
     {
         return passives;
     }
 
+    static public Enemy provideEnemy()
+    {
+        Random random = new Random();
+
+        int index = random.nextInt(enemies.size());
+
+        return enemies.get(index);
+    }
+
+    static public Tool provideTool()
+    {
+        Random random = new Random();
+
+        int index = random.nextInt(tools.size());
+
+        return tools.get(index);
+    }
+
+    static public PassiveItem providePassive()
+    {
+        Random random = new Random();
+
+        int index = random.nextInt(passives.size());
+
+        return passives.get(index);
+    }
 }

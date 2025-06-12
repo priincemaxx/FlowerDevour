@@ -86,13 +86,35 @@ public class Map
         }
 
         currentRoom = possiblePaths[index];
+
+        possiblePaths = currentRoom.getPaths();
+
+        if (currentRoom.getClass() == CombatRoom.class)
+        {
+            Random random = new Random();
+
+            int type = random.nextInt(3);
+
+            if (type == 0)
+            {
+                currentRoom = new CombatRoom(GameMaster.provideEnemy());
+            }
+            else
+            {
+                currentRoom = new CombatRoom(GameMaster.provideEnemy(), GameMaster.provideTool());
+            }
+        }
+        else
+        {
+            currentRoom = new LootRoom(GameMaster.providePassive());
+        }
+
+        currentRoom.setPaths(possiblePaths);
+
         return currentRoom;
     }
 
-    /**
-     * For printing to terminal.
-     */
-    public void traverse()
+    public void print()
     {
         for (int i = 0; i < ROWS; i++)
         {
