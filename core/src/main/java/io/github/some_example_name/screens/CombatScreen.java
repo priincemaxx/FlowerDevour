@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import io.github.some_example_name.CombatRoom;
 import io.github.some_example_name.Main;
 import io.github.some_example_name.Player;
 import io.github.some_example_name.enemies.Enemy;
@@ -14,9 +15,12 @@ import io.github.some_example_name.enemies.Enemy;
 public class CombatScreen implements Screen {
     public Main game;
     public Player player;
+    //TODO: take enemy from CombatRoom (once map exists)
+    //string of enemy (type? name?) will need to be passed into enemy.draw (animation)
+    public CombatRoom combatRoom;
     public Enemy enemy;
-    private Stage stage;
-    private Stage gameEndStage;
+    private final Stage stage;
+    private final Stage gameEndStage;
     private final Texture backgroundTexture;
     //perhaps tint should be moved to game master
     private final Texture backgroundTint;
@@ -25,6 +29,8 @@ public class CombatScreen implements Screen {
     private final Texture defeat;
 
     public CombatScreen(Main game, Player player, Enemy enemy) {
+        //this.combatRoom = combatRoom;
+        //this.enemy = combatRoom.enemy?;
         this.game = game;
         this.player = player;
         this.enemy = enemy;
@@ -76,6 +82,8 @@ public class CombatScreen implements Screen {
         game.batch.setProjectionMatrix(game.viewport.getCamera().combined);
         game.batch.begin();
         game.batch.draw(backgroundTexture, 0, 0, game.getWorldWidth(), game.getWorldHeight());
+        player.provideHealthBar(game.batch);
+        enemy.provideHealthBar(game.batch);
 
         if(player.isDead()) {
             //TODO: player death animation
@@ -87,8 +95,7 @@ public class CombatScreen implements Screen {
             //i dont know if enemy animation will delay victory screen
         } else game.batch.draw(enemyTexture, 4.1f, 2.2f, 3f, 3.4f);
 
-        player.provideHealthBar(game.batch);
-        enemy.provideHealthBar(game.batch);
+
 
         game.batch.end();
     }
@@ -139,7 +146,8 @@ public class CombatScreen implements Screen {
 
         Table defeatButtons = new Table();
         TextButton mainMenu = new TextButton("Return to main menu" ,new Skin(Gdx.files.internal("button/Buttons.json")));
-        TextButton playAgain = new TextButton("Play again?" ,new Skin(Gdx.files.internal("button/Buttons.json")));
+        //dunno if we need that button
+        //TextButton playAgain = new TextButton("Play again?" ,new Skin(Gdx.files.internal("button/Buttons.json")));
         defeatButtons.setFillParent(true);
         defeatButtons.bottom().row();
         defeatButtons.add(mainMenu).pad(100).growX().height(60);
