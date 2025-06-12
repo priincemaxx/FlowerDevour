@@ -13,21 +13,24 @@ import io.github.some_example_name.Player;
 import io.github.some_example_name.enemies.Enemy;
 import io.github.some_example_name.screens.MainMenuScreen;
 import io.github.some_example_name.tools.Tool;
+import io.github.some_example_name.tools.ToolContainer;
 
 public class LootScreen implements Screen {
     public Main game;
     public Player player;
     public Enemy enemy;
-    private Tool chest;
+    private ToolContainer chest;
     private Stage stage;
     private final Texture backgroundTexture;
     private final Texture chestTexture;
     private final ScreenViewport stageViewport;
+    private final PauseMenuScreen pauseButton;
 
     public LootScreen(Main game, Player player, Enemy enemy) {
         this.game = game;
         this.player = player;
         this.enemy = enemy;
+        pauseButton = new PauseMenuScreen(game, player, enemy);
 
         backgroundTexture = new Texture("Backgrounds/lootbg_temp.png");
         chestTexture = new Texture("Chest.png");
@@ -36,27 +39,13 @@ public class LootScreen implements Screen {
 
         stageViewport = new ScreenViewport();
         stage = new Stage(stageViewport);
+        stage.addActor(pauseButton.getPauseButton());
         player.setupAnimations();
-        //stage.addActor(player.provideMoveButtons());
-        //player.setTarget(enemy);
-        //enemy.setTarget(player);
-
-        Button pauseButton = new Button(new Skin(Gdx.files.internal("button/Buttons.json")), "pause");
-        Table table = new Table();
-        table.top().left().setFillParent(true);
-        table.add(pauseButton).size(55, 55).pad(10);
 
         TextButton openChestButton = new TextButton("Open!" ,new Skin(Gdx.files.internal("button/Buttons.json")));
         Table chestTable = new Table();
         chestTable.bottom().pad(10).setFillParent(true);
         chestTable.add(openChestButton).bottom().growX().height(60).padLeft(100).padRight(100).padBottom(20);
-
-        pauseButton.addListener(e -> {
-            if (pauseButton.isPressed()) {
-                game.setScreen(new MainMenuScreen(game, player, enemy));
-            }
-            return false;
-        });
 
         openChestButton.addListener(e -> {
             if (openChestButton.isPressed()) {
@@ -66,7 +55,6 @@ public class LootScreen implements Screen {
             return false;
         });
 
-        stage.addActor(table);
         stage.addActor(chestTable);
     }
 
@@ -114,8 +102,6 @@ public class LootScreen implements Screen {
 
     @Override public void dispose() {
         backgroundTexture.dispose();
-        //playerTexture.dispose();
-        //enemyTexture.dispose();
         stage.dispose();
     }
 

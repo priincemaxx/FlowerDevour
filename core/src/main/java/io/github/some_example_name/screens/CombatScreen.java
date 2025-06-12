@@ -21,11 +21,13 @@ public class CombatScreen implements Screen {
     private final Texture backgroundTexture;
     private final Texture enemyTexture;
     private final ScreenViewport stageViewport;
+    private final PauseMenuScreen pauseButton;
 
     public CombatScreen(Main game, Player player, Enemy enemy) {
         this.game = game;
         this.player = player;
         this.enemy = enemy;
+        pauseButton = new PauseMenuScreen(game, player, enemy);
 
         backgroundTexture = new Texture("Backgrounds/combatbg_temp_red.png");
         enemyTexture = new Texture("Enemy/Dandelion/Idle/Idle1.png");
@@ -38,20 +40,7 @@ public class CombatScreen implements Screen {
         player.setTarget(enemy);
         enemy.setTarget(player);
 
-        Button pauseButton = new Button(new Skin(Gdx.files.internal("button/Buttons.json")), "pause");
-
-        Table table = new Table();
-        table.top().left().setFillParent(true);
-        table.add(pauseButton).size(55, 55).pad(10);
-
-        pauseButton.addListener(e -> {
-            if (pauseButton.isPressed()) {
-                game.setScreen(new MainMenuScreen(game, player, enemy));
-            }
-            return false;
-        });
-
-        stage.addActor(table);
+        stage.addActor(pauseButton.getPauseButton());
     }
 
     @Override
@@ -61,8 +50,6 @@ public class CombatScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        ScreenUtils.clear(Color.WHITE);
-
         player.update(delta);
         drawRoom();
 
@@ -103,7 +90,6 @@ public class CombatScreen implements Screen {
 
     @Override public void dispose() {
         backgroundTexture.dispose();
-        //playerTexture.dispose();
         enemyTexture.dispose();
         stage.dispose();
     }

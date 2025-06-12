@@ -66,15 +66,6 @@ public class MainMenuScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        /*
-        ScreenUtils.clear(Color.BLACK);
-        game.viewport.apply();
-        game.batch.setProjectionMatrix(game.viewport.getCamera().combined);
-        game.batch.begin();
-        game.font.draw(game.batch, "press space to switch!",  4, 3);
-        game.font.draw(game.batch, "--- MAIN MENU ---",  4, 4);
-        game.batch.end();
-         */
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
