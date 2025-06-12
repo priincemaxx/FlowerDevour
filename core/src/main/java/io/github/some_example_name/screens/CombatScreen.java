@@ -3,8 +3,10 @@ package io.github.some_example_name.screens;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import io.github.some_example_name.CombatRoom;
@@ -55,13 +57,14 @@ public class CombatScreen implements Screen {
         table.add(new PauseMenuScreen(game, player, enemy).getPauseButton()).size(40, 40).pad(10);
         table.add(test).size(55, 55).pad(10);
 
-        test.addListener(e -> {
-            if (test.isPressed()) {
+        test.addListener(new ChangeListener()
+        {
+            @Override
+            public void changed(ChangeEvent event, Actor actor)
+            {
                 enemy.doAttack();
-                //enemy.doDefaultIdle();
-                //enemy.takeDamage();
+                enemy.doMove();
             }
-            return false;
         });
 
         stage.addActor(table);
