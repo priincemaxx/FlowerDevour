@@ -42,7 +42,7 @@ public class CombatScreen implements Screen {
 
         Table table = new Table();
         table.top().left().setFillParent(true);
-        table.add(pauseButton).size(40, 40).pad(10);
+        table.add(pauseButton).size(55, 55).pad(10);
 
         pauseButton.addListener(e -> {
             if (pauseButton.isPressed()) {
@@ -79,9 +79,9 @@ public class CombatScreen implements Screen {
         game.batch.setProjectionMatrix(game.viewport.getCamera().combined);
         game.batch.begin();
         game.batch.draw(backgroundTexture, 0, 0, game.getWorldWidth(), game.getWorldHeight());
-        player.draw(game.batch, 1.1f, 2.1f, 3f, 3.4f);
+        player.draw(game.batch, 1.1f, 2.2f, 3f, 3.4f);
         //game.batch.draw(playerTexture, 1.1f, 2.1f, 3f, 3.4f);
-        game.batch.draw(enemyTexture, 4.1f, 2.1f, 3f, 3.4f);
+        game.batch.draw(enemyTexture, 4.1f, 2.2f, 3f, 3.4f);
         player.provideHealthBar(game.batch);
         enemy.provideHealthBar(game.batch);
 

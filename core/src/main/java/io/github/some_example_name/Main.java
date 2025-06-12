@@ -17,7 +17,6 @@ import io.github.some_example_name.tools.Tool;
 public class Main extends Game
 {
     public SpriteBatch batch;
-    //public BitmapFont font;
     public FillViewport viewport;
 
     public static final int worldWidth = 8;

@@ -51,7 +51,7 @@ public class MainMenuScreen implements Screen {
 
         startButton.addListener(e -> {
             if (startButton.isPressed()) {
-                game.setScreen(new CombatScreen(game, player, enemy));
+                game.setScreen(new MapScreen(game, player, enemy));
             }
             return false;
         });

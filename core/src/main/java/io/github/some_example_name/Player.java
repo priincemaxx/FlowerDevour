@@ -145,14 +145,17 @@ public class Player extends Entity
 
         actingTool.getMove().setTargetChange(targetChange);
 
-        /// does Polearm type weapon animation
-        if (animations != null && animations.getAnimation("PolearmAttack") != null) {
-            setCurrentAnimation(animations.getAnimation("PolearmAttack"));
-        }
+        attackArmMovement();
 
         actingTool.execute(this, super.getTarget());
     }
 
+    public void attackArmMovement() {
+        /// does Polearm type weapon animation
+        if (animations != null && animations.getAnimation("PolearmAttack") != null) {
+            setCurrentAnimation(animations.getAnimation("PolearmAttack"));
+        }
+    }
 
     /** Provides buttons that do the associated action.
      * @return Table with buttons to be added to a stage.
@@ -203,10 +206,10 @@ public class Player extends Entity
      * @param batch - spritebatch of screen
      */
     public void provideHealthBar(SpriteBatch batch) {
-        batch.draw(new Texture("barborder_temp1.png"), 1.25f, 4.55f, 2.5f, 0.2f);
+        batch.draw(new Texture("barborder_temp1.png"), 1.25f, 4.65f, 2.5f, 0.2f);
         float maxWidth = 2.4f;
         float width = (float) getHealth() /getMaxHealth() * maxWidth;
-        batch.draw(new Texture("healthBar.png"), 1.3f, 4.6f, width, 0.1f);
+        batch.draw(new Texture("healthBar.png"), 1.3f, 4.7f, width, 0.1f);
     }
 
 

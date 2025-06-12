@@ -53,10 +53,10 @@ public class Enemy extends Entity implements Serializable
      * @param batch - spritebatch of screen
      */
     public void provideHealthBar(SpriteBatch batch) {
-        batch.draw(new Texture("barborder_temp1.png"), 4.25f, 4.55f, 2.5f, 0.2f);
+        batch.draw(new Texture("barborder_temp1.png"), 4.25f, 4.65f, 2.5f, 0.2f);
         float maxWidth = 2.4f;
         float width = (float) getHealth() /getMaxHealth() * maxWidth;
-        batch.draw(new Texture("healthBar.png"), 4.3f, 4.6f, width, 0.1f);
+        batch.draw(new Texture("healthBar.png"), 4.3f, 4.7f, width, 0.1f);
     }
 
     @Override
