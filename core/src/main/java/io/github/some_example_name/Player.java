@@ -208,13 +208,6 @@ public class Player extends Entity
         batch.draw(new Texture("other/healthBar.png"), 1.3f, 4.7f, width, 0.1f);
     }
 
-    public boolean isDead() {
-        if(getHealth() == 0) {
-            return true;
-        }
-        return false;
-    }
-
     /// animation testing
 
     /// sets up all animations

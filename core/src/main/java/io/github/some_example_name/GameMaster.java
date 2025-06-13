@@ -103,7 +103,7 @@ public class GameMaster
 
         int index = random.nextInt(enemies.size());
 
-        return enemies.get(index);
+        return new Enemy(enemies.get(index));
     }
 
     static public Tool provideTool()
@@ -112,7 +112,7 @@ public class GameMaster
 
         int index = random.nextInt(tools.size());
 
-        return tools.get(index);
+        return new Tool(tools.get(index));
     }
 
     static public PassiveItem providePassive()
@@ -121,6 +121,6 @@ public class GameMaster
 
         int index = random.nextInt(passives.size());
 
-        return passives.get(index);
+        return new PassiveItem(passives.get(index));
     }
 }

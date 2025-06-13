@@ -22,12 +22,12 @@ public class Tool extends Item implements Serializable
     public Tool(String name, BasicAction move)
     {
         super(name);
-        this.move = move;
+        setMove(move);
     }
     public Tool(Tool tool)
     {
         super(tool);
-        this.move = tool.move;
+        setMove(new BasicAction(tool.getMove()));
     }
 
     public BasicAction getMove()

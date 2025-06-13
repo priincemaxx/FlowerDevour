@@ -21,7 +21,7 @@ public class Item implements Serializable
     }
     public Item(Item item)
     {
-        this.name = item.getName();
+        setName(item.getName());
     }
 
     public String getName()

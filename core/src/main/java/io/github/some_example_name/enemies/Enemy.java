@@ -15,6 +15,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import io.github.some_example_name.Animations;
 import io.github.some_example_name.Entity;
+import io.github.some_example_name.EntityException;
 import io.github.some_example_name.actions.BasicAction;
 import io.github.some_example_name.tools.Tool;
 
@@ -41,13 +42,25 @@ public class Enemy extends Entity implements Serializable
         move.setUser(this);
     }
 
+    //for copying objects
+    public Enemy(Enemy enemy)
+    {
+        super(enemy);
+        setMove(enemy.getMove());
+    }
+
     public BasicAction getMove()
     {
         return move;
     }
 
-    public void setMove(BasicAction move)
+    public void setMove(BasicAction move) throws EntityException
     {
+        if (move == null)
+        {
+            throw new EntityException("Null move.");
+        }
+
         this.move = move;
     }
 
@@ -67,14 +80,6 @@ public class Enemy extends Entity implements Serializable
         float maxWidth = 2.4f;
         float width = (float) getHealth() /getMaxHealth() * maxWidth;
         batch.draw(new Texture("other/healthBar.png"), 4.3f, 4.7f, width, 0.1f);
-    }
-
-    //@Override
-    public boolean isDead() {
-        if(getHealth() == 0) {
-            return true;
-        }
-        return false;
     }
 
     public void setupAnimations() {

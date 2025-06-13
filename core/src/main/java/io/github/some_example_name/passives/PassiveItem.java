@@ -16,9 +16,9 @@ public class PassiveItem extends Item implements Serializable
 
     }
 
-    PassiveItem(PassiveItem passive)
+    public PassiveItem(PassiveItem passive)
     {
-        super(passive.getName());
+        super(passive);
     }
 
     public PassiveItem(String name)

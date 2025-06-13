@@ -27,6 +27,7 @@ public class BasicAction implements Serializable
         setTargetChange(targetChange);
         setName(name);
     }
+
     public BasicAction(int userChange, int targetChange, String name)
     {
         setUserChange(userChange);
@@ -35,6 +36,15 @@ public class BasicAction implements Serializable
 
         setUser(null);
         setTarget(null);
+    }
+
+    public BasicAction(BasicAction action)
+    {
+        setUser(action.getUser());
+        setTarget(action.getTarget());
+        setUserChange(action.getUserChange());
+        setTargetChange(action.getTargetChange());
+        setName(action.getName());
     }
 
     public Entity getUser()
@@ -102,11 +112,6 @@ public class BasicAction implements Serializable
 
         user.setHealth(userHp);
         target.setHealth(targetHp);
-    }
-
-    public void update()
-    {
-
     }
 
     @Override

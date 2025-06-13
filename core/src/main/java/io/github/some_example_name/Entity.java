@@ -41,6 +41,21 @@ public class Entity implements Serializable
         setTexture(texture);
     }
 
+
+    //for copying objects
+    public Entity(Entity entity) throws EntityException
+    {
+        if (entity == null)
+        {
+            throw new EntityException("Trying to copy nothing.");
+        }
+
+        setMaxHealth(entity.getMaxHealth());
+        setHealth(entity.getHealth());
+        setName(entity.getName());
+        //etc. TODO: copy remaining fields.
+    }
+
     public int getHealth()
     {
         return health;
@@ -113,6 +128,9 @@ public class Entity implements Serializable
 
     public boolean isDead()
     {
+        if(getHealth() == 0) {
+            return true;
+        }
         return false;
     }
 
