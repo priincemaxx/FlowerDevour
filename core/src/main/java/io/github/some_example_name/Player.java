@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import io.github.some_example_name.passives.PassiveContainer;
 import io.github.some_example_name.passives.PassiveItem;
+import io.github.some_example_name.screens.InventoryScreen;
 import io.github.some_example_name.tools.Tool;
 import io.github.some_example_name.tools.ToolContainer;
 import io.github.some_example_name.tools.ToolContainerException;
@@ -30,11 +31,18 @@ public class Player extends Entity
 
     private double damageModifier = 1;
 
+    Table inventoryScreenTable;
 
     public Player(int health, int maxHealth, String name, Tool starterTool)
     {
         super(health, maxHealth, name);
         equippedTools.moveInside(new Tool(starterTool));
+    }
+
+    public Player(int health, int maxHealth, String name, ToolContainer starterTools)
+    {
+        super(health, maxHealth, name);
+        setEquippedTools(starterTools);
     }
 
     public Player(int health, int maxHealth, String name, Texture texture, ToolContainer starterTools)
@@ -195,14 +203,14 @@ public class Player extends Entity
         return moveButtons;
     }
 
-    public Table provideEquippedSlots()
+    public Table provideEquippedSlots(InventoryScreen inventoryScreen)
     {
         Table equipTable = new Table();
         Skin skin = new Skin(Gdx.files.internal("button/Buttons.json"));
 
-        //equipTable.setFillParent(true);
-        //equipTable.bottom().pad(15);
-        //equipTable.defaults().growX().padLeft(10).padRight(10).height(50);
+        equipTable.setFillParent(true);
+        equipTable.bottom().pad(15);
+        equipTable.defaults().growX().padLeft(10).padRight(10).height(50);
 
         //equipTable.setDebug(true);
 
@@ -227,6 +235,7 @@ public class Player extends Entity
                 public void changed(ChangeEvent event, Actor actor)
                 {
                     equippedTools.moveOneInto(tmpCurrentSlot, inventory);
+                    inventoryScreen.updateButtons();
                 }
             });
         }
@@ -234,14 +243,14 @@ public class Player extends Entity
         return equipTable;
     }
 
-    public Table provideInventory()
+    public Table provideInventory(InventoryScreen inventoryScreen)
     {
         Table inventoryTable = new Table();
         Skin skin = new Skin(Gdx.files.internal("button/Buttons.json"));
 
-        //inventoryTable.setFillParent(true);
-        //inventoryTable.bottom().pad(15);
-        //inventoryTable.defaults().growX().padLeft(10).padRight(10).height(50);
+        inventoryTable.setFillParent(true);
+        inventoryTable.bottom().pad(15);
+        inventoryTable.defaults().growX().padLeft(10).padRight(10).height(50);
 
         //inventoryTable.setDebug(true);
 
@@ -271,6 +280,7 @@ public class Player extends Entity
                 public void changed(ChangeEvent event, Actor actor)
                 {
                     inventory.moveOneInto(tmpCurrentSlot, equippedTools);
+                    inventoryScreen.updateButtons();
                 }
             });
         }

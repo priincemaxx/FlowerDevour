@@ -39,9 +39,9 @@ public class InventoryScreen implements Screen
 
         buttons.setFillParent(true);
 
-        buttons.add(player.provideEquippedSlots());
+        buttons.add(player.provideEquippedSlots(this));
         buttons.row();
-        buttons.add(player.provideInventory());
+        buttons.add(player.provideInventory(this));
 
         stage.addActor(buttons);
     }
@@ -62,25 +62,23 @@ public class InventoryScreen implements Screen
 
         game.batch.end();
 
-        if (Gdx.input.justTouched())
-        {
-            System.out.println("PRESSED!!!!!!");
-
-            buttons.remove();
-
-            buttons = new Table();
-
-            buttons.setFillParent(true);
-
-            buttons.add(player.provideEquippedSlots());
-            buttons.row();
-            buttons.add(player.provideInventory());
-
-            stage.addActor(buttons);
-        }
-
         stage.act(delta);
         stage.draw();
+    }
+
+    public void updateButtons()
+    {
+        buttons.remove();
+
+        buttons = new Table();
+
+        buttons.setFillParent(true);
+
+        buttons.add(player.provideEquippedSlots(this));
+        buttons.row();
+        buttons.add(player.provideInventory(this));
+
+        stage.addActor(buttons);
     }
 
     @Override

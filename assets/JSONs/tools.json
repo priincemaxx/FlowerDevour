@@ -77,7 +77,7 @@
     }
   },
   {
-    "class" : "io.github.some_example.name.tools.DeadlyTool",
+    "class" : "io.github.some_example_name.tools.DeadlyTool",
     "name" : "Bountiful Rake",
     "move" :
     {

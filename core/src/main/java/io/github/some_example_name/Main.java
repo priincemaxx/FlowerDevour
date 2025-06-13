@@ -29,6 +29,8 @@ public class Main extends Game
 
     @Override
     public void create() {
+        player.rewardTool(GameMaster.provideTool());
+
         batch = new SpriteBatch();
         viewport = new FillViewport(worldWidth, worldHeight);
         this.setScreen(new MainMenuScreen(this, player, punyLeaf));
