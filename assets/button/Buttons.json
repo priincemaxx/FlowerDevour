@@ -36,6 +36,21 @@
 		"over": "inventoryUpOver",
 		"focused": "inventoryDownOver",
 		"disabled": "inventoryDisabled"
+	},
+	"lootRoom": {
+		"up": "lootRoomUp",
+		"over": "lootRoomUpOver",
+		"disabled": "lootRoomDisabled"
+	},
+	"combatRoom": {
+		"up": "combatRoomUp",
+		"over": "combatRoomUpOver",
+		"disabled": "combatRoomDisabled"
+	},
+	"bossRoom": {
+		"up": "bossRoomUp",
+		"over": "bossRoomUpOver",
+		"disabled": "bossRoomDisabled"
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle": {

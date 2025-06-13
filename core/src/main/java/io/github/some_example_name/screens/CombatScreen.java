@@ -50,7 +50,7 @@ public class CombatScreen implements Screen {
         enemy.setTarget(player);
 
         stage.addActor(new PauseMenuScreen(game, player, enemy).getPauseButton());
-        Button test = new Button(new Skin(Gdx.files.internal("button/Buttons.json")), "inventory");
+        Button test = new Button(new Skin(Gdx.files.internal("button/Buttons.json")), "combatRoom");
 
         Table table = new Table();
         table.top().left().setFillParent(true);

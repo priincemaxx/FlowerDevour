@@ -2,56 +2,56 @@
 Buttons.png
 size: 512, 512
 format: RGBA8888
-filter: Linear, Linear
+filter: Nearest, Nearest
 repeat: none
 buttonDisabled
   rotate: false
-  xy: 1, 391
-  size: 128, 32
-  split: 16, 21, 7, 7
-  pad: 21, 28, 12, 14
-  orig: 128, 32
+  xy: 1, 407
+  size: 64, 16
+  split: 8, 7, 3, 4
+  pad: 10, 10, 5, 7
+  orig: 64, 16
   offset: 0, 0
   index: -1
 buttonDown
   rotate: false
-  xy: 1, 357
-  size: 128, 32
-  split: 18, 21, 9, 7
-  pad: 23, 26, 14, 12
-  orig: 128, 32
+  xy: 1, 389
+  size: 64, 16
+  split: 9, 7, 4, 4
+  pad: 11, 9, 6, 6
+  orig: 64, 16
   offset: 0, 0
   index: -1
 buttonDownOver
   rotate: false
-  xy: 131, 391
-  size: 128, 32
-  split: 18, 21, 9, 7
-  pad: 23, 26, 14, 12
-  orig: 128, 32
+  xy: 67, 407
+  size: 64, 16
+  split: 9, 7, 4, 4
+  pad: 11, 9, 6, 6
+  orig: 64, 16
   offset: 0, 0
   index: -1
 buttonUp
   rotate: false
-  xy: 1, 323
-  size: 128, 32
-  split: 16, 21, 7, 7
-  pad: 21, 28, 12, 14
-  orig: 128, 32
+  xy: 1, 371
+  size: 64, 16
+  split: 8, 7, 3, 4
+  pad: 10, 10, 5, 7
+  orig: 64, 16
   offset: 0, 0
   index: -1
 buttonUpOver
   rotate: false
-  xy: 131, 357
-  size: 128, 32
-  split: 16, 21, 7, 7
-  pad: 21, 28, 12, 14
-  orig: 128, 32
+  xy: 67, 389
+  size: 64, 16
+  split: 8, 7, 3, 4
+  pad: 10, 10, 5, 7
+  orig: 64, 16
   offset: 0, 0
   index: -1
 inventoryDisabled
   rotate: false
-  xy: 1, 255
+  xy: 1, 269
   size: 32, 32
   split: 3, 2, 3, 2
   pad: 16, 15, 16, 15
@@ -60,7 +60,7 @@ inventoryDisabled
   index: -1
 inventoryDown
   rotate: false
-  xy: 35, 289
+  xy: 235, 391
   size: 32, 32
   split: 4, 2, 4, 2
   pad: 16, 15, 16, 15
@@ -69,7 +69,7 @@ inventoryDown
   index: -1
 inventoryDownOver
   rotate: false
-  xy: 165, 323
+  xy: 1, 235
   size: 32, 32
   split: 4, 2, 4, 2
   pad: 16, 15, 16, 15
@@ -78,7 +78,7 @@ inventoryDownOver
   index: -1
 inventoryUp
   rotate: false
-  xy: 295, 357
+  xy: 269, 391
   size: 32, 32
   split: 3, 2, 3, 2
   pad: 16, 15, 16, 15
@@ -87,7 +87,7 @@ inventoryUp
   index: -1
 inventoryUpOver
   rotate: false
-  xy: 329, 391
+  xy: 1, 201
   size: 32, 32
   split: 3, 2, 3, 2
   pad: 16, 15, 16, 15
@@ -96,7 +96,7 @@ inventoryUpOver
   index: -1
 pauseDisabled
   rotate: false
-  xy: 261, 391
+  xy: 133, 391
   size: 32, 32
   split: 3, 2, 3, 2
   pad: 0, 0, 0, 0
@@ -105,7 +105,7 @@ pauseDisabled
   index: -1
 pauseDown
   rotate: false
-  xy: 1, 289
+  xy: 1, 337
   size: 32, 32
   split: 4, 2, 4, 2
   pad: 0, 0, 0, 0
@@ -114,7 +114,7 @@ pauseDown
   index: -1
 pauseDownOver
   rotate: false
-  xy: 131, 323
+  xy: 167, 391
   size: 32, 32
   split: 4, 2, 4, 2
   pad: 0, 0, 0, 0
@@ -123,7 +123,7 @@ pauseDownOver
   index: -1
 pauseUp
   rotate: false
-  xy: 261, 357
+  xy: 1, 303
   size: 32, 32
   split: 3, 2, 3, 2
   pad: 0, 0, 0, 0
@@ -132,7 +132,7 @@ pauseUp
   index: -1
 pauseUpOver
   rotate: false
-  xy: 295, 391
+  xy: 201, 391
   size: 32, 32
   split: 3, 2, 3, 2
   pad: 0, 0, 0, 0
@@ -144,5 +144,68 @@ dogica(1)
   xy: 1, 425
   size: 505, 79
   orig: 505, 79
+  offset: 0, 0
+  index: -1
+bossRoomDisabled
+  rotate: false
+  xy: 303, 391
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+bossRoomUp
+  rotate: false
+  xy: 1, 167
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+bossRoomUpOver
+  rotate: false
+  xy: 337, 391
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+combatRoomDisabled
+  rotate: false
+  xy: 1, 133
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+combatRoomUp
+  rotate: false
+  xy: 371, 391
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+combatRoomUpOver
+  rotate: false
+  xy: 1, 99
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+lootRoomDisabled
+  rotate: false
+  xy: 405, 391
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+lootRoomUp
+  rotate: false
+  xy: 1, 65
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+lootRoomUpOver
+  rotate: false
+  xy: 439, 391
+  size: 32, 32
+  orig: 32, 32
   offset: 0, 0
   index: -1
