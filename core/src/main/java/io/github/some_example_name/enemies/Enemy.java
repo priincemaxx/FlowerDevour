@@ -89,8 +89,8 @@ public class Enemy extends Entity implements Serializable
     }
 
     /// performs these animations once
-    public void animateDefaultIdle() {
-        performAnimation("DefaultIdle");
+    public void animateIdle() {
+        performAnimation("Idle");
     }
 
     public void animateTakeDamage() {

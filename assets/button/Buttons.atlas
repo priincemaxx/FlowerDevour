@@ -4,6 +4,24 @@ size: 512, 512
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
+Defeat
+  rotate: false
+  xy: 133, 407
+  size: 64, 16
+  split: 4, 3, 0, 0
+  pad: 10, 10, 5, 7
+  orig: 64, 16
+  offset: 0, 0
+  index: -1
+Victory
+  rotate: false
+  xy: 1, 353
+  size: 64, 16
+  split: 4, 3, 0, 0
+  pad: 10, 10, 5, 7
+  orig: 64, 16
+  offset: 0, 0
+  index: -1
 buttonDisabled
   rotate: false
   xy: 1, 407
@@ -51,7 +69,7 @@ buttonUpOver
   index: -1
 inventoryDisabled
   rotate: false
-  xy: 1, 269
+  xy: 1, 183
   size: 32, 32
   split: 3, 2, 3, 2
   pad: 16, 15, 16, 15
@@ -60,7 +78,7 @@ inventoryDisabled
   index: -1
 inventoryDown
   rotate: false
-  xy: 235, 391
+  xy: 1, 149
   size: 32, 32
   split: 4, 2, 4, 2
   pad: 16, 15, 16, 15
@@ -69,7 +87,7 @@ inventoryDown
   index: -1
 inventoryDownOver
   rotate: false
-  xy: 1, 235
+  xy: 1, 115
   size: 32, 32
   split: 4, 2, 4, 2
   pad: 16, 15, 16, 15
@@ -78,7 +96,7 @@ inventoryDownOver
   index: -1
 inventoryUp
   rotate: false
-  xy: 269, 391
+  xy: 1, 81
   size: 32, 32
   split: 3, 2, 3, 2
   pad: 16, 15, 16, 15
@@ -87,7 +105,7 @@ inventoryUp
   index: -1
 inventoryUpOver
   rotate: false
-  xy: 1, 201
+  xy: 1, 47
   size: 32, 32
   split: 3, 2, 3, 2
   pad: 16, 15, 16, 15
@@ -96,7 +114,7 @@ inventoryUpOver
   index: -1
 pauseDisabled
   rotate: false
-  xy: 133, 391
+  xy: 67, 355
   size: 32, 32
   split: 3, 2, 3, 2
   pad: 0, 0, 0, 0
@@ -105,7 +123,7 @@ pauseDisabled
   index: -1
 pauseDown
   rotate: false
-  xy: 1, 337
+  xy: 1, 319
   size: 32, 32
   split: 4, 2, 4, 2
   pad: 0, 0, 0, 0
@@ -114,7 +132,7 @@ pauseDown
   index: -1
 pauseDownOver
   rotate: false
-  xy: 167, 391
+  xy: 1, 285
   size: 32, 32
   split: 4, 2, 4, 2
   pad: 0, 0, 0, 0
@@ -123,7 +141,7 @@ pauseDownOver
   index: -1
 pauseUp
   rotate: false
-  xy: 1, 303
+  xy: 1, 251
   size: 32, 32
   split: 3, 2, 3, 2
   pad: 0, 0, 0, 0
@@ -132,7 +150,7 @@ pauseUp
   index: -1
 pauseUpOver
   rotate: false
-  xy: 201, 391
+  xy: 1, 217
   size: 32, 32
   split: 3, 2, 3, 2
   pad: 0, 0, 0, 0
@@ -148,63 +166,63 @@ dogica(1)
   index: -1
 bossRoomDisabled
   rotate: false
-  xy: 303, 391
+  xy: 1, 13
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 bossRoomUp
   rotate: false
-  xy: 1, 167
+  xy: 101, 355
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 bossRoomUpOver
   rotate: false
-  xy: 337, 391
+  xy: 35, 319
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 combatRoomDisabled
   rotate: false
-  xy: 1, 133
+  xy: 35, 285
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 combatRoomUp
   rotate: false
-  xy: 371, 391
+  xy: 35, 251
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 combatRoomUpOver
   rotate: false
-  xy: 1, 99
+  xy: 35, 217
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 lootRoomDisabled
   rotate: false
-  xy: 405, 391
+  xy: 35, 183
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 lootRoomUp
   rotate: false
-  xy: 1, 65
+  xy: 35, 149
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 lootRoomUpOver
   rotate: false
-  xy: 439, 391
+  xy: 35, 115
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
