@@ -45,7 +45,7 @@ public class Animations {
     public void performAnimation(String animationName) {
         Animation<TextureRegion> anim = animations.get(animationName);
         if (anim != null && !animationName.equals(defaultAnimation)) {
-            anim.setPlayMode(Animation.PlayMode.NORMAL); // play once
+            anim.setPlayMode(Animation.PlayMode.NORMAL);
             setCurrentAnimation(anim);
         }
     }
@@ -62,6 +62,10 @@ public class Animations {
     public void setCurrentAnimation(Animation<TextureRegion> animation) {
         this.currentAnimation = animation;
         this.stateTime = 0f;
+    }
+
+    public boolean isCurrentAnimationFinished() {
+        return currentAnimation != null && currentAnimation.isAnimationFinished(stateTime);
     }
 
     public void update(float delta) {

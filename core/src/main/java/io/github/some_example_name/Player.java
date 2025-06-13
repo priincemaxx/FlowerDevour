@@ -146,7 +146,7 @@ public class Player extends Entity
         actingTool.getMove().setTargetChange(targetChange);
 
         /// performs attack animation
-        doPolearmAttack();
+        animatePolearmAttack();
 
         actingTool.execute(this, super.getTarget());
     }
@@ -187,7 +187,6 @@ public class Player extends Entity
                 public void changed(ChangeEvent event, Actor actor)
                 {
                     setSelectedTool(tmpCurrentSlot);
-                    doPolearmAttack();
                     doMove();
                 }
             });
@@ -309,40 +308,40 @@ public class Player extends Entity
     }
 
     /// temp attack animation
-    public void doPolearmAttack() throws PlayerException {
+    public void animatePolearmAttack() throws PlayerException {
         performAnimation("GardenerPolearmAttack");
     }
 
-    public void doArmMovement() {
+    public void animateArmMovement() {
         performAnimation("GardenerEmptyAttack");
     }
 
-    public void doPolearmIdle() {
+    public void animatePolearmIdle() {
         performAnimation("GardenerPolearmIdle");
     }
 
-    public void takeEmptyDamage() {
+    public void animateTakeEmptyDamage() {
         performAnimation("GardenerEmptyDamage");
     }
 
-    public void takePolearmDamage() {
+    public void animateTakePolearmDamage() {
         performAnimation("GardenerPolearmDamage");
     }
 
     /// rough structure of animations when inventory and weapon types are implemented
     /*
-    public void doAttack() {
+    public void animateAttack() {
         String weaponType = getWeaponType();
         String animName = "Gardener" + weaponType + "Attack";
         performAnimation(animName);
     }
 
-    public void doIdle() {
+    public void animateIdle() {
         String weaponType = getWeaponType();
         performAnimation("Gardener" + weaponType + "Idle");
     }
 
-    public void takeDamage() {
+    public void animateTakeDamage() {
         String weaponType = getWeaponType();
         performAnimation("Gardener" + weaponType + "Damage");
     }

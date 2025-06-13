@@ -52,11 +52,14 @@ public class CombatScreen implements Screen {
         enemy.setTarget(player);
 
         stage.addActor(new PauseMenuScreen(game, player, enemy).getPauseButton());
-        Button test = new Button(new Skin(Gdx.files.internal("button/Buttons.json")), "combatRoom");
+
 
         Table table = new Table();
         table.top().left().setFillParent(true);
         table.add(new PauseMenuScreen(game, player, enemy).getPauseButton()).size(40, 40).pad(10);
+
+        /// test button, temporary
+        Button test = new Button(new Skin(Gdx.files.internal("button/Buttons.json")), "combatRoom");
         table.add(test).size(55, 55).pad(10);
 
         test.addListener(new ChangeListener()
@@ -64,11 +67,13 @@ public class CombatScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor)
             {
-                enemy.doAttack();
+                enemy.animateAttack();
                 enemy.doMove();
+                /// temporary player damage
+                player.animateTakePolearmDamage();
             }
         });
-
+        /// end of test button
 
 
         Button inventoryButton = new Button(new Skin(Gdx.files.internal("button/Buttons.json")), "inventory");

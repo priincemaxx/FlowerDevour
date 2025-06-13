@@ -7,10 +7,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import io.github.some_example_name.Animations;
 import io.github.some_example_name.Main;
 import io.github.some_example_name.Player;
 import io.github.some_example_name.enemies.Enemy;
 import io.github.some_example_name.tools.ToolContainer;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class LootScreen implements Screen {
@@ -27,10 +31,16 @@ public class LootScreen implements Screen {
 
     private final Texture temporary;
 
+    private Animations chestAnimations;
+
     public LootScreen(Main game, Player player, Enemy enemy) {
         this.game = game;
         this.player = player;
         this.enemy = enemy;
+
+        Map<String, Float> chestAnimationData = new HashMap<>();
+        chestAnimationData.put("ChestOpen", 0.1f);
+        chestAnimations = new Animations("atlas/ChestAtlas.atlas", chestAnimationData);
 
         backgroundTexture = new Texture("Backgrounds/lootbg_temp.png");
         backgroundTint = new Texture("Backgrounds/backgroundTint.png");
@@ -43,7 +53,6 @@ public class LootScreen implements Screen {
 
         stage = new Stage(new ScreenViewport());
         stage.addActor(new PauseMenuScreen(game, player, enemy).getPauseButton());
-        player.setupAnimations();
 
         TextButton openChestButton = new TextButton("Open!" ,new Skin(Gdx.files.internal("button/Buttons.json")));
         Table chestTable = new Table();
@@ -53,8 +62,9 @@ public class LootScreen implements Screen {
         rewardStage = new Stage(new ScreenViewport());
 
         openChestButton.addListener(e -> {
-            if (openChestButton.isPressed()) {
+            if (openChestButton.isPressed() && !chestOpen) {
                 chestOpen = true;
+                chestAnimations.performAnimation("ChestOpen");
             }
             return false;
         });
@@ -78,11 +88,14 @@ public class LootScreen implements Screen {
         stage.draw();
 
         if(chestOpen) {
-            player.doArmMovement();
+            player.animateArmMovement();
+            chestAnimations.update(delta);
             //TODO: animation delay
-            //TODO: ANIMATION chest opens
-            drawRewardScreen();
+            if (chestAnimations.isCurrentAnimationFinished()) {
+                drawRewardScreen();
+            }
         }
+
     }
 
     private void drawRoom() {
@@ -92,8 +105,12 @@ public class LootScreen implements Screen {
 
         game.batch.draw(backgroundTexture, 0, 0, game.getWorldWidth(), game.getWorldHeight());
         player.draw(game.batch, 1.1f, 2.2f, 3f, 3.4f);
-        //TODO: ANIMATION
-        game.batch.draw(chestTexture, 4.1f, 2.2f, 3f, 3.4f);
+
+        if (chestOpen) {
+            chestAnimations.draw(game.batch, 4.1f, 2.2f, 3f, 3.4f);
+        } else {
+            game.batch.draw(chestTexture, 4.1f, 2.2f, 3f, 3.4f);
+        }
 
         game.batch.end();
     }
