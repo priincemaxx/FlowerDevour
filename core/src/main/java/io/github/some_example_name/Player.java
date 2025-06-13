@@ -15,6 +15,8 @@ import io.github.some_example_name.tools.ToolContainerException;
 import java.util.HashMap;
 import java.util.Map;
 
+/// TODO: based on the equipted weapon the default animation should change
+
 public class Player extends Entity
 {
     public static final int EQUIP_SLOTS = 4;
@@ -143,10 +145,8 @@ public class Player extends Entity
 
         actingTool.getMove().setTargetChange(targetChange);
 
-        /// does Polearm type weapon animation
-        if (animations != null && animations.getAnimation("PolearmAttack") != null) {
-            setCurrentAnimation(animations.getAnimation("PolearmAttack"));
-        }
+        /// performs attack animation
+        doPolearmAttack();
 
         actingTool.execute(this, super.getTarget());
     }
@@ -217,8 +217,8 @@ public class Player extends Entity
 
     /// animation testing
 
-    private Animations animations;
-
+    /// sets up all animations
+    /// (will probably have to somehow optimize this based on weapon type)
     public void setupAnimations() {
         Map<String, Float> animData = new HashMap<>();
         animData.put("GardenerEmptyIdle", 0.75f);
@@ -228,12 +228,12 @@ public class Player extends Entity
         animData.put("GardenerEmptyDamage", 0.1f);
         animData.put("GardenerPolearmDamage", 0.1f);
 
-
         Animations playerAnimations = new Animations("atlas/FemaleType1Atlas.atlas", animData);
         setAnimations(playerAnimations);
-        setCurrentAnimation(playerAnimations.getAnimation("GardenerPolearmIdle"));
+        setDefaultAnimation("GardenerEmptyIdle");
     }
 
+    /// temp attack animation
     public void doPolearmAttack() throws PlayerException {
         Tool actingTool = equippedTools.getTool(selectedTool);
 
@@ -250,10 +250,6 @@ public class Player extends Entity
         performAnimation("GardenerEmptyAttack");
     }
 
-    public void doEmptyIdle() {
-        performAnimation("GardenerEmptyIdle");
-    }
-
     public void doPolearmIdle() {
         performAnimation("GardenerPolearmIdle");
     }
@@ -266,9 +262,22 @@ public class Player extends Entity
         performAnimation("GardenerPolearmDamage");
     }
 
-    @Override
-    public String setIdle() {
-        return "GardenerPolearmIdle";
+    /// rough structure of animations when inventory and weapon types are implemented
+    /*
+    public void doAttack() {
+        String weaponType = getWeaponType();
+        String animName = "Gardener" + weaponType + "Attack";
+        performAnimation(animName);
     }
 
+    public void doIdle() {
+        String weaponType = getWeaponType();
+        performAnimation("Gardener" + weaponType + "Idle");
+    }
+
+    public void takeDamage() {
+        String weaponType = getWeaponType();
+        performAnimation("Gardener" + weaponType + "Damage");
+    }
+     */
 }

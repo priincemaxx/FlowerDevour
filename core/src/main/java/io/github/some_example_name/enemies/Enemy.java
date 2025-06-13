@@ -85,9 +85,10 @@ public class Enemy extends Entity implements Serializable
 
         Animations enemyAnimations = new Animations("atlas/DandelionAtlas.atlas", animData);
         setAnimations(enemyAnimations);
-        setCurrentAnimation(enemyAnimations.getAnimation("DefaultIdle"));
+        setDefaultAnimation("DefaultIdle");
     }
 
+    /// performs these animations once
     public void doDefaultIdle() {
         performAnimation("DefaultIdle");
     }

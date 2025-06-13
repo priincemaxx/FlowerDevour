@@ -41,6 +41,8 @@ public class CombatScreen implements Screen {
         //enemyTexture = new Texture("Enemy/Dandelion/Idle/Idle1.png");
 
         player.setupAnimations();
+        /// will have to change based on weapon type
+        player.setDefaultAnimation("GardenerPolearmIdle");
         enemy.setupAnimations();
 
         gameEndStage = new Stage(new ScreenViewport());

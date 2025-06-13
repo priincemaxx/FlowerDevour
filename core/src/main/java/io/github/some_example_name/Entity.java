@@ -17,6 +17,9 @@ public class Entity implements Serializable
     private Entity target;
     private Texture texture; //should later replace with TextureRegion class
 
+    protected Animations animations;
+    protected Animation<TextureRegion> currentAnimation;
+    protected float stateTime = 0f;
 
     public Entity()
     {
@@ -113,50 +116,39 @@ public class Entity implements Serializable
         return false;
     }
 
-    private Animations animations;
-    private Animation<TextureRegion> currentAnimation;
-    private float stateTime = 0f;
-
     public void setAnimations(Animations animations) {
         this.animations = animations;
     }
 
-    public void setAnimations(Animations animations, String defaultAnimation) {
-        this.animations = animations;
-        this.currentAnimation = animations.getAnimation(defaultAnimation); // default animation
-    }
-
-    public void performAnimation(String animationName) {
-        if (animations != null && animations.getAnimation(animationName) != null) {
-            setCurrentAnimation(animations.getAnimation(animationName));
+    /// sets default animation
+    public void setDefaultAnimation(String animationName) {
+        if (animations != null) {
+            animations.setDefaultAnimation(animationName);
+            this.currentAnimation = animations.getDefaultAnimation();
         }
-
     }
 
-    public void setCurrentAnimation(Animation<TextureRegion> animation) {
-        this.currentAnimation = animation;
-        this.stateTime = 0f;
+    /// performs animation once and goes back to default
+    public void performAnimation(String animationName) {
+        if (animations != null) {
+            animations.performAnimation(animationName);
+        }
     }
 
     public void update(float delta) {
-        stateTime += delta;
-        if (currentAnimation != null && currentAnimation.isAnimationFinished(stateTime)) {
-            Animation<TextureRegion> idle = animations.getAnimation(setIdle());
-            if (idle != null) {
-                setCurrentAnimation(idle);
-            }
+        if (animations != null) {
+            animations.update(delta);
+        } else {
+            stateTime += delta;
         }
     }
 
     public void draw(SpriteBatch batch, float x, float y, float width, float height) {
-        if (currentAnimation != null) {
-            TextureRegion frame = currentAnimation.getKeyFrame(stateTime, true);
-            batch.draw(frame, x, y, width, height);
+        if (animations != null) {
+            animations.draw(batch, x, y, width, height);
+        } else if (texture != null) {
+            batch.draw(texture, x, y, width, height);
         }
-    }
-
-    public String setIdle() {
-        return "DefaultIdle";
     }
 
     @Override
