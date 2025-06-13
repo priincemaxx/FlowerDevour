@@ -130,4 +130,8 @@ public class Map
             System.out.println();
         }
     }
+
+    public Room getRoom(int row, int col) {
+        return rooms[row][col];
+    }
 }

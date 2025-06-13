@@ -1,12 +1,14 @@
 package io.github.some_example_name.screens;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import io.github.some_example_name.Main;
-import io.github.some_example_name.Player;
+import io.github.some_example_name.*;
 import io.github.some_example_name.enemies.*;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.Gdx;
@@ -24,44 +26,94 @@ public class MapScreen implements Screen {
     public Enemy enemy;
     private Stage stage;
     private final Skin skin;
-
+    private final Texture backgroundTexture;
+    private final Texture backgroundTint;
+    private Map map;
+    private Table table;
 
     public MapScreen(Main game, Player player, Enemy enemy) {
         this.game = game;
         this.player = player;
         this.enemy = enemy;
+        this.map = new Map();
+
+        backgroundTexture = new Texture("Backgrounds/MapBackground.png");
+        backgroundTint = new Texture("Backgrounds/backgroundTint.png");
 
         skin = new Skin(Gdx.files.internal("button/Buttons.json"));
         stage = new Stage(new ScreenViewport());
 
-        Table table = new Table();
+        stage.addActor(new PauseMenuScreen(game, player, enemy).getPauseButton());
+
+        table = new Table();
         table.setFillParent(true);
         stage.addActor(table);
-        stage.addActor(new PauseMenuScreen(game, player, enemy).getPauseButton());
-        TextButton lootButton = new TextButton("Loot!", skin);
-        TextButton combatButton = new TextButton("Fight!", skin);
-        table.add(lootButton);
-        table.add(combatButton);
 
-        lootButton.addListener(e -> {
-            if (lootButton.isPressed()) {
-                game.setScreen(new LootScreen(game, player, enemy));
+        table.debug();
+
+        drawMapButtons();
+    }
+
+    public void drawMapButtons() {
+        table.clear();
+
+        for (int row = 0; row < Map.ROWS; row++) {
+            table.row();
+            for (int col = 0; col < Map.MAX_ROW_ROOMS; col++) {
+                Room room = map.getRoom(row, col);
+                if (room != null) {
+                    Button button = createRoomButton(room, row, col);
+                    table.add(button).pad(10).width(40).height(40);
+                } else {
+                    /// TODO: should add empty space for null rooms
+                    table.add().width(40).height(40);
+                }
             }
-            return false;
+        }
+    }
+
+    public Button createRoomButton(Room room, int row, int col) {
+        String roomStyle;
+        if (room instanceof LootRoom) {
+            roomStyle = "lootRoom";
+        } else if (room instanceof CombatRoom) {
+            roomStyle = "combatRoom";
+        } else {
+            /// temptorary use of boss room; room also doesnt switch to anything, its just empty
+            roomStyle = "bossRoom";
+        }
+
+        Button button = new Button(skin, roomStyle);
+
+        button.setUserObject(room);
+
+        button.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                Room clickedRoom = (Room) button.getUserObject();
+                switchToRoom(clickedRoom);
+            }
         });
 
-        combatButton.addListener(e -> {
-            if (combatButton.isPressed()) {
-                game.setScreen(new CombatScreen(game, player, enemy));
-            }
-            return false;
-        });
+        return button;
+    }
 
+    private void switchToRoom(Room room) {
+        if (room instanceof LootRoom) {
+            game.setScreen(new LootScreen(game, player, enemy));
+        } else if (room instanceof CombatRoom) {
+            game.setScreen(new CombatScreen(game, player, enemy));
+        } else {
+            System.out.println("Didnt switch!!!");
+        }
     }
 
     @Override
     public void render(float delta) {
-        ScreenUtils.clear(Color.BLACK);
+        ScreenUtils.clear(Color.WHITE);
+
+        drawRoom();
+
         game.viewport.apply();
         game.batch.setProjectionMatrix(game.viewport.getCamera().combined);
         game.batch.begin();
@@ -70,6 +122,15 @@ public class MapScreen implements Screen {
 
         stage.act(delta);
         stage.draw();
+    }
+
+    private void drawRoom() {
+        game.viewport.apply();
+        game.batch.setProjectionMatrix(game.viewport.getCamera().combined);
+        game.batch.begin();
+        game.batch.draw(backgroundTexture, 0, 0, game.getWorldWidth(), game.getWorldHeight());
+
+        game.batch.end();
     }
 
     @Override
