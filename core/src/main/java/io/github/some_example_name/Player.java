@@ -188,13 +188,95 @@ public class Player extends Entity
                 {
                     setSelectedTool(tmpCurrentSlot);
                     doPolearmAttack();
-                    //doMove();
-                    //System.out.println("I work!");
+                    doMove();
                 }
             });
         }
 
         return moveButtons;
+    }
+
+    public Table provideEquippedSlots()
+    {
+        Table equipTable = new Table();
+        Skin skin = new Skin(Gdx.files.internal("button/Buttons.json"));
+
+        //equipTable.setFillParent(true);
+        //equipTable.bottom().pad(15);
+        //equipTable.defaults().growX().padLeft(10).padRight(10).height(50);
+
+        //equipTable.setDebug(true);
+
+        for (int currentSlot = 0; currentSlot < EQUIP_SLOTS; currentSlot++)
+        {
+            if (equippedTools.getTool(currentSlot) == null)
+            {
+                TextButton blankButton = new TextButton(" ", skin);
+                blankButton.setDisabled(true);
+                equipTable.add(blankButton).uniform();
+                continue;
+            }
+
+            String toolName = equippedTools.getTool(currentSlot).getName();
+            TextButton moveButton = new TextButton(toolName, skin);
+            equipTable.add(moveButton).uniform();
+
+            final int tmpCurrentSlot = currentSlot;
+            moveButton.addListener(new ChangeListener()
+            {
+                @Override
+                public void changed(ChangeEvent event, Actor actor)
+                {
+                    equippedTools.moveOneInto(tmpCurrentSlot, inventory);
+                }
+            });
+        }
+
+        return equipTable;
+    }
+
+    public Table provideInventory()
+    {
+        Table inventoryTable = new Table();
+        Skin skin = new Skin(Gdx.files.internal("button/Buttons.json"));
+
+        //inventoryTable.setFillParent(true);
+        //inventoryTable.bottom().pad(15);
+        //inventoryTable.defaults().growX().padLeft(10).padRight(10).height(50);
+
+        //inventoryTable.setDebug(true);
+
+        for (int currentSlot = 0; currentSlot < INVENTORY_SLOTS; currentSlot++)
+        {
+            if (currentSlot > 0 && currentSlot % 5 == 0)
+            {
+                inventoryTable.row();
+            }
+
+            if (inventory.getTool(currentSlot) == null)
+            {
+                TextButton blankButton = new TextButton(" ", skin);
+                blankButton.setDisabled(true);
+                inventoryTable.add(blankButton).uniform();
+                continue;
+            }
+
+            String toolName = inventory.getTool(currentSlot).getName();
+            TextButton moveButton = new TextButton(toolName, skin);
+            inventoryTable.add(moveButton).uniform();
+
+            final int tmpCurrentSlot = currentSlot;
+            moveButton.addListener(new ChangeListener()
+            {
+                @Override
+                public void changed(ChangeEvent event, Actor actor)
+                {
+                    inventory.moveOneInto(tmpCurrentSlot, equippedTools);
+                }
+            });
+        }
+
+        return inventoryTable;
     }
 
     /**
@@ -228,15 +310,7 @@ public class Player extends Entity
 
     /// temp attack animation
     public void doPolearmAttack() throws PlayerException {
-        Tool actingTool = equippedTools.getTool(selectedTool);
-
-        if (actingTool == null)
-        {
-            throw new PlayerException("Trying to act on nothing!");
-        }
-
         performAnimation("GardenerPolearmAttack");
-        actingTool.execute(this, super.getTarget());
     }
 
     public void doArmMovement() {

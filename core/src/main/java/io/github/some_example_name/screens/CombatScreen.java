@@ -69,6 +69,20 @@ public class CombatScreen implements Screen {
             }
         });
 
+
+
+        Button inventoryButton = new Button(new Skin(Gdx.files.internal("button/Buttons.json")), "inventory");
+        inventoryButton.addListener(e ->
+        {
+            if (inventoryButton.isPressed())
+            {
+                game.setScreen(new InventoryScreen(game, player));
+            }
+            return false;
+        });
+        table.add(inventoryButton);
+
+
         stage.addActor(table);
     }
 
@@ -166,7 +180,7 @@ public class CombatScreen implements Screen {
         gameEndStage.draw();
 
         Table table = new Table();
-        TextButton claimReward = new TextButton("Return to main menu" ,new Skin(Gdx.files.internal("button/Buttons.json")));
+        TextButton claimReward = new TextButton("Return to game menu" ,new Skin(Gdx.files.internal("button/Buttons.json")));
         table.setFillParent(true);
         table.bottom().row();
         table.add(claimReward).pad(100).growX().height(60);

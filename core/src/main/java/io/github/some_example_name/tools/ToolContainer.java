@@ -100,13 +100,23 @@ public class ToolContainer
     /**Moves one Tool from container to different container.
      * @param containerIndex Tool to move out.
      * @param receiver Tool receiver.
-     * @return Where Tool was placed in receiver.
+     * @return Where Tool was placed in receiver or -1 if the tool
+     * was unable to be moved.
      */
     public int moveOneInto(int containerIndex, ToolContainer receiver)
     {
         Tool movingTool = this.moveOutside(containerIndex);
 
-        return receiver.moveInside(movingTool);
+        try
+        {
+            return receiver.moveInside(movingTool);
+        }
+        catch (ToolContainerException e)
+        {
+            System.out.println(e);
+            this.moveInside(containerIndex, movingTool);
+            return -1;
+        }
     }
     /**Moves one Tool from container to specific slot in different container.
      * @param containerIndex Tool to move out.
@@ -117,7 +127,15 @@ public class ToolContainer
     {
         Tool movingTool = this.moveOutside(containerIndex);
 
-        receiver.moveInside(receiverIndex, movingTool);
+        try
+        {
+            receiver.moveInside(receiverIndex, movingTool);
+        }
+        catch (ToolContainerException e)
+        {
+            System.out.println(e);
+            this.moveInside(containerIndex, movingTool);
+        }
     }
 
 
