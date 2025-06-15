@@ -48,7 +48,7 @@ public class MapScreen implements Screen {
         table.setFillParent(true);
         stage.addActor(table);
 
-        table.debug();
+        //table.debug();
 
         drawMapButtons();
     }

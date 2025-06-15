@@ -3,10 +3,9 @@ package io.github.some_example_name.screens;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import io.github.some_example_name.CombatRoom;
@@ -25,8 +24,6 @@ public class CombatScreen implements Screen {
     private final Stage gameEndStage;
     private final Texture backgroundTexture;
     private final Texture backgroundTint;
-    //private final Texture victory; //couldnt get png
-    private final Texture defeat;
 
     public CombatScreen(Main game, Player player, Enemy enemy) {
         this.game = game;
@@ -36,7 +33,6 @@ public class CombatScreen implements Screen {
 
         backgroundTexture = new Texture("Backgrounds/combatbg_temp_red.png");
         backgroundTint = new Texture("Backgrounds/backgroundTint.png");
-        defeat = new Texture("other/Defeat_temp.png");
 
         player.setupAnimations();
         /// will have to change based on weapon type
@@ -53,8 +49,9 @@ public class CombatScreen implements Screen {
         Table table = new Table();
         table.top().left().setFillParent(true);
         table.add(new PauseMenuScreen(game, player, enemy, 2).getPauseButton()).size(40, 40).pad(10);
-        Button inventoryButton =new Button(new Skin(Gdx.files.internal("button/Buttons.json")), "inventory");
+        //Button inventoryButton =new Button(new Skin(Gdx.files.internal("button/Buttons.json")), "inventory");
 
+        /*
         inventoryButton.addListener(e ->
         {
             if (inventoryButton.isPressed())
@@ -65,6 +62,7 @@ public class CombatScreen implements Screen {
         });
 
         table.add(inventoryButton);
+        */
         stage.addActor(table);
     }
 
@@ -77,7 +75,6 @@ public class CombatScreen implements Screen {
 
         backgroundTexture = new Texture("Backgrounds/Combat.png");
         backgroundTint = new Texture("Backgrounds/backgroundTint.png");
-        defeat = new Texture("other/Defeat_temp.png");
 
         player.setupAnimations();
         /// will have to change based on weapon type
@@ -94,8 +91,9 @@ public class CombatScreen implements Screen {
         Table table = new Table();
         table.top().left().setFillParent(true);
         table.add(new PauseMenuScreen(game, player, enemy, 2).getPauseButton()).size(40, 40).pad(10);
-        Button inventoryButton = new Button(new Skin(Gdx.files.internal("button/Buttons.json")), "inventory");
+        //Button inventoryButton = new Button(new Skin(Gdx.files.internal("button/Buttons.json")), "inventory");
 
+        /*
         inventoryButton.addListener(e ->
         {
             if (inventoryButton.isPressed())
@@ -106,6 +104,7 @@ public class CombatScreen implements Screen {
         });
 
         table.add(inventoryButton);
+         */
         stage.addActor(table);
     }
 
@@ -173,17 +172,17 @@ public class CombatScreen implements Screen {
         game.batch.begin();
         game.batch.draw(backgroundTint, 0, 0, game.getWorldWidth(), game.getWorldHeight());
         //TODO: change to item frame + reward item and change to victory
-        game.batch.draw(defeat, 1, 2.5f, 6, 2);
         game.batch.end();
 
-        gameEndStage.act();
-        gameEndStage.draw();
-
         Table table = new Table();
-        TextButton claimReward = new TextButton("Claim reward" ,new Skin(Gdx.files.internal("button/Buttons.json")));
         table.setFillParent(true);
         table.bottom().row();
+
+        table.add(drawTextField("Victory!", "victory")).width(400).height(100).padBottom(20).row();
+
+        TextButton claimReward = new TextButton("Claim reward" ,new Skin(Gdx.files.internal("button/Buttons.json")));
         table.add(claimReward).pad(100).growX().height(60);
+
         gameEndStage.addActor(table);
 
         claimReward.addListener(e -> {
@@ -194,6 +193,9 @@ public class CombatScreen implements Screen {
             }
             return false;
         });
+
+        gameEndStage.act();
+        gameEndStage.draw();
     }
 
     private void drawDefeatScreen() {
@@ -204,16 +206,15 @@ public class CombatScreen implements Screen {
         game.batch.begin();
         game.batch.draw(backgroundTint, 0, 0, game.getWorldWidth(), game.getWorldHeight());
         //TODO: change to item frame + reward item and change to victory
-        game.batch.draw(defeat, 1, 2.5f, 6, 2);
         game.batch.end();
 
-        gameEndStage.act();
-        gameEndStage.draw();
-
         Table table = new Table();
-        TextButton returnToMenu = new TextButton("Return to main menu" ,new Skin(Gdx.files.internal("button/Buttons.json")));
         table.setFillParent(true);
         table.bottom().row();
+
+        table.add(drawTextField("Defeat", "defeat")).width(400).height(100).padBottom(20).row();
+
+        TextButton returnToMenu = new TextButton("Return to main menu" ,new Skin(Gdx.files.internal("button/Buttons.json")));
         table.add(returnToMenu).pad(100).growX().height(60);
         gameEndStage.addActor(table);
 
@@ -223,6 +224,15 @@ public class CombatScreen implements Screen {
             }
             return false;
         });
+
+        gameEndStage.act();
+        gameEndStage.draw();
+    }
+
+    public TextField drawTextField(String message, String style) {
+        TextField textField = new TextField(message, new Skin(Gdx.files.internal("button/Buttons.json")), style);
+        textField.setAlignment(Align.center);
+        return textField;
     }
 
     @Override public void resize(int width, int height) {

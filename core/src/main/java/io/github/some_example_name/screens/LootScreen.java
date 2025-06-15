@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import io.github.some_example_name.Animations;
@@ -25,8 +26,6 @@ public class LootScreen implements Screen {
     private final Texture chestTexture;
     boolean chestOpen = false;
 
-    private final Texture temporary;
-
     private Animations chestAnimations;
 
     public LootScreen(Main game, Player player) {
@@ -42,7 +41,6 @@ public class LootScreen implements Screen {
         chestTexture = new Texture("other/Chest.png");
         //something to act as the item frame
         //TODO: item frame, reward item icon on it
-        temporary = new Texture("other/Defeat_temp.png");
 
         player.setupAnimations();
 
@@ -109,17 +107,17 @@ public class LootScreen implements Screen {
         game.batch.begin();
         game.batch.draw(backgroundTint, 0, 0, game.getWorldWidth(), game.getWorldHeight());
         //TODO: change to item frame + reward item
-        game.batch.draw(temporary, 1, 2.5f, 6, 2);
         game.batch.end();
 
-        rewardStage.act();
-        rewardStage.draw();
-
         Table table = new Table();
-        TextButton claimReward = new TextButton("Claim reward" ,new Skin(Gdx.files.internal("button/Buttons.json")));
         table.setFillParent(true);
-        table.bottom().row();
+        table.center().top().padTop(150);
+
+        table.add(drawTextField("Reward!", "victory")).width(400).height(100).padBottom(20).row();
+
+        TextButton claimReward = new TextButton("Claim reward" ,new Skin(Gdx.files.internal("button/Buttons.json")));
         table.add(claimReward).pad(100).growX().height(60);
+
         rewardStage.addActor(table);
 
         claimReward.addListener(e -> {
@@ -130,6 +128,15 @@ public class LootScreen implements Screen {
             }
             return false;
         });
+
+        rewardStage.act();
+        rewardStage.draw();
+    }
+
+    public TextField drawTextField(String message, String style) {
+        TextField textField = new TextField(message, new Skin(Gdx.files.internal("button/Buttons.json")), style);
+        textField.setAlignment(Align.center);
+        return textField;
     }
 
     @Override public void resize(int width, int height) {
