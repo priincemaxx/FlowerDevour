@@ -24,31 +24,30 @@ public class MainMenuScreen implements Screen {
     private final Texture background;
     private final SpriteBatch batch;
 
-    public MainMenuScreen(Main game, Player player, Enemy enemy) {
+    public MainMenuScreen(Main game, Player player) {
         this.game = game;
         this.player = player;
-        this.enemy = enemy;
 
         this.stage = new Stage(new ScreenViewport());
-
         skin = new Skin(Gdx.files.internal("button/Buttons.json"));
-
         background = new Texture(Gdx.files.internal("Backgrounds/MainMenuBackground.png"));
         batch = new SpriteBatch();
 
         Table table = new Table();
         table.setFillParent(true);
         stage.addActor(table);
-
         TextButton startButton = new TextButton("Start", skin);
         TextButton exitButton = new TextButton("Exit", skin);
-
-        table.add(startButton).pad(10).row();
-        table.add(exitButton).pad(10);
+        //table.defaults().pad(50).height(50).width(150);
+        table.add(startButton).pad(50).height(50).width(200).uniform();
+        table.row();
+        table.add(exitButton).pad(20).height(50).width(200).uniform();
 
         startButton.addListener(e -> {
             if (startButton.isPressed()) {
-                game.setScreen(new MapScreen(game, player, enemy));
+                //reset health every time new game is started
+                player.setHealth(player.getMaxHealth());
+                game.setScreen(new MapScreen(game, player));
             }
             return false;
         });

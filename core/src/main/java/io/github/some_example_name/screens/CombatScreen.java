@@ -4,14 +4,12 @@ import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.actions.DelayAction;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import io.github.some_example_name.CombatRoom;
-import io.github.some_example_name.GameMaster;
 import io.github.some_example_name.Main;
 import io.github.some_example_name.Player;
 import io.github.some_example_name.enemies.Enemy;
@@ -50,33 +48,13 @@ public class CombatScreen implements Screen {
         stage.addActor(player.provideMoveButtons(enemy.getTurnOver()));
         player.setTarget(enemy);
         enemy.setTarget(player);
-
         stage.addActor(new PauseMenuScreen(game, player, enemy, 2).getPauseButton());
-
 
         Table table = new Table();
         table.top().left().setFillParent(true);
         table.add(new PauseMenuScreen(game, player, enemy, 2).getPauseButton()).size(40, 40).pad(10);
-
-        /// test button, temporary
-        Button test = new Button(new Skin(Gdx.files.internal("button/Buttons.json")), "combatRoom");
-        table.add(test).size(55, 55).pad(10);
-
-        test.addListener(new ChangeListener()
-        {
-            @Override
-            public void changed(ChangeEvent event, Actor actor)
-            {
-                enemy.animateAttack();
-                enemy.doMove();
-                /// temporary player damage
-                player.animateTakePolearmDamage();
-            }
-        });
-        /// end of test button
-
-
         Button inventoryButton =new Button(new Skin(Gdx.files.internal("button/Buttons.json")), "inventory");
+
         inventoryButton.addListener(e ->
         {
             if (inventoryButton.isPressed())
@@ -85,9 +63,8 @@ public class CombatScreen implements Screen {
             }
             return false;
         });
+
         table.add(inventoryButton);
-
-
         stage.addActor(table);
     }
 
@@ -98,7 +75,7 @@ public class CombatScreen implements Screen {
         enemy = combatRoom.getRandomEnemy();
         enemy.setTurnOver(true);
 
-        backgroundTexture = new Texture("Backgrounds/combatbg_temp_red.png");
+        backgroundTexture = new Texture("Backgrounds/Combat.png");
         backgroundTint = new Texture("Backgrounds/backgroundTint.png");
         defeat = new Texture("other/Defeat_temp.png");
 
@@ -112,15 +89,13 @@ public class CombatScreen implements Screen {
         stage.addActor(player.provideMoveButtons(enemy.getTurnOver()));
         player.setTarget(enemy);
         enemy.setTarget(player);
-
         stage.addActor(new PauseMenuScreen(game, player, enemy, 2).getPauseButton());
-
 
         Table table = new Table();
         table.top().left().setFillParent(true);
         table.add(new PauseMenuScreen(game, player, enemy, 2).getPauseButton()).size(40, 40).pad(10);
-
         Button inventoryButton = new Button(new Skin(Gdx.files.internal("button/Buttons.json")), "inventory");
+
         inventoryButton.addListener(e ->
         {
             if (inventoryButton.isPressed())
@@ -129,9 +104,8 @@ public class CombatScreen implements Screen {
             }
             return false;
         });
+
         table.add(inventoryButton);
-
-
         stage.addActor(table);
     }
 
@@ -182,10 +156,10 @@ public class CombatScreen implements Screen {
 
         if(player.isDead()) {
             //TODO: player death animation
-        } else player.draw(game.batch, 1.1f, 2.1f, 3f, 3.4f);
+        } else player.draw(game.batch, 1.1f, 2.2f, 3f, 3.4f);
         if(enemy.isDead()) {
             //TODO: enemy death animation
-        } else enemy.draw(game.batch, 4.1f, 2.1f, 3f, 3.4f);
+        } else enemy.draw(game.batch, 4.1f, 2.2f, 3f, 3.4f);
 
         game.batch.end();
     }
@@ -216,7 +190,7 @@ public class CombatScreen implements Screen {
             if (claimReward.isPressed()) {
                 //TODO: add reward item to inventory
                 //maybe another popup/animation for "claimed!" or smthn to delay return to map
-                game.setScreen(new MapScreen(game, player, enemy));
+                game.setScreen(new MapScreen(game, player));
             }
             return false;
         });
@@ -237,15 +211,15 @@ public class CombatScreen implements Screen {
         gameEndStage.draw();
 
         Table table = new Table();
-        TextButton claimReward = new TextButton("Return to game menu" ,new Skin(Gdx.files.internal("button/Buttons.json")));
+        TextButton returnToMenu = new TextButton("Return to main menu" ,new Skin(Gdx.files.internal("button/Buttons.json")));
         table.setFillParent(true);
         table.bottom().row();
-        table.add(claimReward).pad(100).growX().height(60);
+        table.add(returnToMenu).pad(100).growX().height(60);
         gameEndStage.addActor(table);
 
-        claimReward.addListener(e -> {
-            if (claimReward.isPressed()) {
-                game.setScreen(new MainMenuScreen(game, player, enemy));
+        returnToMenu.addListener(e -> {
+            if (returnToMenu.isPressed()) {
+                game.setScreen(new MainMenuScreen(game, player));
             }
             return false;
         });
@@ -267,9 +241,9 @@ public class CombatScreen implements Screen {
 
     @Override public void dispose() {
         backgroundTexture.dispose();
+        backgroundTint.dispose();
         stage.dispose();
         gameEndStage.dispose();
-        backgroundTint.dispose();
     }
 
 }

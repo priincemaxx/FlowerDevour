@@ -10,8 +10,6 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import io.github.some_example_name.Animations;
 import io.github.some_example_name.Main;
 import io.github.some_example_name.Player;
-import io.github.some_example_name.enemies.Enemy;
-import io.github.some_example_name.tools.ToolContainer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,8 +18,6 @@ import java.util.Map;
 public class LootScreen implements Screen {
     public Main game;
     public Player player;
-    public Enemy enemy;
-    private ToolContainer chest;
     private final Stage stage;
     private final Stage rewardStage;
     private final Texture backgroundTexture;
@@ -33,16 +29,15 @@ public class LootScreen implements Screen {
 
     private Animations chestAnimations;
 
-    public LootScreen(Main game, Player player, Enemy enemy) {
+    public LootScreen(Main game, Player player) {
         this.game = game;
         this.player = player;
-        this.enemy = enemy;
 
         Map<String, Float> chestAnimationData = new HashMap<>();
         chestAnimationData.put("ChestOpen", 0.1f);
         chestAnimations = new Animations("atlas/ChestAtlas.atlas", chestAnimationData);
 
-        backgroundTexture = new Texture("Backgrounds/lootbg_temp.png");
+        backgroundTexture = new Texture("Backgrounds/Loot.png");
         backgroundTint = new Texture("Backgrounds/backgroundTint.png");
         chestTexture = new Texture("other/Chest.png");
         //something to act as the item frame
@@ -52,7 +47,7 @@ public class LootScreen implements Screen {
         player.setupAnimations();
 
         stage = new Stage(new ScreenViewport());
-        stage.addActor(new PauseMenuScreen(game, player, enemy,3).getPauseButton());
+        stage.addActor(new PauseMenuScreen(game, player,3).getPauseButton());
 
         TextButton openChestButton = new TextButton("Open!" ,new Skin(Gdx.files.internal("button/Buttons.json")));
         Table chestTable = new Table();
@@ -65,6 +60,7 @@ public class LootScreen implements Screen {
             if (openChestButton.isPressed() && !chestOpen) {
                 chestOpen = true;
                 chestAnimations.performAnimation("ChestOpen");
+                player.animateArmMovement();
             }
             return false;
         });
@@ -80,38 +76,27 @@ public class LootScreen implements Screen {
     @Override
     public void render(float delta) {
         ScreenUtils.clear(Color.WHITE);
-
         player.update(delta);
         drawRoom();
-
         stage.act();
         stage.draw();
-
         if(chestOpen) {
-            player.animateArmMovement();
             chestAnimations.update(delta);
-            //TODO: animation delay
-            if (chestAnimations.isCurrentAnimationFinished()) {
-                drawRewardScreen();
-            }
+            if (player.isAnimationFinished()) { drawRewardScreen(); }
         }
-
     }
 
     private void drawRoom() {
         game.viewport.apply();
         game.batch.setProjectionMatrix(game.viewport.getCamera().combined);
         game.batch.begin();
-
         game.batch.draw(backgroundTexture, 0, 0, game.getWorldWidth(), game.getWorldHeight());
         player.draw(game.batch, 1.1f, 2.2f, 3f, 3.4f);
-
         if (chestOpen) {
             chestAnimations.draw(game.batch, 4.1f, 2.2f, 3f, 3.4f);
         } else {
             game.batch.draw(chestTexture, 4.1f, 2.2f, 3f, 3.4f);
         }
-
         game.batch.end();
     }
 
@@ -141,7 +126,7 @@ public class LootScreen implements Screen {
             if (claimReward.isPressed()) {
                 //TODO: add reward item to inventory
                 //maybe another popup/animation for "claimed!" or smthn to delay return to map
-                game.setScreen(new MapScreen(game, player, enemy));
+                game.setScreen(new MapScreen(game, player));
             }
             return false;
         });
@@ -163,7 +148,10 @@ public class LootScreen implements Screen {
 
     @Override public void dispose() {
         backgroundTexture.dispose();
+        backgroundTint.dispose();
+        chestTexture.dispose();
         stage.dispose();
+        rewardStage.dispose();
     }
 
 }

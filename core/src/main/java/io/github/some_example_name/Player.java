@@ -28,7 +28,6 @@ public class Player extends Entity
     private ToolContainer inventory = new ToolContainer(INVENTORY_SLOTS);
     private PassiveContainer passives = new PassiveContainer(MAX_PASSIVES);
     private int selectedTool = 0;
-    //private boolean turnOver = false;
 
     private double damageModifier = 1;
 
@@ -300,10 +299,10 @@ public class Player extends Entity
      * @param batch - spritebatch of screen
      */
     public void provideHealthBar(SpriteBatch batch) {
-        batch.draw(new Texture("other/barborder_temp1.png"), 1.25f, 4.65f, 2.5f, 0.2f);
+        batch.draw(new Texture("other/barborder_temp1.png"), 1.25f, 4.75f, 2.5f, 0.2f);
         float maxWidth = 2.4f;
         float width = (float) getHealth() /getMaxHealth() * maxWidth;
-        batch.draw(new Texture("other/healthBar.png"), 1.3f, 4.7f, width, 0.1f);
+        batch.draw(new Texture("other/healthBar.png"), 1.3f, 4.8f, width, 0.1f);
     }
 
     /// animation testing

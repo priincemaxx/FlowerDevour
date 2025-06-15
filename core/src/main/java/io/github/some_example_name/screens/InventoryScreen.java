@@ -12,7 +12,6 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import io.github.some_example_name.Main;
 import io.github.some_example_name.Player;
 
-import static java.lang.Thread.sleep;
 
 public class InventoryScreen implements Screen
 {
@@ -111,6 +110,7 @@ public class InventoryScreen implements Screen
     @Override
     public void dispose()
     {
-
+        backgroundTexture.dispose();
+        stage.dispose();
     }
 }

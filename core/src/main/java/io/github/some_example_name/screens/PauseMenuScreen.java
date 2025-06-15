@@ -30,7 +30,18 @@ public class PauseMenuScreen implements Screen {
 
         skin = new Skin(Gdx.files.internal("button/Buttons.json"));
 
-        background = new Texture(Gdx.files.internal("Backgrounds/backgroundTint.png"));
+        background = new Texture(Gdx.files.internal("Backgrounds/Pause.png"));
+    }
+    public PauseMenuScreen(Main game, Player player, int roomId) {
+        this.game = game;
+        this.player = player;
+        this.roomId = roomId;
+
+        this.stage = new Stage(new ScreenViewport());
+
+        skin = new Skin(Gdx.files.internal("button/Buttons.json"));
+
+        background = new Texture(Gdx.files.internal("Backgrounds/Pause.png"));
 
     }
 
@@ -79,15 +90,14 @@ public class PauseMenuScreen implements Screen {
         TextButton backToMenu = new TextButton("Exit to main menu" ,new Skin(Gdx.files.internal("button/Buttons.json")));
         TextButton continueGame = new TextButton("Continue" ,new Skin(Gdx.files.internal("button/Buttons.json")));
         table.setFillParent(true);
-        table.bottom().row();
-        table.add(backToMenu).pad(100).growX().height(60).uniform();
+        table.add(continueGame).pad(50).growX().height(60).uniform();
         table.row();
-        table.add(continueGame).pad(100).growX().height(60).uniform();
+        table.add(backToMenu).pad(50).growX().height(60).uniform();
         stage.addActor(table);
 
         backToMenu.addListener(e -> {
             if (backToMenu.isPressed()) {
-                game.setScreen(new MainMenuScreen(game, player, enemy));
+                game.setScreen(new MainMenuScreen(game, player));
             }
             return false;
         });
@@ -95,11 +105,11 @@ public class PauseMenuScreen implements Screen {
             if (continueGame.isPressed()) {
                 switch(roomId){
                     //map
-                    case 1: game.setScreen(new MapScreen(game, player, enemy)); break;
+                    case 1: game.setScreen(new MapScreen(game, player)); break;
                     //combat
                     case 2: game.setScreen(new CombatScreen(game, player, enemy)); break;
                     //loot
-                    case 3: game.setScreen(new LootScreen(game, player, enemy)); break;
+                    case 3: game.setScreen(new LootScreen(game, player)); break;
                 }
 
             }

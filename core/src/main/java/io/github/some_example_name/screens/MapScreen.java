@@ -31,10 +31,9 @@ public class MapScreen implements Screen {
     private Map map;
     private Table table;
 
-    public MapScreen(Main game, Player player, Enemy enemy) {
+    public MapScreen(Main game, Player player) {
         this.game = game;
         this.player = player;
-        this.enemy = enemy;
         this.map = new Map();
 
         backgroundTexture = new Texture("Backgrounds/MapBackground.png");
@@ -43,7 +42,7 @@ public class MapScreen implements Screen {
         skin = new Skin(Gdx.files.internal("button/Buttons.json"));
         stage = new Stage(new ScreenViewport());
 
-        stage.addActor(new PauseMenuScreen(game, player, enemy, 1).getPauseButton());
+        stage.addActor(new PauseMenuScreen(game, player, 1).getPauseButton());
 
         table = new Table();
         table.setFillParent(true);
@@ -100,7 +99,7 @@ public class MapScreen implements Screen {
 
     private void switchToRoom(Room room) {
         if (room instanceof LootRoom) {
-            game.setScreen(new LootScreen(game, player, enemy));
+            game.setScreen(new LootScreen(game, player));
         } else if (room instanceof CombatRoom) {
             //game.setScreen(new CombatScreen(game, player, enemy));
             game.setScreen(new CombatScreen(game, player));
