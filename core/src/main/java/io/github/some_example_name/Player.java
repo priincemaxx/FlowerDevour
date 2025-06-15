@@ -28,6 +28,7 @@ public class Player extends Entity
     private ToolContainer inventory = new ToolContainer(INVENTORY_SLOTS);
     private PassiveContainer passives = new PassiveContainer(MAX_PASSIVES);
     private int selectedTool = 0;
+    //private boolean turnOver = false;
 
     private double damageModifier = 1;
 
@@ -82,6 +83,8 @@ public class Player extends Entity
     {
         return damageModifier;
     }
+
+
 
     /**
      * Equips tool to first empty equip slot.
@@ -157,13 +160,15 @@ public class Player extends Entity
         animatePolearmAttack();
 
         actingTool.execute(this, super.getTarget());
+
+        setTurnOver(true);
     }
 
 
     /** Provides buttons that do the associated action.
      * @return Table with buttons to be added to a stage.
      */
-    public Table provideMoveButtons()
+    public Table provideMoveButtons(boolean enemyTurnOver)
     {
         Table moveButtons = new Table();
         Skin skin = new Skin(Gdx.files.internal("button/Buttons.json"));
@@ -194,8 +199,10 @@ public class Player extends Entity
                 @Override
                 public void changed(ChangeEvent event, Actor actor)
                 {
-                    setSelectedTool(tmpCurrentSlot);
-                    doMove();
+                    if(enemyTurnOver) {
+                        setSelectedTool(tmpCurrentSlot);
+                        doMove();
+                    }
                 }
             });
         }

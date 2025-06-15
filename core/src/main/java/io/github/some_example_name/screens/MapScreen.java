@@ -102,7 +102,8 @@ public class MapScreen implements Screen {
         if (room instanceof LootRoom) {
             game.setScreen(new LootScreen(game, player, enemy));
         } else if (room instanceof CombatRoom) {
-            game.setScreen(new CombatScreen(game, player, enemy));
+            //game.setScreen(new CombatScreen(game, player, enemy));
+            game.setScreen(new CombatScreen(game, player));
         } else {
             System.out.println("Didnt switch!!!");
         }

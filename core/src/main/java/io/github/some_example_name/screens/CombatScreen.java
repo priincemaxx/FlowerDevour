@@ -4,6 +4,7 @@ import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.actions.DelayAction;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -25,9 +26,7 @@ public class CombatScreen implements Screen {
     private final Stage stage;
     private final Stage gameEndStage;
     private final Texture backgroundTexture;
-    //perhaps tint should be moved to game master
     private final Texture backgroundTint;
-    //private final Texture enemyTexture;
     //private final Texture victory; //couldnt get png
     private final Texture defeat;
 
@@ -35,20 +34,20 @@ public class CombatScreen implements Screen {
         this.game = game;
         this.player = player;
         this.enemy = enemy;
+        enemy.setTurnOver(true);
 
         backgroundTexture = new Texture("Backgrounds/combatbg_temp_red.png");
         backgroundTint = new Texture("Backgrounds/backgroundTint.png");
         defeat = new Texture("other/Defeat_temp.png");
-        //enemyTexture = new Texture("Enemy/Dandelion/Idle/Idle1.png");
 
         player.setupAnimations();
         /// will have to change based on weapon type
         player.setDefaultAnimation("GardenerPolearmIdle");
-        enemy.setupAnimations();
+        enemy.setupAnimations("Dandelion Trooper");
 
         gameEndStage = new Stage(new ScreenViewport());
         stage = new Stage(new ScreenViewport());
-        stage.addActor(player.provideMoveButtons());
+        stage.addActor(player.provideMoveButtons(enemy.getTurnOver()));
         player.setTarget(enemy);
         enemy.setTarget(player);
 
@@ -76,6 +75,50 @@ public class CombatScreen implements Screen {
         });
         /// end of test button
 
+
+        Button inventoryButton =new Button(new Skin(Gdx.files.internal("button/Buttons.json")), "inventory");
+        inventoryButton.addListener(e ->
+        {
+            if (inventoryButton.isPressed())
+            {
+                game.setScreen(new InventoryScreen(game, player));
+            }
+            return false;
+        });
+        table.add(inventoryButton);
+
+
+        stage.addActor(table);
+    }
+
+    public CombatScreen(Main game, Player player) {
+        combatRoom = new CombatRoom();
+        this.game = game;
+        this.player = player;
+        enemy = combatRoom.getRandomEnemy();
+        enemy.setTurnOver(true);
+
+        backgroundTexture = new Texture("Backgrounds/combatbg_temp_red.png");
+        backgroundTint = new Texture("Backgrounds/backgroundTint.png");
+        defeat = new Texture("other/Defeat_temp.png");
+
+        player.setupAnimations();
+        /// will have to change based on weapon type
+        player.setDefaultAnimation("GardenerPolearmIdle");
+        enemy.setupAnimations(enemy.getName());
+
+        gameEndStage = new Stage(new ScreenViewport());
+        stage = new Stage(new ScreenViewport());
+        stage.addActor(player.provideMoveButtons(enemy.getTurnOver()));
+        player.setTarget(enemy);
+        enemy.setTarget(player);
+
+        stage.addActor(new PauseMenuScreen(game, player, enemy, 2).getPauseButton());
+
+
+        Table table = new Table();
+        table.top().left().setFillParent(true);
+        table.add(new PauseMenuScreen(game, player, enemy, 2).getPauseButton()).size(40, 40).pad(10);
 
         Button inventoryButton = new Button(new Skin(Gdx.files.internal("button/Buttons.json")), "inventory");
         inventoryButton.addListener(e ->
@@ -111,10 +154,18 @@ public class CombatScreen implements Screen {
         if(enemy.isDead()) {
             //TODO: delay for animation
             drawVictoryScreen();
+            player.setTurnOver(false);
         }
         if(player.isDead()) {
             //TODO: delay
             drawDefeatScreen();
+        }
+        if(player.getTurnOver() && player.isAnimationFinished()){
+            enemy.setTurnOver(true);
+            enemy.animateAttack();
+            enemy.doMove(player);
+            player.animateTakePolearmDamage();
+            player.setTurnOver(false);
         }
         // Debug info
         System.out.println("Player health: " + player.getHealth());

@@ -16,6 +16,7 @@ public class Entity implements Serializable
     private String name;
     private Entity target;
     private Texture texture; //should later replace with TextureRegion class
+    private boolean turnOver;
 
     protected Animations animations;
     protected Animation<TextureRegion> currentAnimation;
@@ -114,15 +115,18 @@ public class Entity implements Serializable
         this.texture = texture;
     }
 
+    public void setTurnOver(boolean value) {
+        turnOver = value;
+    }
+    public boolean getTurnOver() {
+        return turnOver;
+    }
+
     /**
      * Executes selected action on target.
      */
     public void doMove()
     {
-
-    }
-
-    public void provideHealthBar() {
 
     }
 
@@ -151,6 +155,11 @@ public class Entity implements Serializable
         if (animations != null) {
             animations.performAnimation(animationName);
         }
+    }
+
+
+    public boolean isAnimationFinished() {
+        return animations.isCurrentAnimationFinished();
     }
 
     public void update(float delta) {

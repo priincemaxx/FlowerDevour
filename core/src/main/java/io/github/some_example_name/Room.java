@@ -2,7 +2,7 @@ package io.github.some_example_name;
 
 import com.badlogic.gdx.graphics.Texture;
 
-public class Room
+public class Room extends GameMaster
 {
     private String backgroundPath;
     //0 left path, MAX right path, else middle paths;

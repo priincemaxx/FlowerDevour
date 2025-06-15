@@ -5,6 +5,7 @@ package io.github.some_example_name.enemies;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 
 import com.badlogic.gdx.graphics.Texture;
@@ -12,6 +13,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import io.github.some_example_name.Animations;
 import io.github.some_example_name.Entity;
 import io.github.some_example_name.EntityException;
+import io.github.some_example_name.Player;
 import io.github.some_example_name.actions.BasicAction;
 
 public class Enemy extends Entity implements Serializable
@@ -62,7 +64,13 @@ public class Enemy extends Entity implements Serializable
     public void doMove()
     {
         move.setTarget(super.getTarget());
+        move.execute();
+    }
 
+    public void doMove(Player player)
+    {
+        move.setUser(player);
+        move.setTarget(super.getTarget());
         move.execute();
     }
 
@@ -77,14 +85,21 @@ public class Enemy extends Entity implements Serializable
         batch.draw(new Texture("other/healthBar.png"), 4.3f, 4.7f, width, 0.1f);
     }
 
-    public void setupAnimations() {
+    public void setupAnimations(String name) {
         Map<String, Float> animData = new HashMap<>();
         animData.put("Idle", 0.5f);
         animData.put("Attack", 0.08f);
         animData.put("Damage", 0.1f);
 
-        Animations enemyAnimations = new Animations("atlas/DandelionAtlas.atlas", animData);
-        setAnimations(enemyAnimations);
+        Animations enemyAnimations;
+        if(Objects.equals(name, "Dandelion Trooper")) {
+            enemyAnimations = new Animations("atlas/DandelionAtlas.atlas", animData);
+            setAnimations(enemyAnimations);
+        } else {
+            enemyAnimations = new Animations("atlas/DandelionAtlas.atlas", animData);
+            setAnimations(enemyAnimations);
+        }
+        //setAnimations(enemyAnimations);
         setDefaultAnimation("Idle");
     }
 
