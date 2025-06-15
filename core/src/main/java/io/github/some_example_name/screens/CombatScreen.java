@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import io.github.some_example_name.CombatRoom;
+import io.github.some_example_name.GameMaster;
 import io.github.some_example_name.Main;
 import io.github.some_example_name.Player;
 import io.github.some_example_name.enemies.Enemy;
@@ -51,12 +52,12 @@ public class CombatScreen implements Screen {
         player.setTarget(enemy);
         enemy.setTarget(player);
 
-        stage.addActor(new PauseMenuScreen(game, player, enemy).getPauseButton());
+        stage.addActor(new PauseMenuScreen(game, player, enemy, 2).getPauseButton());
 
 
         Table table = new Table();
         table.top().left().setFillParent(true);
-        table.add(new PauseMenuScreen(game, player, enemy).getPauseButton()).size(40, 40).pad(10);
+        table.add(new PauseMenuScreen(game, player, enemy, 2).getPauseButton()).size(40, 40).pad(10);
 
         /// test button, temporary
         Button test = new Button(new Skin(Gdx.files.internal("button/Buttons.json")), "combatRoom");

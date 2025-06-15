@@ -3,6 +3,7 @@ package io.github.some_example_name.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -19,6 +20,7 @@ public class InventoryScreen implements Screen
     Main game;
     Player player;
 
+    private final Texture backgroundTexture;
     final Skin skin;
     Stage stage;
 
@@ -29,6 +31,7 @@ public class InventoryScreen implements Screen
         this.game = game;
         this.player = player;
 
+        backgroundTexture = new Texture("Backgrounds/Inventory.png");
         skin = new Skin(Gdx.files.internal("button/Buttons.json"));
         stage = new Stage(new ScreenViewport());
 
@@ -59,7 +62,7 @@ public class InventoryScreen implements Screen
         game.viewport.apply();
         game.batch.setProjectionMatrix(game.viewport.getCamera().combined);
         game.batch.begin();
-
+        //game.batch.draw(backgroundTexture, 0, 0, game.getWorldWidth(), game.getWorldHeight());
         game.batch.end();
 
         stage.act(delta);

@@ -43,7 +43,7 @@ public class MapScreen implements Screen {
         skin = new Skin(Gdx.files.internal("button/Buttons.json"));
         stage = new Stage(new ScreenViewport());
 
-        stage.addActor(new PauseMenuScreen(game, player, enemy).getPauseButton());
+        stage.addActor(new PauseMenuScreen(game, player, enemy, 1).getPauseButton());
 
         table = new Table();
         table.setFillParent(true);
