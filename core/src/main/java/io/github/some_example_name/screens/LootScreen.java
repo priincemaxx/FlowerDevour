@@ -47,7 +47,7 @@ public class LootScreen implements Screen
         player.setupAnimations();
 
         stage = new Stage(new ScreenViewport());
-        stage.addActor(new PauseMenuScreen(game, player, 3).getPauseButton());
+        stage.addActor(new PauseMenuScreen(game, player, PauseMenuScreen.TO_LOOT).getPauseButton());
 
         TextButton openChestButton = new TextButton("Open!", new Skin(Gdx.files.internal("button/Buttons.json")));
         Table chestTable = new Table();

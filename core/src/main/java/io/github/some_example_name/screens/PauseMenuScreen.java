@@ -19,14 +19,20 @@ public class PauseMenuScreen implements Screen
     private final Stage stage;
     private final Skin skin;
     private final Texture background;
-    private int roomId;
+    private int returnCase;
 
-    public PauseMenuScreen(Main game, Player player, Enemy enemy, int roomId)
+    public static final int TO_MAP = 1;
+    public static final int TO_COMBAT = 2;
+    public static final int TO_LOOT = 3;
+
+
+
+    public PauseMenuScreen(Main game, Player player, Enemy enemy, int returnCase)
     {
         this.game = game;
         this.player = player;
         this.enemy = enemy;
-        this.roomId = roomId;
+        this.returnCase = returnCase;
 
         this.stage = new Stage(new ScreenViewport());
 
@@ -35,11 +41,11 @@ public class PauseMenuScreen implements Screen
         background = new Texture(Gdx.files.internal("Backgrounds/Pause.png"));
     }
 
-    public PauseMenuScreen(Main game, Player player, int roomId)
+    public PauseMenuScreen(Main game, Player player, int returnCase)
     {
         this.game = game;
         this.player = player;
-        this.roomId = roomId;
+        this.returnCase = returnCase;
 
         this.stage = new Stage(new ScreenViewport());
 
@@ -61,7 +67,7 @@ public class PauseMenuScreen implements Screen
         {
             if (pauseButton.isPressed())
             {
-                game.setScreen(new PauseMenuScreen(game, player, enemy, roomId));
+                game.setScreen(new PauseMenuScreen(game, player, enemy, returnCase));
             }
             return false;
         });
@@ -116,18 +122,15 @@ public class PauseMenuScreen implements Screen
         {
             if (continueGame.isPressed())
             {
-                switch (roomId)
+                switch (returnCase)
                 {
-                    //map
-                    case 1:
+                    case TO_MAP:
                         game.setScreen(new MapScreen(game, player));
                         break;
-                    //combat
-                    case 2:
+                    case TO_COMBAT:
                         game.setScreen(new CombatScreen(game, player, enemy));
                         break;
-                    //loot
-                    case 3:
+                    case TO_LOOT:
                         game.setScreen(new LootScreen(game, player));
                         break;
                 }

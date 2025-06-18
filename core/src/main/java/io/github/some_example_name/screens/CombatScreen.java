@@ -46,11 +46,11 @@ public class CombatScreen implements Screen
         stage.addActor(player.provideMoveButtons(enemy.getTurnOver()));
         player.setTarget(enemy);
         enemy.setTarget(player);
-        stage.addActor(new PauseMenuScreen(game, player, enemy, 2).getPauseButton());
+        stage.addActor(new PauseMenuScreen(game, player, enemy, PauseMenuScreen.TO_COMBAT).getPauseButton());
 
         Table table = new Table();
         table.top().left().setFillParent(true);
-        table.add(new PauseMenuScreen(game, player, enemy, 2).getPauseButton()).size(40, 40).pad(10);
+        table.add(new PauseMenuScreen(game, player, enemy, PauseMenuScreen.TO_COMBAT).getPauseButton()).size(40, 40).pad(10);
         //Button inventoryButton =new Button(new Skin(Gdx.files.internal("button/Buttons.json")), "inventory");
 
         /*
@@ -89,11 +89,11 @@ public class CombatScreen implements Screen
         stage.addActor(player.provideMoveButtons(enemy.getTurnOver()));
         player.setTarget(enemy);
         enemy.setTarget(player);
-        stage.addActor(new PauseMenuScreen(game, player, enemy, 2).getPauseButton());
+        stage.addActor(new PauseMenuScreen(game, player, enemy, PauseMenuScreen.TO_COMBAT).getPauseButton());
 
         Table table = new Table();
         table.top().left().setFillParent(true);
-        table.add(new PauseMenuScreen(game, player, enemy, 2).getPauseButton()).size(40, 40).pad(10);
+        table.add(new PauseMenuScreen(game, player, enemy, PauseMenuScreen.TO_COMBAT).getPauseButton()).size(40, 40).pad(10);
         //Button inventoryButton = new Button(new Skin(Gdx.files.internal("button/Buttons.json")), "inventory");
 
         /*
