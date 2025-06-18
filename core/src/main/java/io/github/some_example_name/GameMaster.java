@@ -13,7 +13,7 @@ import java.util.Random;
 
 
 /**
- * Responsible for files and the actual game.
+ * Responsible for various game objects.
  * <p>
  * Game objects initialized from JSONs.
  * <p>
@@ -27,6 +27,9 @@ public class GameMaster
     static private ArrayList<PassiveItem> passives = initializePassives();
 
 
+    /**
+     * @return Reads enemies.JSON, turns it into an ArrayList and returns it.
+     */
     static public ArrayList<Enemy> initializeEnemies()
     {
         ArrayList<Enemy> enemies = new ArrayList<Enemy>();
@@ -45,6 +48,9 @@ public class GameMaster
         return enemies;
     }
 
+    /**
+     * @return Reads tools.JSON, turns it into an ArrayList and returns it.
+     */
     static public ArrayList<Tool> initializeTools()
     {
         ArrayList<Tool> tools = new ArrayList<Tool>();
@@ -63,6 +69,9 @@ public class GameMaster
         return tools;
     }
 
+    /**
+     * @return Reads passives.JSON, turns it into an ArrayList and returns it.
+     */
     static public ArrayList<PassiveItem> initializePassives()
     {
         ArrayList<PassiveItem> passives = new ArrayList<PassiveItem>();
