@@ -2,8 +2,8 @@ package io.github.some_example_name.passives;
 
 import io.github.some_example_name.Item;
 import io.github.some_example_name.Player;
-import java.io.Serializable;
 
+import java.io.Serializable;
 
 
 /**
@@ -26,7 +26,9 @@ public class PassiveItem extends Item implements Serializable
         super(name);
     }
 
-    /** Abstract method to do something when a passive is obtained.
+    /**
+     * Abstract method to do something when a passive is obtained.
+     *
      * @param owner the Player that got the item.
      */
     public void onGet(Player owner)

@@ -43,7 +43,9 @@ public class Map
     }
 
 
-    /**Adds Rooms to the map at the given row
+    /**
+     * Adds Rooms to the map at the given row
+     *
      * @param row Index of the row to add the Rooms to.
      */
     private void addRowRooms(int row)
@@ -66,7 +68,9 @@ public class Map
         }
     }
 
-    /**Adds paths to the Rooms in the specified row.
+    /**
+     * Adds paths to the Rooms in the specified row.
+     *
      * @param row Index of row with Rooms that will receive paths.
      */
     private void addRoomPaths(int row) //Row can't be the first row
@@ -90,7 +94,9 @@ public class Map
     }
 
 
-    /** Used to advance the Player through the Rooms of the map.
+    /**
+     * Used to advance the Player through the Rooms of the map.
+     *
      * @param index Index of path the player wishes to travel to.
      * @return The Room that the player has traveled to.
      * @throws MapException Throws when there isn't a path with the given index.

@@ -25,7 +25,7 @@ public class CombatRoom extends Room
     }
 
     /**
-     * @param enemy Enemy the player will encounter in this room.
+     * @param enemy  Enemy the player will encounter in this room.
      * @param reward The reward the player will get after defeating
      *               the enemy in this room.
      */

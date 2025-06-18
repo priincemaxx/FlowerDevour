@@ -1,6 +1,7 @@
 package io.github.some_example_name.actions;
 
 import io.github.some_example_name.Entity;
+
 import java.io.Serializable;
 
 /**

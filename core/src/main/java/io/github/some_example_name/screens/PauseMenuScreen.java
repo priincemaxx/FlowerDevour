@@ -27,9 +27,9 @@ public class PauseMenuScreen implements Screen
 
 
     /**
-     * @param game Mandatory parameter for Screen class.
-     * @param player Initialized player.
-     * @param enemy Optional. An initialized enemy.
+     * @param game       Mandatory parameter for Screen class.
+     * @param player     Initialized player.
+     * @param enemy      Optional. An initialized enemy.
      * @param returnCase A choice between TO_MAP, TO_COMBAT, TO_LOOT.
      */
     public PauseMenuScreen(Main game, Player player, Enemy enemy, int returnCase)
@@ -47,8 +47,8 @@ public class PauseMenuScreen implements Screen
     }
 
     /**
-     * @param game Mandatory parameter for Screen class.
-     * @param player Initialized player.
+     * @param game       Mandatory parameter for Screen class.
+     * @param player     Initialized player.
      * @param returnCase A choice between TO_MAP, TO_COMBAT, TO_LOOT.
      */
     public PauseMenuScreen(Main game, Player player, int returnCase)

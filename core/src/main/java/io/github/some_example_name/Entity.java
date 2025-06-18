@@ -1,6 +1,7 @@
 package io.github.some_example_name;
 
 import java.io.Serializable;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -115,7 +116,9 @@ public class Entity implements Serializable
         this.name = name;
     }
 
-    /** Mandatory to set up before using doMove()
+    /**
+     * Mandatory to set up before using doMove()
+     *
      * @param target The Entity that will be targeted.
      * @throws ActionException
      */
@@ -144,7 +147,8 @@ public class Entity implements Serializable
         return turnOver;
     }
 
-    /**Abstract method.
+    /**
+     * Abstract method.
      * Executes selected action on target.
      */
     public void doMove()
@@ -178,6 +182,7 @@ public class Entity implements Serializable
 
     /**
      * Performs animation once and goes back to default.
+     *
      * @param animationName Name of animation to perform.
      */
     public void performAnimation(String animationName)

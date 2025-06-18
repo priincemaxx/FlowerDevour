@@ -12,6 +12,7 @@ import io.github.some_example_name.screens.InventoryScreen;
 import io.github.some_example_name.tools.Tool;
 import io.github.some_example_name.tools.ToolContainer;
 import io.github.some_example_name.tools.ToolContainerException;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -134,8 +135,10 @@ public class Player extends Entity
         equippedTools.moveOneInto(equipSlotIndex, inventoryIndex, inventory);
     }
 
-    /**Rewards a Player with a new Tool.
+    /**
+     * Rewards a Player with a new Tool.
      * Tool is put into Player inventory.
+     *
      * @param reward The tool the Player is being rewarded with.
      * @return Returns index of where the reward was placed in inventory.
      */
@@ -144,8 +147,10 @@ public class Player extends Entity
         return inventory.moveInside(reward);
     }
 
-    /**Rewards a Player with a new PassiveItem.
+    /**
+     * Rewards a Player with a new PassiveItem.
      * PassiveItem is put int Player passives.
+     *
      * @param reward The PassiveItem the Player is being rewarded with.
      * @return Returns index of where the reward was placed in passives.
      */
@@ -178,7 +183,9 @@ public class Player extends Entity
         return passives.filledSlots();
     }
 
-    /**Executes the BasicAction of the current selected Tool from the equippedSlots on selected target Entity.
+    /**
+     * Executes the BasicAction of the current selected Tool from the equippedSlots on selected target Entity.
+     *
      * @throws PlayerException Throws if selected Tool is null.
      */
     public void doMove() throws PlayerException
@@ -252,10 +259,12 @@ public class Player extends Entity
         return moveButtons;
     }
 
-    /**Buttons to be used specifically in the InventoryScreen.
+    /**
+     * Buttons to be used specifically in the InventoryScreen.
      * <p>
      * Pressing one of these buttons will unequip the according Tool and move it
      * to the inventory.
+     *
      * @param inventoryScreen Mandatory parameter for updating buttons correctly.
      * @return Returns table to be added to a stage or table.
      */
@@ -299,10 +308,12 @@ public class Player extends Entity
         return equipTable;
     }
 
-    /**Buttons to be used specifically in the InventoryScreen.
+    /**
+     * Buttons to be used specifically in the InventoryScreen.
      * <p>
      * Pressing one of these buttons will equip the according Tool and move it
      * to equippedSlots.
+     *
      * @param inventoryScreen Mandatory parameter for updating buttons correctly.
      * @return Returns table to be added to a stage or table.
      */

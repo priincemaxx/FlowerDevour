@@ -40,8 +40,10 @@ public class Item implements Serializable
         this.name = name;
     }
 
-    /**Abstract method for Items that can do something.
-     * @param user Entity that owns the item.
+    /**
+     * Abstract method for Items that can do something.
+     *
+     * @param user   Entity that owns the item.
      * @param target Entity the item is affecting.
      */
     public void execute(Entity user, Entity target)
