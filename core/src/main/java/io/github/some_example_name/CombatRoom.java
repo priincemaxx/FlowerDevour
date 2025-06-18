@@ -1,14 +1,19 @@
 package io.github.some_example_name;
 
-//ROUGH ESTIMATE, ONLY FOR ARCHITECTURAL PURPOSES
 //Template for an enemy encounter in the map
 
 import io.github.some_example_name.enemies.Enemy;
 import io.github.some_example_name.tools.Tool;
 
-import java.util.Objects;
 
-
+/**
+ * This is an object that stores basic data for a combat room.
+ * <p>
+ * It stores an Enemy and sometimes a Tool to reward the Player
+ * with.
+ * <p>
+ * THAT'S IT!!!!!!!!!!!!
+ */
 public class CombatRoom extends Room
 {
     private Enemy enemy;
@@ -16,17 +21,27 @@ public class CombatRoom extends Room
 
     public CombatRoom()
     {
-
+        super();
     }
 
+    /**
+     * @param enemy Enemy the player will encounter in this room.
+     * @param reward The reward the player will get after defeating
+     *               the enemy in this room.
+     */
     public CombatRoom(Enemy enemy, Tool reward)
     {
+        super();
         setEnemy(enemy);
         setReward(reward);
     }
 
+    /**
+     * @param enemy Enemy the player will encounter in this room.
+     */
     public CombatRoom(Enemy enemy)
     {
+        super();
         setEnemy(enemy);
         setReward(null);
     }

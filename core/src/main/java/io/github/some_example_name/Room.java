@@ -1,7 +1,8 @@
 package io.github.some_example_name;
 
-import com.badlogic.gdx.graphics.Texture;
-
+/**
+ * Parent class for all rooms that a Player could enter.
+ */
 public class Room extends GameMaster
 {
     private String backgroundPath;

@@ -95,9 +95,9 @@ public class CombatScreen implements Screen
         Table table = new Table();
         table.top().left().setFillParent(true);
         table.add(new PauseMenuScreen(game, player, enemy, PauseMenuScreen.TO_COMBAT).getPauseButton()).size(40, 40).pad(10);
-        //Button inventoryButton = new Button(new Skin(Gdx.files.internal("button/Buttons.json")), "inventory");
+        /*Button inventoryButton = new Button(new Skin(Gdx.files.internal("button/Buttons.json")), "inventory");
 
-        /*
+
         inventoryButton.addListener(e ->
         {
             if (inventoryButton.isPressed())
@@ -107,8 +107,8 @@ public class CombatScreen implements Screen
             return false;
         });
 
-        table.add(inventoryButton);
-         */
+        table.add(inventoryButton);*/
+
         stage.addActor(table);
     }
 
