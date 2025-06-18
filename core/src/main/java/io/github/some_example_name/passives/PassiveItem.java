@@ -1,14 +1,14 @@
 package io.github.some_example_name.passives;
 
-//Template for an item the player can find
-//that passively helps the player.
-
-import io.github.some_example_name.Entity;
 import io.github.some_example_name.Item;
 import io.github.some_example_name.Player;
-
 import java.io.Serializable;
 
+
+
+/**
+ * Parent class for all passive items the player can find.
+ */
 public class PassiveItem extends Item implements Serializable
 {
     public PassiveItem()
@@ -26,6 +26,9 @@ public class PassiveItem extends Item implements Serializable
         super(name);
     }
 
+    /** Abstract method to do something when a passive is obtained.
+     * @param owner the Player that got the item.
+     */
     public void onGet(Player owner)
     {
 

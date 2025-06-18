@@ -1,15 +1,15 @@
 package io.github.some_example_name.tools;
 
-//ROUGH ESTIMATE, ONLY FOR ARCHITECTURAL PURPOSES
-//Template for a weapon style item.
-//Player will start off with some basic ones.
-
 import io.github.some_example_name.Entity;
 import io.github.some_example_name.Item;
 import io.github.some_example_name.actions.BasicAction;
-
 import java.io.Serializable;
 
+/**
+ * A basic Item with a BasicAction.
+ * <p>
+ * This is the main way for the Player to interact with enemies.
+ */
 public class Tool extends Item implements Serializable
 {
     private BasicAction move;
