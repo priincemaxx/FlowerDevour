@@ -96,14 +96,14 @@ public class Map
 
             if (type == 0)
             {
-                currentRoom = new CombatRoom(GameMaster.provideEnemy());
+                currentRoom = new CombatRoom(GameMaster.provideRandomEnemy());
             } else
             {
-                currentRoom = new CombatRoom(GameMaster.provideEnemy(), GameMaster.provideTool());
+                currentRoom = new CombatRoom(GameMaster.provideRandomEnemy(), GameMaster.provideRandomTool());
             }
         } else
         {
-            currentRoom = new LootRoom(GameMaster.providePassive());
+            currentRoom = new LootRoom(GameMaster.provideRandomPassive());
         }
 
         currentRoom.setPaths(possiblePaths);

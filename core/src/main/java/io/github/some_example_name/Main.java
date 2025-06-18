@@ -4,7 +4,6 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import io.github.some_example_name.actions.BasicAction;
-import io.github.some_example_name.enemies.Enemy;
 import io.github.some_example_name.screens.MainMenuScreen;
 import io.github.some_example_name.tools.Tool;
 
@@ -38,7 +37,7 @@ public class Main extends Game
     @Override
     public void create()
     {
-        player.rewardTool(GameMaster.provideTool());
+        player.rewardTool(GameMaster.provideRandomTool());
 
         batch = new SpriteBatch();
         viewport = new FillViewport(worldWidth, worldHeight);

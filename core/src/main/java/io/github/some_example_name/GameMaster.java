@@ -96,7 +96,7 @@ public class GameMaster
         return passives;
     }
 
-    static public Enemy provideEnemy()
+    static public Enemy provideRandomEnemy()
     {
         Random random = new Random();
 
@@ -105,7 +105,7 @@ public class GameMaster
         return new Enemy(enemies.get(index));
     }
 
-    static public Tool provideTool()
+    static public Tool provideRandomTool()
     {
         Random random = new Random();
 
@@ -114,7 +114,7 @@ public class GameMaster
         return new Tool(tools.get(index));
     }
 
-    static public PassiveItem providePassive()
+    static public PassiveItem provideRandomPassive()
     {
         Random random = new Random();
 

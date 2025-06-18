@@ -51,14 +51,16 @@ public class CombatRoom extends Room
         this.reward = reward;
     }
 
-    public Enemy getRandomEnemy()
+    public Enemy getRandomEnemy() //why call it "get random enemy" if you're getting a specific one???? also why is this here and not the GameMaster class????
     {
         Enemy enemy;
-        //loop to ensure we only get dandelion
+        //loop to ensure we only get dandelion //that is incredibly inefficient
         //will probably need something similar to select only boss
+
+        //wtf??? why???
         while (true)
         {
-            enemy = provideEnemy();
+            enemy = GameMaster.provideRandomEnemy();
             if (Objects.equals(enemy.getName(), "Dandelion Trooper"))
             {
                 return enemy;
