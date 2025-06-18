@@ -1,15 +1,18 @@
 package io.github.some_example_name;
 
-//TODO: add texture and associated method for drawing.
-
 import java.io.Serializable;
-
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import io.github.some_example_name.actions.ActionException;
 
+
+/**
+ * Base class for Enemies and the Player.
+ * <p>
+ * Holds basic statistics like health, name, etc.
+ */
 public class Entity implements Serializable
 {
     private int health;
@@ -83,6 +86,9 @@ public class Entity implements Serializable
         return texture;
     }
 
+    /**
+     * @param health New health value, it cannot exceed maxHealth.
+     */
     public void setHealth(int health)
     {
         if (health >= maxHealth)
@@ -109,6 +115,10 @@ public class Entity implements Serializable
         this.name = name;
     }
 
+    /** Mandatory to set up before using doMove()
+     * @param target The Entity that will be targeted.
+     * @throws ActionException
+     */
     public void setTarget(Entity target) throws ActionException
     {
         if (target == null)
@@ -134,7 +144,7 @@ public class Entity implements Serializable
         return turnOver;
     }
 
-    /**
+    /**Abstract method.
      * Executes selected action on target.
      */
     public void doMove()
@@ -156,7 +166,7 @@ public class Entity implements Serializable
         this.animations = animations;
     }
 
-    /// sets default animation
+    /// sets default animation //redundant comment, improve it with actual documentation or remove it
     public void setDefaultAnimation(String animationName)
     {
         if (animations != null)
@@ -166,7 +176,10 @@ public class Entity implements Serializable
         }
     }
 
-    /// performs animation once and goes back to default
+    /**
+     * Performs animation once and goes back to default.
+     * @param animationName Name of animation to perform.
+     */
     public void performAnimation(String animationName)
     {
         if (animations != null)

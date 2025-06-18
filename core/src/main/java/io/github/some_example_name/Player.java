@@ -12,12 +12,16 @@ import io.github.some_example_name.screens.InventoryScreen;
 import io.github.some_example_name.tools.Tool;
 import io.github.some_example_name.tools.ToolContainer;
 import io.github.some_example_name.tools.ToolContainerException;
-
 import java.util.HashMap;
 import java.util.Map;
 
-/// TODO: based on the equipted weapon the default animation should change
+//TODO: based on the equipped weapon the default animation should change
 
+/**
+ * The class that represents the player.
+ * <p>
+ * Holds containers for equipped tools, inventory and passives and a damage modifier.
+ */
 public class Player extends Entity
 {
     public static final int EQUIP_SLOTS = 4;
@@ -30,8 +34,6 @@ public class Player extends Entity
     private int selectedTool = 0;
 
     private double damageModifier = 1;
-
-    Table inventoryScreenTable;
 
     public Player(int health, int maxHealth, String name, Tool starterTool)
     {
@@ -132,39 +134,61 @@ public class Player extends Entity
         equippedTools.moveOneInto(equipSlotIndex, inventoryIndex, inventory);
     }
 
+    /**Rewards a Player with a new Tool.
+     * Tool is put into Player inventory.
+     * @param reward The tool the Player is being rewarded with.
+     * @return Returns index of where the reward was placed in inventory.
+     */
     public int rewardTool(Tool reward) //TODO: add try-catch block for when the player has a full inventory
     {
         return inventory.moveInside(reward);
     }
 
+    /**Rewards a Player with a new PassiveItem.
+     * PassiveItem is put int Player passives.
+     * @param reward The PassiveItem the Player is being rewarded with.
+     * @return Returns index of where the reward was placed in passives.
+     */
     public int rewardPassive(PassiveItem reward)
     {
         return passives.moveInside(reward);
     }
 
+    /**
+     * @return Returns number of equipped Tools.
+     */
     public int getEquippedCount()
     {
         return equippedTools.filledSlots();
     }
 
+    /**
+     * @return Returns number of unequipped Tools in inventory.
+     */
     public int getUnequippedCount()
     {
         return inventory.filledSlots();
     }
 
+    /**
+     * @return Returns number of PassiveItems the Player has.
+     */
     public int getPassivesCount()
     {
         return passives.filledSlots();
     }
 
+    /**Executes the BasicAction of the current selected Tool from the equippedSlots on selected target Entity.
+     * @throws PlayerException Throws if selected Tool is null.
+     */
     public void doMove() throws PlayerException
     {
-        Tool actingTool = equippedTools.getTool(selectedTool);
-
-        if (actingTool == null)
+        if (equippedTools.getTool(selectedTool) == null)
         {
             throw new PlayerException("Trying to act on nothing!");
         }
+
+        Tool actingTool = new Tool(equippedTools.getTool(selectedTool));
 
         int targetChange = actingTool.getMove().getTargetChange();
 
@@ -172,19 +196,18 @@ public class Player extends Entity
 
         actingTool.getMove().setTargetChange(targetChange);
 
-        /// performs attack animation
-        animatePolearmAttack();
-
         actingTool.execute(this, super.getTarget());
 
+        /// performs attack animation //the lines of code below should really be moved to their own method
+        animatePolearmAttack();
         setTurnOver(true);
     }
 
 
     /**
-     * Provides buttons that do the associated action.
+     * Provides buttons that execute the BasicAction of the according Tool from equippedSlots.
      *
-     * @return Table with buttons to be added to a stage.
+     * @return Table with buttons to be added to a stage or table.
      */
     public Table provideMoveButtons(boolean enemyTurnOver)
     {
@@ -229,6 +252,13 @@ public class Player extends Entity
         return moveButtons;
     }
 
+    /**Buttons to be used specifically in the InventoryScreen.
+     * <p>
+     * Pressing one of these buttons will unequip the according Tool and move it
+     * to the inventory.
+     * @param inventoryScreen Mandatory parameter for updating buttons correctly.
+     * @return Returns table to be added to a stage or table.
+     */
     public Table provideEquippedSlots(InventoryScreen inventoryScreen)
     {
         Table equipTable = new Table();
@@ -269,6 +299,13 @@ public class Player extends Entity
         return equipTable;
     }
 
+    /**Buttons to be used specifically in the InventoryScreen.
+     * <p>
+     * Pressing one of these buttons will equip the according Tool and move it
+     * to equippedSlots.
+     * @param inventoryScreen Mandatory parameter for updating buttons correctly.
+     * @return Returns table to be added to a stage or table.
+     */
     public Table provideInventory(InventoryScreen inventoryScreen)
     {
         Table inventoryTable = new Table();
