@@ -1,13 +1,18 @@
 package io.github.some_example_name.actions;
 
-//TODO: figure out a data-driven way to pass BasicAction child classes to enemies and items
-//The purpose of this class is to create a template for
-//describing actions taken in combat by either the player or the enemy.
-
 import io.github.some_example_name.Entity;
-
 import java.io.Serializable;
 
+/**
+ * A BasicAction is the base way for Entities to interact with each other.
+ * <p>
+ * The user is an Entity that is executing the action.
+ * The target is the Entity being targeted with the action.
+ * <p>
+ * userChange and targetChange change the health of the user and target respectively.
+ * Positive numbers heal, negative numbers damage.
+ * BasicActions also have names.
+ */
 public class BasicAction implements Serializable
 {
     private Entity user, target;
@@ -103,7 +108,8 @@ public class BasicAction implements Serializable
     }
 
     /**
-     * Executes itself on user and target.
+     * Executes itself on user and target. Adds userChange to user health
+     * and adds targetChange to target health.
      *
      * @throws ActionException When user or target is unset.
      */
