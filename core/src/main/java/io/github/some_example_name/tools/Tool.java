@@ -42,7 +42,7 @@ public class Tool extends Item implements Serializable
     }
 
     /**
-     * Executes action.
+     * Executes BasicAction.
      *
      * @param user   Entity doing action.
      * @param target Entity targeted by action.
