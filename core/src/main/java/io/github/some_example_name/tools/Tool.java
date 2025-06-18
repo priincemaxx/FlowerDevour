@@ -6,7 +6,7 @@ import io.github.some_example_name.actions.BasicAction;
 import java.io.Serializable;
 
 /**
- * A basic Item with a BasicAction.
+ * Parent class for Items with BasicActions.
  * <p>
  * This is the main way for the Player to interact with enemies.
  */
