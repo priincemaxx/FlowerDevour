@@ -2,6 +2,11 @@ package io.github.some_example_name.tools;
 
 import java.util.Arrays;
 
+/**
+ * A class to store Tools.
+ * <p>
+ * Initialized with an integer denoting size.
+ */
 public class ToolContainer
 {
     private Tool[] container;
