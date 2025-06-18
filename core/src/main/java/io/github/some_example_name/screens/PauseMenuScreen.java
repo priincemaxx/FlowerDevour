@@ -26,7 +26,12 @@ public class PauseMenuScreen implements Screen
     public static final int TO_LOOT = 3;
 
 
-
+    /**
+     * @param game Mandatory parameter for Screen class.
+     * @param player Initialized player.
+     * @param enemy Optional. An initialized enemy.
+     * @param returnCase A choice between TO_MAP, TO_COMBAT, TO_LOOT.
+     */
     public PauseMenuScreen(Main game, Player player, Enemy enemy, int returnCase)
     {
         this.game = game;
@@ -41,6 +46,11 @@ public class PauseMenuScreen implements Screen
         background = new Texture(Gdx.files.internal("Backgrounds/Pause.png"));
     }
 
+    /**
+     * @param game Mandatory parameter for Screen class.
+     * @param player Initialized player.
+     * @param returnCase A choice between TO_MAP, TO_COMBAT, TO_LOOT.
+     */
     public PauseMenuScreen(Main game, Player player, int returnCase)
     {
         this.game = game;
