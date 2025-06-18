@@ -22,7 +22,6 @@ child classes when you could have just added it to the parent class. Don't write
 6. **Keep rendering and data separate.** Do not mix in code that works with rendering something and that also works
 with data. The only exception being event listeners for buttons.
 7. **Finish a method or class fully before pushing changes.** Do all the work that needs to be done first.
-8. balls
 
 # Goals in order of priority
 
