@@ -19,8 +19,16 @@ public class Main extends Game
 
     public static final int worldWidth = 8;
     public static final int worldHeight = 6;
-    public int getWorldWidth() { return worldWidth; }
-    public int getWorldHeight() { return worldHeight;}
+
+    public int getWorldWidth()
+    {
+        return worldWidth;
+    }
+
+    public int getWorldHeight()
+    {
+        return worldHeight;
+    }
 
     Player player = new Player(20, 20, "The Player",
         new Tool("Shovel", new BasicAction(1, -5, "Healing attack")));
@@ -28,7 +36,8 @@ public class Main extends Game
 
 
     @Override
-    public void create() {
+    public void create()
+    {
         player.rewardTool(GameMaster.provideTool());
 
         batch = new SpriteBatch();
@@ -36,12 +45,14 @@ public class Main extends Game
         this.setScreen(new MainMenuScreen(this, player));
     }
 
-    public void render() {
+    public void render()
+    {
         super.render();
     }
 
     @Override
-    public void dispose() {
+    public void dispose()
+    {
         batch.dispose();
     }
 

@@ -16,7 +16,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class LootScreen implements Screen {
+public class LootScreen implements Screen
+{
     public Main game;
     public Player player;
     private final Stage stage;
@@ -28,7 +29,8 @@ public class LootScreen implements Screen {
 
     private Animations chestAnimations;
 
-    public LootScreen(Main game, Player player) {
+    public LootScreen(Main game, Player player)
+    {
         this.game = game;
         this.player = player;
 
@@ -45,17 +47,19 @@ public class LootScreen implements Screen {
         player.setupAnimations();
 
         stage = new Stage(new ScreenViewport());
-        stage.addActor(new PauseMenuScreen(game, player,3).getPauseButton());
+        stage.addActor(new PauseMenuScreen(game, player, 3).getPauseButton());
 
-        TextButton openChestButton = new TextButton("Open!" ,new Skin(Gdx.files.internal("button/Buttons.json")));
+        TextButton openChestButton = new TextButton("Open!", new Skin(Gdx.files.internal("button/Buttons.json")));
         Table chestTable = new Table();
         chestTable.bottom().pad(10).setFillParent(true);
         chestTable.add(openChestButton).bottom().growX().height(60).padLeft(100).padRight(100).padBottom(20);
 
         rewardStage = new Stage(new ScreenViewport());
 
-        openChestButton.addListener(e -> {
-            if (openChestButton.isPressed() && !chestOpen) {
+        openChestButton.addListener(e ->
+        {
+            if (openChestButton.isPressed() && !chestOpen)
+            {
                 chestOpen = true;
                 chestAnimations.performAnimation("ChestOpen");
                 player.animateArmMovement();
@@ -67,39 +71,49 @@ public class LootScreen implements Screen {
     }
 
     @Override
-    public void show() {
+    public void show()
+    {
         Gdx.input.setInputProcessor(stage);
     }
 
     @Override
-    public void render(float delta) {
+    public void render(float delta)
+    {
         ScreenUtils.clear(Color.WHITE);
         player.update(delta);
         drawRoom();
         stage.act();
         stage.draw();
-        if(chestOpen) {
+        if (chestOpen)
+        {
             chestAnimations.update(delta);
-            if (player.isAnimationFinished()) { drawRewardScreen(); }
+            if (player.isAnimationFinished())
+            {
+                drawRewardScreen();
+            }
         }
     }
 
-    private void drawRoom() {
+    private void drawRoom()
+    {
         game.viewport.apply();
         game.batch.setProjectionMatrix(game.viewport.getCamera().combined);
         game.batch.begin();
         game.batch.draw(backgroundTexture, 0, 0, game.getWorldWidth(), game.getWorldHeight());
         player.draw(game.batch, 1.1f, 2.2f, 3f, 3.4f);
-        if (chestOpen) {
+        if (chestOpen)
+        {
             chestAnimations.draw(game.batch, 4.1f, 2.2f, 3f, 3.4f);
-        } else {
+        } else
+        {
             game.batch.draw(chestTexture, 4.1f, 2.2f, 3f, 3.4f);
         }
         game.batch.end();
     }
 
     //TODO: add reward item, make space on screen for reward item + description
-    private void drawRewardScreen() {
+    private void drawRewardScreen()
+    {
         Gdx.input.setInputProcessor(rewardStage);
 
         game.viewport.apply();
@@ -115,13 +129,15 @@ public class LootScreen implements Screen {
 
         table.add(drawTextField("Reward!", "victory")).width(400).height(100).padBottom(20).row();
 
-        TextButton claimReward = new TextButton("Claim reward" ,new Skin(Gdx.files.internal("button/Buttons.json")));
+        TextButton claimReward = new TextButton("Claim reward", new Skin(Gdx.files.internal("button/Buttons.json")));
         table.add(claimReward).pad(100).growX().height(60);
 
         rewardStage.addActor(table);
 
-        claimReward.addListener(e -> {
-            if (claimReward.isPressed()) {
+        claimReward.addListener(e ->
+        {
+            if (claimReward.isPressed())
+            {
                 //TODO: add reward item to inventory
                 //maybe another popup/animation for "claimed!" or smthn to delay return to map
                 game.setScreen(new MapScreen(game, player));
@@ -133,27 +149,38 @@ public class LootScreen implements Screen {
         rewardStage.draw();
     }
 
-    public TextField drawTextField(String message, String style) {
+    public TextField drawTextField(String message, String style)
+    {
         TextField textField = new TextField(message, new Skin(Gdx.files.internal("button/Buttons.json")), style);
         textField.setAlignment(Align.center);
         return textField;
     }
 
-    @Override public void resize(int width, int height) {
+    @Override
+    public void resize(int width, int height)
+    {
         game.viewport.update(width, height, true);
     }
 
-    @Override public void pause() {
+    @Override
+    public void pause()
+    {
     }
 
-    @Override public void resume() {
+    @Override
+    public void resume()
+    {
     }
 
-    @Override public void hide() {
+    @Override
+    public void hide()
+    {
         Gdx.input.setInputProcessor(null);
     }
 
-    @Override public void dispose() {
+    @Override
+    public void dispose()
+    {
         backgroundTexture.dispose();
         backgroundTint.dispose();
         chestTexture.dispose();

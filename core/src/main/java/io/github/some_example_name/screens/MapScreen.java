@@ -20,7 +20,8 @@ import com.badlogic.gdx.utils.ScreenUtils;
  * should be easier to implement the actual map when class isnt blank
  */
 
-public class MapScreen implements Screen {
+public class MapScreen implements Screen
+{
     public Main game;
     public Player player;
     public Enemy enemy;
@@ -31,7 +32,8 @@ public class MapScreen implements Screen {
     private Map map;
     private Table table;
 
-    public MapScreen(Main game, Player player) {
+    public MapScreen(Main game, Player player)
+    {
         this.game = game;
         this.player = player;
         this.map = new Map();
@@ -53,31 +55,41 @@ public class MapScreen implements Screen {
         drawMapButtons();
     }
 
-    public void drawMapButtons() {
+    public void drawMapButtons()
+    {
         table.clear();
 
-        for (int row = 0; row < Map.ROWS; row++) {
+        for (int row = 0; row < Map.ROWS; row++)
+        {
             table.row();
-            for (int col = 0; col < Map.MAX_ROW_ROOMS; col++) {
+            for (int col = 0; col < Map.MAX_ROW_ROOMS; col++)
+            {
                 Room room = map.getRoom(row, col);
-                if (room != null) {
-                    Button button = createRoomButton(room, row, col);
+                if (room != null)
+                {
+                    Button button = createRoomButton(room);
                     table.add(button).pad(10).width(40).height(40);
-                } else {
+                }
+                /*else //literally doesn't do anything
+                {
                     /// TODO: should add empty space for null rooms
                     table.add().width(40).height(40);
-                }
+                }*/
             }
         }
     }
 
-    public Button createRoomButton(Room room, int row, int col) {
+    public Button createRoomButton(Room room) //deleted unused arguments
+    {
         String roomStyle;
-        if (room instanceof LootRoom) {
+        if (room instanceof LootRoom)
+        {
             roomStyle = "lootRoom";
-        } else if (room instanceof CombatRoom) {
+        } else if (room instanceof CombatRoom)
+        {
             roomStyle = "combatRoom";
-        } else {
+        } else
+        {
             /// temptorary use of boss room; room also doesnt switch to anything, its just empty
             roomStyle = "bossRoom";
         }
@@ -86,9 +98,11 @@ public class MapScreen implements Screen {
 
         button.setUserObject(room);
 
-        button.addListener(new ClickListener() {
+        button.addListener(new ClickListener()
+        {
             @Override
-            public void clicked(InputEvent event, float x, float y) {
+            public void clicked(InputEvent event, float x, float y)
+            {
                 Room clickedRoom = (Room) button.getUserObject();
                 switchToRoom(clickedRoom);
             }
@@ -97,19 +111,24 @@ public class MapScreen implements Screen {
         return button;
     }
 
-    private void switchToRoom(Room room) {
-        if (room instanceof LootRoom) {
+    private void switchToRoom(Room room)
+    {
+        if (room instanceof LootRoom)
+        {
             game.setScreen(new LootScreen(game, player));
-        } else if (room instanceof CombatRoom) {
+        } else if (room instanceof CombatRoom)
+        {
             //game.setScreen(new CombatScreen(game, player, enemy));
             game.setScreen(new CombatScreen(game, player));
-        } else {
+        } else
+        {
             System.out.println("Didnt switch!!!");
         }
     }
 
     @Override
-    public void render(float delta) {
+    public void render(float delta)
+    {
         ScreenUtils.clear(Color.WHITE);
 
         drawRoom();
@@ -124,7 +143,8 @@ public class MapScreen implements Screen {
         stage.draw();
     }
 
-    private void drawRoom() {
+    private void drawRoom()
+    {
         game.viewport.apply();
         game.batch.setProjectionMatrix(game.viewport.getCamera().combined);
         game.batch.begin();
@@ -134,28 +154,34 @@ public class MapScreen implements Screen {
     }
 
     @Override
-    public void resize(int width, int height) {
+    public void resize(int width, int height)
+    {
         game.viewport.update(width, height, true);
     }
 
-    public void show() {
+    public void show()
+    {
         Gdx.input.setInputProcessor(stage);
     }
 
     @Override
-    public void hide(){
+    public void hide()
+    {
         Gdx.input.setInputProcessor(null);
     }
 
     @Override
-    public void pause() {
+    public void pause()
+    {
     }
 
     @Override
-    public void resume() {
+    public void resume()
+    {
     }
 
     @Override
-    public void dispose() {
+    public void dispose()
+    {
     }
 }

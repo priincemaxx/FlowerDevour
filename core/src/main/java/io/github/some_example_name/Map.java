@@ -1,4 +1,5 @@
 package io.github.some_example_name;
+
 import java.util.Random;
 
 public class Map
@@ -27,7 +28,6 @@ public class Map
     }
 
 
-
     private void addRowRooms(int row)
     {
         Random random = new Random();
@@ -41,8 +41,7 @@ public class Map
             if (roomType == 0)
             {
                 rooms[row][i] = new LootRoom();
-            }
-            else
+            } else
             {
                 rooms[row][i] = new CombatRoom();
             }
@@ -98,13 +97,11 @@ public class Map
             if (type == 0)
             {
                 currentRoom = new CombatRoom(GameMaster.provideEnemy());
-            }
-            else
+            } else
             {
                 currentRoom = new CombatRoom(GameMaster.provideEnemy(), GameMaster.provideTool());
             }
-        }
-        else
+        } else
         {
             currentRoom = new LootRoom(GameMaster.providePassive());
         }
@@ -131,7 +128,8 @@ public class Map
         }
     }
 
-    public Room getRoom(int row, int col) {
+    public Room getRoom(int row, int col)
+    {
         return rooms[row][col];
     }
 }

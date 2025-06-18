@@ -50,6 +50,7 @@ public class Player extends Entity
         super(health, maxHealth, name, texture);
         setEquippedTools(starterTools);
     }
+
     public Player(int health, int maxHealth, String name, Texture texture, Tool starterTool)
     {
         super(health, maxHealth, name, texture);
@@ -60,10 +61,12 @@ public class Player extends Entity
     {
         this.damageModifier = damageModifier;
     }
+
     public void setEquippedTools(ToolContainer equippedTools)
     {
         this.equippedTools = new ToolContainer(equippedTools);
     }
+
     public void setSelectedTool(int selectedTool) throws PlayerException
     {
         if (selectedTool > EQUIP_SLOTS - 1 || selectedTool < 0)
@@ -73,6 +76,7 @@ public class Player extends Entity
 
         this.selectedTool = selectedTool;
     }
+
     public void setPlayerTarget(Entity target)
     {
         super.setTarget(target);
@@ -84,9 +88,9 @@ public class Player extends Entity
     }
 
 
-
     /**
      * Equips tool to first empty equip slot.
+     *
      * @param inventoryIndex Index of tool to equip.
      * @return Place in equip index.
      */
@@ -94,7 +98,10 @@ public class Player extends Entity
     {
         return inventory.moveOneInto(inventoryIndex, equippedTools);
     }
-    /**Equips tool to selected slot.
+
+    /**
+     * Equips tool to selected slot.
+     *
      * @param equipSlotIndex Selected slot.
      * @param inventoryIndex Index of tool to equip.
      */
@@ -102,7 +109,10 @@ public class Player extends Entity
     {
         inventory.moveOneInto(inventoryIndex, equipSlotIndex, equippedTools);
     }
-    /**Unequips tool to first empty inventory slot.
+
+    /**
+     * Unequips tool to first empty inventory slot.
+     *
      * @param equipSlotIndex Index of tool to unequip.
      * @return Place in inventory index.
      */
@@ -110,7 +120,10 @@ public class Player extends Entity
     {
         return equippedTools.moveOneInto(equipSlotIndex, inventory);
     }
-    /**Unequips tool to selected inventory slot.
+
+    /**
+     * Unequips tool to selected inventory slot.
+     *
      * @param inventoryIndex Selected slot.
      * @param equipSlotIndex Index of tool to unequip.
      */
@@ -118,10 +131,12 @@ public class Player extends Entity
     {
         equippedTools.moveOneInto(equipSlotIndex, inventoryIndex, inventory);
     }
+
     public int rewardTool(Tool reward) //TODO: add try-catch block for when the player has a full inventory
     {
         return inventory.moveInside(reward);
     }
+
     public int rewardPassive(PassiveItem reward)
     {
         return passives.moveInside(reward);
@@ -131,10 +146,12 @@ public class Player extends Entity
     {
         return equippedTools.filledSlots();
     }
+
     public int getUnequippedCount()
     {
         return inventory.filledSlots();
     }
+
     public int getPassivesCount()
     {
         return passives.filledSlots();
@@ -164,7 +181,9 @@ public class Player extends Entity
     }
 
 
-    /** Provides buttons that do the associated action.
+    /**
+     * Provides buttons that do the associated action.
+     *
      * @return Table with buttons to be added to a stage.
      */
     public Table provideMoveButtons(boolean enemyTurnOver)
@@ -198,7 +217,8 @@ public class Player extends Entity
                 @Override
                 public void changed(ChangeEvent event, Actor actor)
                 {
-                    if(enemyTurnOver) {
+                    if (enemyTurnOver)
+                    {
                         setSelectedTool(tmpCurrentSlot);
                         doMove();
                     }
@@ -296,12 +316,14 @@ public class Player extends Entity
 
     /**
      * Provides dynamic health bar
+     *
      * @param batch - spritebatch of screen
      */
-    public void provideHealthBar(SpriteBatch batch) {
+    public void provideHealthBar(SpriteBatch batch)
+    {
         batch.draw(new Texture("other/barborder_temp1.png"), 1.25f, 4.75f, 2.5f, 0.2f);
         float maxWidth = 2.4f;
-        float width = (float) getHealth() /getMaxHealth() * maxWidth;
+        float width = (float) getHealth() / getMaxHealth() * maxWidth;
         batch.draw(new Texture("other/healthBar.png"), 1.3f, 4.8f, width, 0.1f);
     }
 
@@ -309,7 +331,8 @@ public class Player extends Entity
 
     /// sets up all animations
     /// (will probably have to somehow optimize this based on weapon type)
-    public void setupAnimations() {
+    public void setupAnimations()
+    {
         Map<String, Float> animData = new HashMap<>();
         animData.put("GardenerEmptyIdle", 0.75f);
         animData.put("GardenerPolearmIdle", 0.75f);
@@ -324,23 +347,28 @@ public class Player extends Entity
     }
 
     /// temp attack animation
-    public void animatePolearmAttack() throws PlayerException {
+    public void animatePolearmAttack() throws PlayerException
+    {
         performAnimation("GardenerPolearmAttack");
     }
 
-    public void animateArmMovement() {
+    public void animateArmMovement()
+    {
         performAnimation("GardenerEmptyAttack");
     }
 
-    public void animatePolearmIdle() {
+    public void animatePolearmIdle()
+    {
         performAnimation("GardenerPolearmIdle");
     }
 
-    public void animateTakeEmptyDamage() {
+    public void animateTakeEmptyDamage()
+    {
         performAnimation("GardenerEmptyDamage");
     }
 
-    public void animateTakePolearmDamage() {
+    public void animateTakePolearmDamage()
+    {
         performAnimation("GardenerPolearmDamage");
     }
 

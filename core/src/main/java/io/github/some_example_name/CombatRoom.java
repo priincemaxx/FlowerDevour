@@ -24,6 +24,7 @@ public class CombatRoom extends Room
         setEnemy(enemy);
         setReward(reward);
     }
+
     public CombatRoom(Enemy enemy)
     {
         setEnemy(enemy);
@@ -34,6 +35,7 @@ public class CombatRoom extends Room
     {
         return enemy;
     }
+
     public Tool getReward()
     {
         return reward;
@@ -49,13 +51,16 @@ public class CombatRoom extends Room
         this.reward = reward;
     }
 
-    public Enemy getRandomEnemy() {
+    public Enemy getRandomEnemy()
+    {
         Enemy enemy;
         //loop to ensure we only get dandelion
         //will probably need something similar to select only boss
-        while(true){
+        while (true)
+        {
             enemy = provideEnemy();
-            if(Objects.equals(enemy.getName(), "Dandelion Trooper")){
+            if (Objects.equals(enemy.getName(), "Dandelion Trooper"))
+            {
                 return enemy;
             }
         }

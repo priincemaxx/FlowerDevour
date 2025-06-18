@@ -13,8 +13,15 @@ public class Room extends GameMaster
 
     }
 
-    public String getBackgroundPath() { return backgroundPath; }
-    public void setBackgroundPath(String path) { backgroundPath = path; }
+    public String getBackgroundPath()
+    {
+        return backgroundPath;
+    }
+
+    public void setBackgroundPath(String path)
+    {
+        backgroundPath = path;
+    }
 
     public Room[] getPaths()
     {

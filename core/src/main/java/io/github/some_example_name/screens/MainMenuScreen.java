@@ -14,7 +14,8 @@ import io.github.some_example_name.enemies.*;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.Gdx;
 
-public class MainMenuScreen implements Screen {
+public class MainMenuScreen implements Screen
+{
     public Main game;
     public Player player;
     public Enemy enemy;
@@ -24,7 +25,8 @@ public class MainMenuScreen implements Screen {
     private final Texture background;
     private final SpriteBatch batch;
 
-    public MainMenuScreen(Main game, Player player) {
+    public MainMenuScreen(Main game, Player player)
+    {
         this.game = game;
         this.player = player;
 
@@ -43,8 +45,10 @@ public class MainMenuScreen implements Screen {
         table.row();
         table.add(exitButton).pad(20).height(50).width(200).uniform();
 
-        startButton.addListener(e -> {
-            if (startButton.isPressed()) {
+        startButton.addListener(e ->
+        {
+            if (startButton.isPressed())
+            {
                 //reset health every time new game is started
                 player.setHealth(player.getMaxHealth());
                 game.setScreen(new MapScreen(game, player));
@@ -52,8 +56,10 @@ public class MainMenuScreen implements Screen {
             return false;
         });
 
-        exitButton.addListener(e -> {
-            if (exitButton.isPressed()) {
+        exitButton.addListener(e ->
+        {
+            if (exitButton.isPressed())
+            {
                 Gdx.app.exit();
             }
             return false;
@@ -61,7 +67,8 @@ public class MainMenuScreen implements Screen {
     }
 
     @Override
-    public void render(float delta) {
+    public void render(float delta)
+    {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -74,30 +81,36 @@ public class MainMenuScreen implements Screen {
     }
 
     @Override
-    public void resize(int width, int height) {
+    public void resize(int width, int height)
+    {
         game.viewport.update(width, height, true);
     }
 
 
-    public void show() {
+    public void show()
+    {
         Gdx.input.setInputProcessor(stage);
     }
 
     @Override
-    public void hide(){
+    public void hide()
+    {
         Gdx.input.setInputProcessor(null);
     }
 
     @Override
-    public void pause() {
+    public void pause()
+    {
     }
 
     @Override
-    public void resume() {
+    public void resume()
+    {
     }
 
     @Override
-    public void dispose() {
+    public void dispose()
+    {
         stage.dispose();
         skin.dispose();
         background.dispose();

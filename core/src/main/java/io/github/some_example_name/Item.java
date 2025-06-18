@@ -19,6 +19,7 @@ public class Item implements Serializable
     {
         setName(name);
     }
+
     public Item(Item item)
     {
         setName(item.getName());

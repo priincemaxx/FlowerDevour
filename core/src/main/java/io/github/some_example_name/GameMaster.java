@@ -14,9 +14,9 @@ import java.util.Random;
 
 /**
  * Responsible for files and the actual game.
- *
+ * <p>
  * Game objects initialized from JSONs.
- *
+ * <p>
  * For JSON writing, don't forget to declare the class of the object
  * when writing them. Refer to the enemies.json file for reference.
  */
@@ -25,7 +25,6 @@ public class GameMaster
     static private ArrayList<Enemy> enemies = initializeEnemies();
     static private ArrayList<Tool> tools = initializeTools();
     static private ArrayList<PassiveItem> passives = initializePassives();
-
 
 
     static public ArrayList<Enemy> initializeEnemies()

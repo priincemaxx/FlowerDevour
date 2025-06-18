@@ -11,6 +11,7 @@ public class ToolContainer
         container = new Tool[size];
         Arrays.fill(container, null);
     }
+
     public ToolContainer(ToolContainer tools)
     {
         int size = tools.getContainer().length;
@@ -29,8 +30,9 @@ public class ToolContainer
     }
 
 
-
-    /**Moves Tool inside to first open slot.
+    /**
+     * Moves Tool inside to first open slot.
+     *
      * @param tool Tool to move.
      * @return Where Tool was placed.
      * @throws ToolContainerException When null argument or container is full.
@@ -53,11 +55,14 @@ public class ToolContainer
 
         throw new ToolContainerException("Container already full!");
     }
-    /**Move Tool inside given index.
+
+    /**
+     * Move Tool inside given index.
+     *
      * @param containerIndex Where to move.
-     * @param tool Tool to move.
+     * @param tool           Tool to move.
      * @throws ToolContainerException When null argument, out of bounds index,
-     * or indexed slot is occupied.
+     *                                or indexed slot is occupied.
      */
     public void moveInside(int containerIndex, Tool tool) throws ToolContainerException
     {
@@ -76,7 +81,10 @@ public class ToolContainer
 
         container[containerIndex] = new Tool(tool);
     }
-    /**Moves one Tool outside.
+
+    /**
+     * Moves one Tool outside.
+     *
      * @param containerIndex Tool to move out index.
      * @return Indexed Tool.
      * @throws ToolContainerException When out of bounds index or indexed Tool is null.
@@ -97,9 +105,11 @@ public class ToolContainer
         return leavingTool;
     }
 
-    /**Moves one Tool from container to different container.
+    /**
+     * Moves one Tool from container to different container.
+     *
      * @param containerIndex Tool to move out.
-     * @param receiver Tool receiver.
+     * @param receiver       Tool receiver.
      * @return Where Tool was placed in receiver or -1 if the tool
      * was unable to be moved.
      */
@@ -110,18 +120,20 @@ public class ToolContainer
         try
         {
             return receiver.moveInside(movingTool);
-        }
-        catch (ToolContainerException e)
+        } catch (ToolContainerException e)
         {
             System.out.println(e);
             this.moveInside(containerIndex, movingTool);
             return -1;
         }
     }
-    /**Moves one Tool from container to specific slot in different container.
+
+    /**
+     * Moves one Tool from container to specific slot in different container.
+     *
      * @param containerIndex Tool to move out.
-     * @param receiverIndex Place to move tool to.
-     * @param receiver Tool receiver.
+     * @param receiverIndex  Place to move tool to.
+     * @param receiver       Tool receiver.
      */
     public void moveOneInto(int containerIndex, int receiverIndex, ToolContainer receiver)
     {
@@ -130,8 +142,7 @@ public class ToolContainer
         try
         {
             receiver.moveInside(receiverIndex, movingTool);
-        }
-        catch (ToolContainerException e)
+        } catch (ToolContainerException e)
         {
             System.out.println(e);
             this.moveInside(containerIndex, movingTool);
@@ -139,7 +150,9 @@ public class ToolContainer
     }
 
 
-    /**Returns reference to Tool inside.
+    /**
+     * Returns reference to Tool inside.
+     *
      * @param containerIndex Tool index.
      * @return Reference to indexed Tool.
      */

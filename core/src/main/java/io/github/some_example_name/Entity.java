@@ -3,6 +3,7 @@ package io.github.some_example_name;
 //TODO: add texture and associated method for drawing.
 
 import java.io.Serializable;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -61,18 +62,22 @@ public class Entity implements Serializable
     {
         return health;
     }
+
     public int getMaxHealth()
     {
         return maxHealth;
     }
+
     public String getName()
     {
         return name;
     }
+
     public Entity getTarget()
     {
         return target;
     }
+
     public Texture getTexture()
     {
         return texture;
@@ -93,14 +98,17 @@ public class Entity implements Serializable
 
         this.health = health;
     }
+
     public void setMaxHealth(int maxHealth)
     {
         this.maxHealth = maxHealth;
     }
+
     public void setName(String name)
     {
         this.name = name;
     }
+
     public void setTarget(Entity target) throws ActionException
     {
         if (target == null)
@@ -110,15 +118,19 @@ public class Entity implements Serializable
 
         this.target = target;
     }
+
     public void setTexture(Texture texture)
     {
         this.texture = texture;
     }
 
-    public void setTurnOver(boolean value) {
+    public void setTurnOver(boolean value)
+    {
         turnOver = value;
     }
-    public boolean getTurnOver() {
+
+    public boolean getTurnOver()
+    {
         return turnOver;
     }
 
@@ -132,48 +144,61 @@ public class Entity implements Serializable
 
     public boolean isDead()
     {
-        if(getHealth() == 0) {
+        if (getHealth() == 0)
+        {
             return true;
         }
         return false;
     }
 
-    public void setAnimations(Animations animations) {
+    public void setAnimations(Animations animations)
+    {
         this.animations = animations;
     }
 
     /// sets default animation
-    public void setDefaultAnimation(String animationName) {
-        if (animations != null) {
+    public void setDefaultAnimation(String animationName)
+    {
+        if (animations != null)
+        {
             animations.setDefaultAnimation(animationName);
             this.currentAnimation = animations.getDefaultAnimation();
         }
     }
 
     /// performs animation once and goes back to default
-    public void performAnimation(String animationName) {
-        if (animations != null) {
+    public void performAnimation(String animationName)
+    {
+        if (animations != null)
+        {
             animations.performAnimation(animationName);
         }
     }
 
 
-    public boolean isAnimationFinished() {
+    public boolean isAnimationFinished()
+    {
         return animations.isCurrentAnimationFinished();
     }
 
-    public void update(float delta) {
-        if (animations != null) {
+    public void update(float delta)
+    {
+        if (animations != null)
+        {
             animations.update(delta);
-        } else {
+        } else
+        {
             stateTime += delta;
         }
     }
 
-    public void draw(SpriteBatch batch, float x, float y, float width, float height) {
-        if (animations != null) {
+    public void draw(SpriteBatch batch, float x, float y, float width, float height)
+    {
+        if (animations != null)
+        {
             animations.draw(batch, x, y, width, height);
-        } else if (texture != null) {
+        } else if (texture != null)
+        {
             batch.draw(texture, x, y, width, height);
         }
     }

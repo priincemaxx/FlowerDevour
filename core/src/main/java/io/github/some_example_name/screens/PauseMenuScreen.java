@@ -11,7 +11,8 @@ import com.badlogic.gdx.*;
 import com.badlogic.gdx.Gdx;
 
 //temporary functionality purely for button
-public class PauseMenuScreen implements Screen {
+public class PauseMenuScreen implements Screen
+{
     public Main game;
     public Player player;
     public Enemy enemy;
@@ -20,7 +21,8 @@ public class PauseMenuScreen implements Screen {
     private final Texture background;
     private int roomId;
 
-    public PauseMenuScreen(Main game, Player player, Enemy enemy, int roomId) {
+    public PauseMenuScreen(Main game, Player player, Enemy enemy, int roomId)
+    {
         this.game = game;
         this.player = player;
         this.enemy = enemy;
@@ -32,7 +34,9 @@ public class PauseMenuScreen implements Screen {
 
         background = new Texture(Gdx.files.internal("Backgrounds/Pause.png"));
     }
-    public PauseMenuScreen(Main game, Player player, int roomId) {
+
+    public PauseMenuScreen(Main game, Player player, int roomId)
+    {
         this.game = game;
         this.player = player;
         this.roomId = roomId;
@@ -46,14 +50,17 @@ public class PauseMenuScreen implements Screen {
     }
 
 
-    public Table getPauseButton() {
+    public Table getPauseButton()
+    {
         Button pauseButton = new Button(new Skin(Gdx.files.internal("button/Buttons.json")), "pause");
         Table table = new Table();
         table.top().left().setFillParent(true);
         table.add(pauseButton).size(55, 55).pad(10);
 
-        pauseButton.addListener(e -> {
-            if (pauseButton.isPressed()) {
+        pauseButton.addListener(e ->
+        {
+            if (pauseButton.isPressed())
+            {
                 game.setScreen(new PauseMenuScreen(game, player, enemy, roomId));
             }
             return false;
@@ -62,7 +69,8 @@ public class PauseMenuScreen implements Screen {
     }
 
     @Override
-    public void render(float delta) {
+    public void render(float delta)
+    {
 //        Gdx.gl.glClearColor(Color.BLACK);
 //
 //        game.batch.begin();
@@ -74,7 +82,8 @@ public class PauseMenuScreen implements Screen {
         drawPause();
     }
 
-    public void drawPause() {
+    public void drawPause()
+    {
         Gdx.input.setInputProcessor(stage);
 
         game.viewport.apply();
@@ -87,29 +96,40 @@ public class PauseMenuScreen implements Screen {
         stage.draw();
 
         Table table = new Table();
-        TextButton backToMenu = new TextButton("Exit to main menu" ,new Skin(Gdx.files.internal("button/Buttons.json")));
-        TextButton continueGame = new TextButton("Continue" ,new Skin(Gdx.files.internal("button/Buttons.json")));
+        TextButton backToMenu = new TextButton("Exit to main menu", new Skin(Gdx.files.internal("button/Buttons.json")));
+        TextButton continueGame = new TextButton("Continue", new Skin(Gdx.files.internal("button/Buttons.json")));
         table.setFillParent(true);
         table.add(continueGame).pad(50).growX().height(60).uniform();
         table.row();
         table.add(backToMenu).pad(50).growX().height(60).uniform();
         stage.addActor(table);
 
-        backToMenu.addListener(e -> {
-            if (backToMenu.isPressed()) {
+        backToMenu.addListener(e ->
+        {
+            if (backToMenu.isPressed())
+            {
                 game.setScreen(new MainMenuScreen(game, player));
             }
             return false;
         });
-        continueGame.addListener(e -> {
-            if (continueGame.isPressed()) {
-                switch(roomId){
+        continueGame.addListener(e ->
+        {
+            if (continueGame.isPressed())
+            {
+                switch (roomId)
+                {
                     //map
-                    case 1: game.setScreen(new MapScreen(game, player)); break;
+                    case 1:
+                        game.setScreen(new MapScreen(game, player));
+                        break;
                     //combat
-                    case 2: game.setScreen(new CombatScreen(game, player, enemy)); break;
+                    case 2:
+                        game.setScreen(new CombatScreen(game, player, enemy));
+                        break;
                     //loot
-                    case 3: game.setScreen(new LootScreen(game, player)); break;
+                    case 3:
+                        game.setScreen(new LootScreen(game, player));
+                        break;
                 }
 
             }
@@ -119,30 +139,36 @@ public class PauseMenuScreen implements Screen {
 
 
     @Override
-    public void resize(int width, int height) {
+    public void resize(int width, int height)
+    {
         game.viewport.update(width, height, true);
     }
 
 
-    public void show() {
+    public void show()
+    {
         Gdx.input.setInputProcessor(stage);
     }
 
     @Override
-    public void hide(){
+    public void hide()
+    {
         Gdx.input.setInputProcessor(null);
     }
 
     @Override
-    public void pause() {
+    public void pause()
+    {
     }
 
     @Override
-    public void resume() {
+    public void resume()
+    {
     }
 
     @Override
-    public void dispose() {
+    public void dispose()
+    {
         stage.dispose();
         skin.dispose();
         background.dispose();

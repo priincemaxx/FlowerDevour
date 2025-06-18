@@ -51,18 +51,22 @@ public class BasicAction implements Serializable
     {
         return user;
     }
+
     public Entity getTarget()
     {
         return target;
     }
+
     public int getUserChange()
     {
         return userChange;
     }
+
     public int getTargetChange()
     {
         return targetChange;
     }
+
     public String getName()
     {
         return name;
@@ -72,18 +76,22 @@ public class BasicAction implements Serializable
     {
         this.user = user;
     }
+
     public void setTarget(Entity target)
     {
         this.target = target;
     }
+
     public void setUserChange(int userChange)
     {
         this.userChange = userChange;
     }
+
     public void setTargetChange(int targetChange)
     {
         this.targetChange = targetChange;
     }
+
     public void setName(String name) throws ActionException
     {
         if (name == null || name.isEmpty())
@@ -94,7 +102,9 @@ public class BasicAction implements Serializable
         this.name = name;
     }
 
-    /**Executes itself on user and target.
+    /**
+     * Executes itself on user and target.
+     *
      * @throws ActionException When user or target is unset.
      */
     public void execute() throws ActionException

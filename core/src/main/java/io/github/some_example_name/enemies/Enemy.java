@@ -76,26 +76,31 @@ public class Enemy extends Entity implements Serializable
 
     /**
      * Provides dynamic health bar
+     *
      * @param batch - spritebatch of screen
      */
-    public void provideHealthBar(SpriteBatch batch) {
+    public void provideHealthBar(SpriteBatch batch)
+    {
         batch.draw(new Texture("other/barborder_temp1.png"), 4.25f, 4.75f, 2.5f, 0.2f);
         float maxWidth = 2.4f;
-        float width = (float) getHealth() /getMaxHealth() * maxWidth;
+        float width = (float) getHealth() / getMaxHealth() * maxWidth;
         batch.draw(new Texture("other/healthBar.png"), 4.3f, 4.8f, width, 0.1f);
     }
 
-    public void setupAnimations(String name) {
+    public void setupAnimations(String name)
+    {
         Map<String, Float> animData = new HashMap<>();
         animData.put("Idle", 0.5f);
         animData.put("Attack", 0.08f);
         animData.put("Damage", 0.1f);
 
         Animations enemyAnimations;
-        if(Objects.equals(name, "Dandelion Trooper")) {
+        if (Objects.equals(name, "Dandelion Trooper"))
+        {
             enemyAnimations = new Animations("atlas/DandelionAtlas.atlas", animData);
             setAnimations(enemyAnimations);
-        } else {
+        } else
+        {
             enemyAnimations = new Animations("atlas/DandelionAtlas.atlas", animData);
             setAnimations(enemyAnimations);
         }
@@ -104,15 +109,18 @@ public class Enemy extends Entity implements Serializable
     }
 
     /// performs these animations once
-    public void animateIdle() {
+    public void animateIdle()
+    {
         performAnimation("Idle");
     }
 
-    public void animateTakeDamage() {
+    public void animateTakeDamage()
+    {
         performAnimation("Damage");
     }
 
-    public void animateAttack() {
+    public void animateAttack()
+    {
         performAnimation("Attack");
     }
 

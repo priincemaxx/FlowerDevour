@@ -13,7 +13,8 @@ import io.github.some_example_name.Main;
 import io.github.some_example_name.Player;
 import io.github.some_example_name.enemies.Enemy;
 
-public class CombatScreen implements Screen {
+public class CombatScreen implements Screen
+{
     public Main game;
     public Player player;
     //TODO: take enemy from CombatRoom (once map exists)
@@ -25,7 +26,8 @@ public class CombatScreen implements Screen {
     private final Texture backgroundTexture;
     private final Texture backgroundTint;
 
-    public CombatScreen(Main game, Player player, Enemy enemy) {
+    public CombatScreen(Main game, Player player, Enemy enemy)
+    {
         this.game = game;
         this.player = player;
         this.enemy = enemy;
@@ -66,7 +68,8 @@ public class CombatScreen implements Screen {
         stage.addActor(table);
     }
 
-    public CombatScreen(Main game, Player player) {
+    public CombatScreen(Main game, Player player)
+    {
         combatRoom = new CombatRoom();
         this.game = game;
         this.player = player;
@@ -109,12 +112,14 @@ public class CombatScreen implements Screen {
     }
 
     @Override
-    public void show() {
+    public void show()
+    {
         Gdx.input.setInputProcessor(stage);
     }
 
     @Override
-    public void render(float delta) {
+    public void render(float delta)
+    {
         ScreenUtils.clear(Color.WHITE);
 
         player.update(delta);
@@ -124,16 +129,19 @@ public class CombatScreen implements Screen {
         stage.act();
         stage.draw();
 
-        if(enemy.isDead()) {
+        if (enemy.isDead())
+        {
             //TODO: delay for animation
             drawVictoryScreen();
             player.setTurnOver(false);
         }
-        if(player.isDead()) {
+        if (player.isDead())
+        {
             //TODO: delay
             drawDefeatScreen();
         }
-        if(player.getTurnOver() && player.isAnimationFinished()){
+        if (player.getTurnOver() && player.isAnimationFinished())
+        {
             enemy.setTurnOver(true);
             enemy.animateAttack();
             enemy.doMove(player);
@@ -145,7 +153,8 @@ public class CombatScreen implements Screen {
         System.out.println("Enemy health: " + enemy.getHealth());
     }
 
-    private void drawRoom() {
+    private void drawRoom()
+    {
         game.viewport.apply();
         game.batch.setProjectionMatrix(game.viewport.getCamera().combined);
         game.batch.begin();
@@ -153,10 +162,12 @@ public class CombatScreen implements Screen {
         player.provideHealthBar(game.batch);
         enemy.provideHealthBar(game.batch);
 
-        if(player.isDead()) {
+        if (player.isDead())
+        {
             //TODO: player death animation
         } else player.draw(game.batch, 1.1f, 2.2f, 3f, 3.4f);
-        if(enemy.isDead()) {
+        if (enemy.isDead())
+        {
             //TODO: enemy death animation
         } else enemy.draw(game.batch, 4.1f, 2.2f, 3f, 3.4f);
 
@@ -164,7 +175,8 @@ public class CombatScreen implements Screen {
     }
 
     //TODO: add reward item, make space on screen for reward item + description
-    private void drawVictoryScreen() {
+    private void drawVictoryScreen()
+    {
         Gdx.input.setInputProcessor(gameEndStage);
 
         game.viewport.apply();
@@ -180,13 +192,15 @@ public class CombatScreen implements Screen {
 
         table.add(drawTextField("Victory!", "victory")).width(400).height(100).padBottom(20).row();
 
-        TextButton claimReward = new TextButton("Claim reward" ,new Skin(Gdx.files.internal("button/Buttons.json")));
+        TextButton claimReward = new TextButton("Claim reward", new Skin(Gdx.files.internal("button/Buttons.json")));
         table.add(claimReward).pad(100).growX().height(60);
 
         gameEndStage.addActor(table);
 
-        claimReward.addListener(e -> {
-            if (claimReward.isPressed()) {
+        claimReward.addListener(e ->
+        {
+            if (claimReward.isPressed())
+            {
                 //TODO: add reward item to inventory
                 //maybe another popup/animation for "claimed!" or smthn to delay return to map
                 game.setScreen(new MapScreen(game, player));
@@ -198,7 +212,8 @@ public class CombatScreen implements Screen {
         gameEndStage.draw();
     }
 
-    private void drawDefeatScreen() {
+    private void drawDefeatScreen()
+    {
         Gdx.input.setInputProcessor(gameEndStage);
 
         game.viewport.apply();
@@ -214,12 +229,14 @@ public class CombatScreen implements Screen {
 
         table.add(drawTextField("Defeat", "defeat")).width(400).height(100).padBottom(20).row();
 
-        TextButton returnToMenu = new TextButton("Return to main menu" ,new Skin(Gdx.files.internal("button/Buttons.json")));
+        TextButton returnToMenu = new TextButton("Return to main menu", new Skin(Gdx.files.internal("button/Buttons.json")));
         table.add(returnToMenu).pad(100).growX().height(60);
         gameEndStage.addActor(table);
 
-        returnToMenu.addListener(e -> {
-            if (returnToMenu.isPressed()) {
+        returnToMenu.addListener(e ->
+        {
+            if (returnToMenu.isPressed())
+            {
                 game.setScreen(new MainMenuScreen(game, player));
             }
             return false;
@@ -229,27 +246,38 @@ public class CombatScreen implements Screen {
         gameEndStage.draw();
     }
 
-    public TextField drawTextField(String message, String style) {
+    public TextField drawTextField(String message, String style)
+    {
         TextField textField = new TextField(message, new Skin(Gdx.files.internal("button/Buttons.json")), style);
         textField.setAlignment(Align.center);
         return textField;
     }
 
-    @Override public void resize(int width, int height) {
+    @Override
+    public void resize(int width, int height)
+    {
         game.viewport.update(width, height, true);
     }
 
-    @Override public void pause() {
+    @Override
+    public void pause()
+    {
     }
 
-    @Override public void resume() {
+    @Override
+    public void resume()
+    {
     }
 
-    @Override public void hide() {
+    @Override
+    public void hide()
+    {
         Gdx.input.setInputProcessor(null);
     }
 
-    @Override public void dispose() {
+    @Override
+    public void dispose()
+    {
         backgroundTexture.dispose();
         backgroundTint.dispose();
         stage.dispose();

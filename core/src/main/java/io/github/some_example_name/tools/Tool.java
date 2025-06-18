@@ -24,6 +24,7 @@ public class Tool extends Item implements Serializable
         super(name);
         setMove(move);
     }
+
     public Tool(Tool tool)
     {
         super(tool);
@@ -40,8 +41,10 @@ public class Tool extends Item implements Serializable
         this.move = move;
     }
 
-    /**Executes action.
-     * @param user Entity doing action.
+    /**
+     * Executes action.
+     *
+     * @param user   Entity doing action.
      * @param target Entity targeted by action.
      */
     public void execute(Entity user, Entity target)
