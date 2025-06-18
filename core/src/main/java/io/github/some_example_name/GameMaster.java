@@ -96,6 +96,9 @@ public class GameMaster
         return passives;
     }
 
+    /**
+     * @return Returns a copy of a random Enemy from the list.
+     */
     static public Enemy provideRandomEnemy()
     {
         Random random = new Random();
@@ -105,6 +108,9 @@ public class GameMaster
         return new Enemy(enemies.get(index));
     }
 
+    /**
+     * @return Returns a copy of a random Tool from the list.
+     */
     static public Tool provideRandomTool()
     {
         Random random = new Random();
@@ -114,12 +120,99 @@ public class GameMaster
         return new Tool(tools.get(index));
     }
 
+    /**
+     * @return Returns a copy of a random PassiveItem from the list.
+     */
     static public PassiveItem provideRandomPassive()
     {
         Random random = new Random();
 
         int index = random.nextInt(passives.size());
 
+        return new PassiveItem(passives.get(index));
+    }
+
+    /**
+     * @param name Name of Enemy to return.
+     * @return Returns Enemy with given name if it exists, else
+     * returns null.
+     */
+    static public Enemy searchForEnemy(String name)
+    {
+        for (Enemy enemy : enemies)
+        {
+            if (enemy.getName().equals(name))
+            {
+                return new Enemy(enemy);
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @param name Name of Tool to return.
+     * @return Returns Tool with given name if it exists, else
+     * returns null.
+     */
+    static public Tool searchForTool(String name)
+    {
+        for (Tool tool : tools)
+        {
+            if (tool.getName().equals(name))
+            {
+                return new Tool(tool);
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @param name Name of PassiveItem to return.
+     * @return Returns PassiveItem with given name if it exists, else
+     * returns null.
+     */
+    static public PassiveItem searchForPassive(String name)
+    {
+        for (PassiveItem passiveItem : passives)
+        {
+            if (passiveItem.getName().equals(name))
+            {
+                return new PassiveItem(passiveItem);
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @param index Index of Enemy to return.
+     * @return Returns Enemy with given index, else
+     * throws.
+     */
+    static public Enemy searchForEnemy(int index)
+    {
+        return new Enemy(enemies.get(index));
+    }
+
+    /**
+     * @param index Index of Tool to return.
+     * @return Returns Tool with given index, else
+     * throws.
+     */
+    static public Tool searchForTool(int index)
+    {
+        return new Tool(tools.get(index));
+    }
+
+    /**
+     * @param index Index of PassiveItem to return.
+     * @return Returns PassiveItem with given index, else
+     * throws.
+     */
+    static public PassiveItem searchForPassive(int index)
+    {
         return new PassiveItem(passives.get(index));
     }
 }
