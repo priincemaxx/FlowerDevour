@@ -7,9 +7,10 @@ import io.github.some_example_name.actions.BasicAction;
 import java.io.Serializable;
 
 /**
- * Parent class for Items with BasicActions.
+ * Parent class for Items with {@link BasicAction}s.
  * <p>
- * This is the main way for the Player to interact with enemies.
+ * This is the main way for the {@link io.github.some_example_name.Player} to interact with
+ * {@link Enemy} objects.
  * <p>
  * There should be no reason to change this class. If you disagree, bring
  * it up with the rest of the team.
