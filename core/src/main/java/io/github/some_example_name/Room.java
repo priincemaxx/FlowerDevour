@@ -1,9 +1,9 @@
 package io.github.some_example_name;
 
 /**
- * Parent class for all rooms that a Player could enter.
+ * Parent class for all rooms that the {@link Player} could enter from the {@link Map}.
  */
-public class Room extends GameMaster
+public class Room
 {
     private String backgroundPath;
     //0 left path, MAX right path, else middle paths;

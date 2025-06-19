@@ -5,14 +5,14 @@ import java.util.Random;
 /**
  * A class to store basic information about the game's map.
  * <p>
- * The map consists of rows = ROWS and columns = MAX_ROW_ROOMS.
+ * The map consists of rows = {@code ROWS} and columns = {@code MAX_ROW_ROOMS}.
  * <p>
- * The first and last rows are reserved for the starting and boss Rooms respectively.
- * Every other row is filled with from MIN_ROW_ROOMS to MAX_ROW_ROOMS rooms that are
- * randomly either a CombatRoom or a LootRoom.
+ * The first and last rows are reserved for the starting and boss {@link Room}s respectively.
+ * Every other row is filled with from {@code MIN_ROW_ROOMS} to {@code MAX_ROW_ROOMS} rooms that are
+ * randomly either a {@link CombatRoom} or a {@link LootRoom}.
  * <p>
- * The Player may only advance forward through the Map and may only advance to a Room
- * that has a path that connects it to the Room the Player is currently in.
+ * The {@link Player} may only advance forward through the Map and may only advance to a {@link Room}
+ * that has a path that connects it to the {@link Room} the {@link Player} is currently in.
  */
 public class Map
 {
@@ -23,7 +23,7 @@ public class Map
     private Room currentRoom;
 
     /**
-     * Generates a new map.
+     * Generates a new {@link Map}.
      */
     public Map()
     {
@@ -44,9 +44,9 @@ public class Map
 
 
     /**
-     * Adds Rooms to the map at the given row
+     * Adds {@link Room}s to the {@link Map} at the given row
      *
-     * @param row Index of the row to add the Rooms to.
+     * @param row Index of the row to add the {@link Room}s to.
      */
     private void addRowRooms(int row)
     {
@@ -69,9 +69,9 @@ public class Map
     }
 
     /**
-     * Adds paths to the Rooms in the specified row.
+     * Adds paths to the {@link Room}s in the specified row.
      *
-     * @param row Index of row with Rooms that will receive paths.
+     * @param row Index of row with {@link Room}s that will receive paths.
      */
     private void addRoomPaths(int row) //Row can't be the first row
     {
@@ -95,10 +95,10 @@ public class Map
 
 
     /**
-     * Used to advance the Player through the Rooms of the map.
+     * Used to advance the {@link Player} through the {@link Room}s of the {@link Map}.
      *
-     * @param index Index of path the player wishes to travel to.
-     * @return The Room that the player has traveled to.
+     * @param index Index of path the {@link Player} wishes to travel to.
+     * @return The {@link Room} that the {@link Player} will travel to.
      * @throws MapException Throws when there isn't a path with the given index.
      */
     public Room advance(int index) throws MapException

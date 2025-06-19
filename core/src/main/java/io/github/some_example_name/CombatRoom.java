@@ -7,8 +7,8 @@ import io.github.some_example_name.tools.Tool;
 /**
  * This is an object that stores basic data for a combat room.
  * <p>
- * It stores an Enemy and sometimes a Tool to reward the Player
- * with.
+ * It should always store an {@link Enemy} and occasionally a {@link Tool} to reward
+ * the {@link Player} with.
  * <p>
  * There should be no reason to change this class. If you disagree, bring
  * it up with the rest of the team.
@@ -24,7 +24,7 @@ public class CombatRoom extends Room
     }
 
     /**
-     * @param enemy  Enemy the player will encounter in this room.
+     * @param enemy  {@link Enemy} the player will encounter in this room.
      * @param reward The reward the player will get after defeating
      *               the enemy in this room.
      */
@@ -36,7 +36,7 @@ public class CombatRoom extends Room
     }
 
     /**
-     * @param enemy Enemy the player will encounter in this room.
+     * @param enemy {@link Enemy} the player will encounter in this room.
      */
     public CombatRoom(Enemy enemy)
     {

@@ -5,10 +5,10 @@ import io.github.some_example_name.Entity;
 import java.io.Serializable;
 
 /**
- * A BasicAction is the base way for Entities to interact with each other.
+ * A BasicAction is the base way for {@link Entity} objects to interact with each other.
  * <p>
- * The user is an Entity that is executing the action.
- * The target is the Entity being targeted with the action.
+ * The user is an {@link Entity} that is executing the action.
+ * The target is the {@link Entity} being targeted with the action.
  * <p>
  * userChange and targetChange change the health of the user and target respectively.
  * Positive numbers heal, negative numbers damage.
