@@ -145,7 +145,8 @@ public class CombatScreen implements Screen
         {
             enemy.setTurnOver(true);
             enemy.animateAttack();
-            enemy.doMove(player);
+            enemy.setTarget(player);
+            enemy.doMove();
             player.animateTakePolearmDamage();
             player.setTurnOver(false);
         }

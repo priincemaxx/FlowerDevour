@@ -13,6 +13,20 @@ import io.github.some_example_name.actions.ActionException;
  * Base class for Enemies and the Player.
  * <p>
  * Holds basic statistics like health, name, etc.
+ * <p>
+ * Each Entity has a target Entity. This field is used
+ * in combination with the doMove() method.
+ * <p>
+ * At it's most basic, doMove() should somehow set the
+ * targets for a BasicAction and then execute it.
+ * <p>
+ * The turn of an Entity should look like this:
+ * <p></p>
+ * 1. Set the targets of the BasicAction.
+ * <p>
+ * 2. Execute the BasicAction.
+ * </p>
+ * 3. Pass the turn.
  */
 public class Entity implements Serializable
 {
@@ -149,7 +163,7 @@ public class Entity implements Serializable
 
     /**
      * Abstract method.
-     * Executes selected action on target.
+     * Executes selected BasicAction on target.
      */
     public void doMove()
     {

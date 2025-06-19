@@ -7,6 +7,9 @@ import io.github.some_example_name.passives.PassiveItem;
  * <p>
  * It stores a single PassiveItem to reward the player with upon
  * entering.
+ * <p>
+ * There should be no reason to change this class. If you disagree, bring
+ * it up with the rest of the team.
  */
 public class LootRoom extends Room
 {

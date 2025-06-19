@@ -10,6 +10,9 @@ import java.io.Serializable;
  * Parent class for Items with BasicActions.
  * <p>
  * This is the main way for the Player to interact with enemies.
+ * <p>
+ * There should be no reason to change this class. If you disagree, bring
+ * it up with the rest of the team.
  */
 public class Tool extends Item implements Serializable
 {

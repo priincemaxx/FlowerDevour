@@ -14,6 +14,15 @@ import io.github.some_example_name.Player;
 import io.github.some_example_name.actions.BasicAction;
 
 
+/**
+ * This is a basic Enemy that can do one BasicAction.
+ * <p>
+ * The turn of an Enemy should look like this:
+ * <p>
+ * 1. Set the Enemy's target.
+ * <p></p>
+ * 2. The Enemy does its move.
+ */
 public class Enemy extends Entity implements Serializable
 {
     private BasicAction move;
@@ -59,15 +68,13 @@ public class Enemy extends Entity implements Serializable
         this.move = move;
     }
 
+    /**
+     * Set's the BasicAction's user to this Enemy
+     * and target to Enemy's target, then executes it.
+     */
     public void doMove()
     {
-        move.setTarget(super.getTarget());
-        move.execute();
-    }
-
-    public void doMove(Player player)
-    {
-        move.setUser(player);
+        move.setUser(this);
         move.setTarget(super.getTarget());
         move.execute();
     }

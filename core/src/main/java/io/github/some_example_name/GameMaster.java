@@ -13,12 +13,16 @@ import java.util.Random;
 
 
 /**
- * Responsible for various game objects.
+ * Responsible for various game objects. Currently, stores all Enemies, Tools and Passive
+ * items.
  * <p>
- * Game objects initialized from JSONs.
+ * Game objects initialized from JSONs in the assets/JSONs folder.
  * <p>
  * For JSON writing, don't forget to declare the class of the object
- * when writing them. Refer to the enemies.json file for reference.
+ * when writing them. Refer to any existing entries for example.
+ * <p>
+ * When writing a new method to provide a game object, don't forget to use copy
+ * constructors.
  */
 public class GameMaster
 {

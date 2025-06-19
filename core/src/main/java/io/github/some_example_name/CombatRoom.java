@@ -1,7 +1,5 @@
 package io.github.some_example_name;
 
-//Template for an enemy encounter in the map
-
 import io.github.some_example_name.enemies.Enemy;
 import io.github.some_example_name.tools.Tool;
 
@@ -12,7 +10,8 @@ import io.github.some_example_name.tools.Tool;
  * It stores an Enemy and sometimes a Tool to reward the Player
  * with.
  * <p>
- * THAT'S IT!!!!!!!!!!!!
+ * There should be no reason to change this class. If you disagree, bring
+ * it up with the rest of the team.
  */
 public class CombatRoom extends Room
 {
