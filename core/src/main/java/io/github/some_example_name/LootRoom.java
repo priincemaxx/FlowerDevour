@@ -38,4 +38,13 @@ public class LootRoom extends Room
     {
         this.reward = reward;
     }
+
+    public static LootRoom initliazeRandomLootRoom()
+    {
+        LootRoom room = new LootRoom();
+
+        room.setReward(GameMaster.provideRandomPassive());
+
+        return room;
+    }
 }

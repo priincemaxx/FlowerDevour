@@ -44,7 +44,7 @@ public class Map
 
 
     /**
-     * Adds {@link Room}s to the {@link Map} at the given row
+     * Adds random {@link Room}s to the {@link Map} at the given row
      *
      * @param row Index of the row to add the {@link Room}s to.
      */
@@ -56,15 +56,7 @@ public class Map
 
         for (int i = 0; i < roomNumber; i++)
         {
-            int roomType = random.nextInt(4);
-
-            if (roomType == 0) //consider initializing room here instead of advance() or move to a separate method
-            {
-                rooms[row][i] = new LootRoom();
-            } else
-            {
-                rooms[row][i] = new CombatRoom();
-            }
+            rooms[row][i] = initializeRandomRoom();
         }
     }
 
@@ -112,29 +104,37 @@ public class Map
 
         currentRoom = possiblePaths[index];
 
-        possiblePaths = currentRoom.getPaths();
+        return currentRoom;
+    }
 
-        if (currentRoom.getClass() == CombatRoom.class) //consider moving this to a separate method
+    /**Initializes randomly either a {@link LootRoom}, {@link CombatRoom} with reward
+     * or {@link CombatRoom} without reward.
+     * @return New random {@link Room}.
+     */
+    public Room initializeRandomRoom()
+    {
+        Room room;
+        Random random = new Random();
+
+        int roomType = random.nextInt(4);
+
+        if (roomType == 0)
         {
-            Random random = new Random();
-
-            int type = random.nextInt(3);
-
-            if (type == 0)
-            {
-                currentRoom = new CombatRoom(GameMaster.provideRandomEnemy());
-            } else
-            {
-                currentRoom = new CombatRoom(GameMaster.provideRandomEnemy(), GameMaster.provideRandomTool());
-            }
+            room = LootRoom.initliazeRandomLootRoom();
         } else
         {
-            currentRoom = new LootRoom(GameMaster.provideRandomPassive());
+            roomType = random.nextInt(3);
+
+            if (roomType == 0)
+            {
+                room = CombatRoom.initializeRandomCombatRoom(CombatRoom.WITHOUT_REWARD);
+            } else
+            {
+                room = CombatRoom.initializeRandomCombatRoom(CombatRoom.WITH_REWARD);
+            }
         }
 
-        currentRoom.setPaths(possiblePaths);
-
-        return currentRoom;
+        return room;
     }
 
     public void print()
