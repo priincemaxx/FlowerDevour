@@ -199,7 +199,9 @@ public class GameMaster
         return null;
     }
 
-    /**Returns the {@link Enemy} at index in the list.
+    /**
+     * Returns the {@link Enemy} at index in the list.
+     *
      * @param index Index of {@link Enemy} to return.
      * @return Returns {@link Enemy} with given index, else
      * throws.
@@ -209,7 +211,9 @@ public class GameMaster
         return new Enemy(enemies.get(index));
     }
 
-    /**Returns the {@link Tool} at index in the list.
+    /**
+     * Returns the {@link Tool} at index in the list.
+     *
      * @param index Index of {@link Tool} to return.
      * @return Returns {@link Tool} with given index, else
      * throws.
@@ -219,7 +223,9 @@ public class GameMaster
         return new Tool(tools.get(index));
     }
 
-    /**Returns the {@link PassiveItem} at index in the list.
+    /**
+     * Returns the {@link PassiveItem} at index in the list.
+     *
      * @param index Index of {@link PassiveItem} to return.
      * @return Returns {@link PassiveItem} with given index, else
      * throws.

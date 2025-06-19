@@ -218,7 +218,8 @@ public class Entity implements Serializable
         if (animations != null)
         {
             animations.update(delta);
-        } else
+        }
+        else
         {
             stateTime += delta;
         }
@@ -229,7 +230,8 @@ public class Entity implements Serializable
         if (animations != null)
         {
             animations.draw(batch, x, y, width, height);
-        } else if (texture != null)
+        }
+        else if (texture != null)
         {
             batch.draw(texture, x, y, width, height);
         }

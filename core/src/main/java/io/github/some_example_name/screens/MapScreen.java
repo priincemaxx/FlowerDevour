@@ -85,10 +85,12 @@ public class MapScreen implements Screen
         if (room instanceof LootRoom)
         {
             roomStyle = "lootRoom";
-        } else if (room instanceof CombatRoom)
+        }
+        else if (room instanceof CombatRoom)
         {
             roomStyle = "combatRoom";
-        } else
+        }
+        else
         {
             /// temptorary use of boss room; room also doesnt switch to anything, its just empty
             roomStyle = "bossRoom";
@@ -116,11 +118,13 @@ public class MapScreen implements Screen
         if (room instanceof LootRoom)
         {
             game.setScreen(new LootScreen(game, player));
-        } else if (room instanceof CombatRoom)
+        }
+        else if (room instanceof CombatRoom)
         {
             //game.setScreen(new CombatScreen(game, player, enemy));
             game.setScreen(new CombatScreen(game, player));
-        } else
+        }
+        else
         {
             System.out.println("Didnt switch!!!");
         }

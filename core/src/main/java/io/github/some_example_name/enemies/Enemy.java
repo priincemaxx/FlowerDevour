@@ -106,7 +106,8 @@ public class Enemy extends Entity implements Serializable
         {
             enemyAnimations = new Animations("atlas/DandelionAtlas.atlas", animData);
             setAnimations(enemyAnimations);
-        } else
+        }
+        else
         {
             enemyAnimations = new Animations("atlas/DandelionAtlas.atlas", animData);
             setAnimations(enemyAnimations);

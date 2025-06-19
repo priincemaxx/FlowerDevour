@@ -167,11 +167,19 @@ public class CombatScreen implements Screen
         if (player.isDead())
         {
             //TODO: player death animation
-        } else player.draw(game.batch, 1.1f, 2.2f, 3f, 3.4f);
+        }
+        else
+        {
+            player.draw(game.batch, 1.1f, 2.2f, 3f, 3.4f);
+        }
         if (enemy.isDead())
         {
             //TODO: enemy death animation
-        } else enemy.draw(game.batch, 4.1f, 2.2f, 3f, 3.4f);
+        }
+        else
+        {
+            enemy.draw(game.batch, 4.1f, 2.2f, 3f, 3.4f);
+        }
 
         game.batch.end();
     }

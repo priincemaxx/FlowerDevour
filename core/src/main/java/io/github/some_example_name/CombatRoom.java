@@ -68,7 +68,8 @@ public class CombatRoom extends Room
         this.reward = reward;
     }
 
-    /**Creates a new {@link CombatRoom} with a random {@link Enemy}
+    /**
+     * Creates a new {@link CombatRoom} with a random {@link Enemy}
      * and random {@link Tool} as a reward if specified {@code WITH_REWARD}.
      *
      * @param mode Either {@code WITH_REWARD} or {@code WITHOUT_REWARD}.

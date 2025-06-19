@@ -107,8 +107,10 @@ public class Map
         return currentRoom;
     }
 
-    /**Initializes randomly either a {@link LootRoom}, {@link CombatRoom} with reward
+    /**
+     * Initializes randomly either a {@link LootRoom}, {@link CombatRoom} with reward
      * or {@link CombatRoom} without reward.
+     *
      * @return New random {@link Room}.
      */
     public Room initializeRandomRoom()
@@ -121,14 +123,16 @@ public class Map
         if (roomType == 0)
         {
             room = LootRoom.initliazeRandomLootRoom();
-        } else
+        }
+        else
         {
             roomType = random.nextInt(3);
 
             if (roomType == 0)
             {
                 room = CombatRoom.initializeRandomCombatRoom(CombatRoom.WITHOUT_REWARD);
-            } else
+            }
+            else
             {
                 room = CombatRoom.initializeRandomCombatRoom(CombatRoom.WITH_REWARD);
             }

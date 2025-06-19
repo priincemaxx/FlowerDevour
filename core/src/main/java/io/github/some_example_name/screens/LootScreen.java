@@ -104,7 +104,8 @@ public class LootScreen implements Screen
         if (chestOpen)
         {
             chestAnimations.draw(game.batch, 4.1f, 2.2f, 3f, 3.4f);
-        } else
+        }
+        else
         {
             game.batch.draw(chestTexture, 4.1f, 2.2f, 3f, 3.4f);
         }
