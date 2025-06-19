@@ -189,8 +189,8 @@ public class Entity implements Serializable
     {
         if (animations != null)
         {
-            animations.setDefaultAnimation(animationName);
-            this.currentAnimation = animations.getDefaultAnimation();
+            animations.setDefaultAnimationName(animationName);
+            this.currentAnimation = animations.getDefaultAnimationName();
         }
     }
 

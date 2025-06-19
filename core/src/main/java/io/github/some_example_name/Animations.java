@@ -13,7 +13,7 @@ public class Animations
     private final Map<String, Animation<TextureRegion>> animations = new HashMap<>();
     private Animation<TextureRegion> currentAnimation;
     private final TextureAtlas atlas;
-    private String defaultAnimation = null;
+    private String defaultAnimationName = null;
     private float stateTime = 0f;
 
     public Animations(String atlasPath, Map<String, Float> animationData)
@@ -28,12 +28,12 @@ public class Animations
             Array<TextureAtlas.AtlasRegion> frames = atlas.findRegions(name);
             if (frames != null && frames.size > 0)
             {
-                Animation<TextureRegion> anim = new Animation<>(duration, frames, Animation.PlayMode.NORMAL);
-                animations.put(name, anim);
-                if (defaultAnimation == null)
+                Animation<TextureRegion> animation = new Animation<>(duration, frames, Animation.PlayMode.NORMAL);
+                animations.put(name, animation);
+                if (defaultAnimationName == null)
                 {
-                    defaultAnimation = name;
-                    currentAnimation = anim;
+                    defaultAnimationName = name;
+                    currentAnimation = animation;
                 }
             }
         }
@@ -44,41 +44,41 @@ public class Animations
         return animations.get(name);
     }
 
-    public Animation<TextureRegion> getDefaultAnimation()
+    public Animation<TextureRegion> getDefaultAnimationName() //why is the field a string, but the getter for it returns an animation??????
     {
-        return animations.get(defaultAnimation);
+        return animations.get(defaultAnimationName);
     }
 
     public void performAnimation(String animationName)
     {
-        Animation<TextureRegion> anim = animations.get(animationName);
-        if (anim != null && !animationName.equals(defaultAnimation))
+        Animation<TextureRegion> animation = animations.get(animationName);
+        if (animation != null && !animationName.equals(defaultAnimationName))
         {
-            anim.setPlayMode(Animation.PlayMode.NORMAL);
-            setCurrentAnimation(anim);
+            animation.setPlayMode(Animation.PlayMode.NORMAL);
+            setCurrentAnimation(animation);
         }
     }
 
-    public void setDefaultAnimation(String name)
+    public void setDefaultAnimationName(String name)
     {
         if (animations.containsKey(name))
         {
-            defaultAnimation = name;
-            Animation<TextureRegion> anim = animations.get(name);
-            anim.setPlayMode(Animation.PlayMode.LOOP);
-            currentAnimation = anim;
+            defaultAnimationName = name;
+            Animation<TextureRegion> animation = animations.get(name);
+            animation.setPlayMode(Animation.PlayMode.LOOP);
+            currentAnimation = animation;
         }
     }
 
     public void setCurrentAnimation(Animation<TextureRegion> animation)
     {
-        this.currentAnimation = animation;
-        this.stateTime = 0f;
+        currentAnimation = animation;
+        stateTime = 0f;
     }
 
     public boolean isCurrentAnimationFinished()
     {
-        return currentAnimation != null && currentAnimation.isAnimationFinished(stateTime);
+        return (currentAnimation != null && currentAnimation.isAnimationFinished(stateTime));
     }
 
     public void update(float delta)
@@ -88,11 +88,11 @@ public class Animations
             stateTime += delta;
             if (currentAnimation.isAnimationFinished(stateTime))
             {
-                if (!currentAnimation.equals(animations.get(defaultAnimation)))
+                if (!currentAnimation.equals(animations.get(defaultAnimationName)))
                 {
-                    Animation<TextureRegion> defaultAnim = animations.get(defaultAnimation);
-                    setCurrentAnimation(defaultAnim);
-                    defaultAnim.setPlayMode(Animation.PlayMode.LOOP);
+                    Animation<TextureRegion> defaultAnimation = animations.get(defaultAnimationName);
+                    setCurrentAnimation(defaultAnimation);
+                    defaultAnimation.setPlayMode(Animation.PlayMode.LOOP);
                 }
             }
         }
